@@ -1,0 +1,63 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
+
+" Fast saving
+nmap <leader>w :w!<cr>
+
+" Close folds with 7
+map 7 zc
+" Open folds with 8
+map 8 zo
+" Close all folds with F7
+map <F7> zM
+" Open all folds with F8
+map <F8> zR
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => VIM user interface
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set 5 lines to the cursor - when moving vertically using j/k
+set so=5
+
+" Ignore case when searching
+set ignorecase
+" When searching try to be smart about cases
+set smartcase
+" Highlight search results
+set hlsearch
+" Makes search act like search in modern browsers
+set incsearch
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Moving around, tabs, windows and buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" *-----------*
+" | SEARCHING |
+" *-----------*
+" Disable highlight when <leader><cr> is pressed
+map <leader><cr> :noh<cr>
+
+" *---------*
+" | BUFFERS |
+" *---------*
+" Move between buffers
+map <leader>l :bnext<cr>
+map <leader>h :bprevious<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 9 moves to the last character in a line
+map 9 $
+
+" Use CTRL-Q to do what CTRL-V used to do (block selection in visual mode)
+noremap <C-Q> <C-V>
+
