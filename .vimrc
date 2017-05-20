@@ -66,13 +66,8 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 " Set the runtime path to include Vundle and initialize
 " Set where Vundle installs plugins:
-if has('win32')
-  set rtp+=C:/Users/Dave/_vim/bundle/Vundle.vim
-  call vundle#begin('C:/Users/Dave/_vim/bundle')
-elseif has('unix')
-  set rtp+=~/.vim/bundle/Vundle.vim
-  call vundle#begin('~/.vim/bundle')
-endif
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin('~/.vim/bundle')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -184,7 +179,7 @@ map <F2> :NERDTree %:p:h<CR>
 " *--------*
 " | Tagbar |
 " *--------*
-let g:tagbar_ctags_bin = 'C:\Users\Dave\_vim\bundle\tagbar\dependencies\ctags58\ctags.exe'
+let g:tagbar_ctags_bin = '~/.vim/bundle/tagbar/dependencies/ctags58/ctags.exe'
 nmap <F9> :TagbarToggle<CR>
 
 " *-----------*
@@ -344,11 +339,7 @@ if has('conceal')
 endif
 
 " Tell Neosnippet about the other snippets
-if has('win32')
-  let g:neosnippet#snippets_directory='C:/Users/Dave/_vim/bundle/vim-snippets/snippets'
-elseif has('unix')
-  let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
-endif
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
