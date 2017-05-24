@@ -179,7 +179,12 @@ map <F2> :NERDTree %:p:h<CR>
 " *--------*
 " | Tagbar |
 " *--------*
-let g:tagbar_ctags_bin = '~/.vim/bundle/tagbar/dependencies/ctags58/ctags.exe'
+" Locate Exuberant Ctags installation (must be installed manually)
+if has('win32')
+  let g:tagbar_ctags_bin = '~/.vim/bundle/tagbar/dependencies/ctags58/ctags.exe'
+elseif has('unix')
+  let g:tagbar_ctags_bin = '~/.vim/bundle/tagbar/dependencies/ctags-5.8/ctags'
+endif
 nmap <F9> :TagbarToggle<CR>
 
 " *-----------*
