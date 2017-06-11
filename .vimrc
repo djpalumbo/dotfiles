@@ -186,6 +186,8 @@ elseif has('unix')
   let g:tagbar_ctags_bin = '~/.vim/bundle/tagbar/dependencies/ctags-5.8/ctags'
 endif
 nmap <F9> :TagbarToggle<CR>
+" Fix Tagbar window width to be less intrusive (thinner)
+let g:tagbar_width = 30
 
 " *-----------*
 " | Syntastic |
