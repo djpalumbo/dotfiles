@@ -79,6 +79,8 @@ Plugin 'mhinz/vim-startify'
 Plugin 'tomasr/molokai'
 Plugin 'chriskempson/base16-vim'
 Plugin 'joshdick/onedark.vim'
+Plugin 'morhetz/gruvbox'
+Plugin 'ajmwagar/vim-dues'
 
 " Airline: Status/tabline
 Plugin 'bling/vim-airline'
@@ -470,6 +472,8 @@ syntax enable
 
 " Colorscheme
 colorscheme molokai
+" Make sure background is /very/ black
+highlight Normal guibg=black guifg=white
 
 " Set font
 set guifont=DejaVu\ Sans\ Mono:h10
