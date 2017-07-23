@@ -177,6 +177,8 @@ cd %:p:h
 map <C-n> :NERDTreeToggle<CR>
 " F2 opens NerdTree to current buffer's directory
 map <F2> :NERDTree %:p:h<CR>
+" Ignore files of certain types
+let NERDTreeIgnore=['\.class$']
 
 " *--------*
 " | Tagbar |
