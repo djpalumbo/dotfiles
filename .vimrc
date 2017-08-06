@@ -75,12 +75,12 @@ Plugin 'VundleVim/Vundle.vim'
 " Startify: Startup screen with most recent files used and cowsay
 Plugin 'mhinz/vim-startify'
 
-" Themes: Molokai, Base16 set, Onedark; (in vim80/colors)
+" Colorschemes:
 Plugin 'tomasr/molokai'
-Plugin 'chriskempson/base16-vim'
-Plugin 'joshdick/onedark.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'ajmwagar/vim-dues'
+Plugin 'dracula/vim'
+Plugin 'raphamorim/lucario'
 
 " Airline: Status/tabline
 Plugin 'bling/vim-airline'
@@ -178,7 +178,7 @@ map <C-n> :NERDTreeToggle<CR>
 " F2 opens NerdTree to current buffer's directory
 map <F2> :NERDTree %:p:h<CR>
 " Ignore files of certain types
-let NERDTreeIgnore=['\.class$']
+let NERDTreeIgnore=['\.class$', '\.pdf$', '\.png$', '\.doc$', '\.docx$', '\.odt$', '\.pptx$', '\.pptm$', '\.xls$', '\.xlsm$', '\.gdoc$', '\.gsheet$', '\.gslides$', '\.psd$', '\.jpg$', '\.jpeg$', '\.svg$', '\.raw$', '\.exe$', '\.mp3$', '\.mp4$', '\.avi$', '\.url$', '\.cap$', 'Thumbs.db$']
 
 " *--------*
 " | Tagbar |
@@ -479,7 +479,7 @@ set background=dark
 syntax enable
 
 " Colorscheme
-colorscheme molokai
+colorscheme dues
 " Make sure background is /very/ black
 highlight Normal guibg=black guifg=white
 
