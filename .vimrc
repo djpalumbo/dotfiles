@@ -178,7 +178,12 @@ map <C-n> :NERDTreeToggle<CR>
 " F2 opens NerdTree to current buffer's directory
 map <F2> :NERDTree %:p:h<CR>
 " Ignore files of certain types
-let NERDTreeIgnore=['\.class$', '\.pdf$', '\.png$', '\.doc$', '\.docx$', '\.odt$', '\.pptx$', '\.pptm$', '\.xls$', '\.xlsm$', '\.gdoc$', '\.gsheet$', '\.gslides$', '\.psd$', '\.jpg$', '\.jpeg$', '\.svg$', '\.raw$', '\.exe$', '\.mp3$', '\.mp4$', '\.avi$', '\.url$', '\.cap$', 'Thumbs.db$']
+let NERDTreeIgnore=['\.class$', '\.exe$', '\.pdf$', '\.doc$', '\.docx$',
+                  \ '\.odt$', '\.pptx$', '\.pptm$', '\.xls$', '\.xlsx$',
+                  \ '\.xlsm$', '\.gdoc$', '\.gsheet$', '\.gslides$', '\.psd$',
+                  \ '\.png$', '\.jpg$', '\.jpeg$', '\.svg$', '\.raw$',
+                  \ '\.mp3$', '\.mp4$', '\.avi$', '\.url$', '\.cap$',
+                  \ 'Thumbs.db$', 'desktop.ini$']
 
 " *--------*
 " | Tagbar |
