@@ -183,12 +183,12 @@ map <C-n> :NERDTreeToggle<CR>
 " F2 opens NerdTree to current buffer's directory
 map <F2> :NERDTree %:p:h<CR>
 " Ignore files of certain types
-let NERDTreeIgnore=['\.class$', '\.exe$', '\.pdf$', '\.doc$', '\.docx$',
-                  \ '\.odt$', '\.pptx$', '\.pptm$', '\.xls$', '\.xlsx$',
+let NERDTreeIgnore=['\.bin$', '\.exe$', '\.pdf$', '\.doc$', '\.docx$', '\.odt$',
+                  \ '\.class$', '\.pptx$', '\.pptm$', '\.xls$', '\.xlsx$',
                   \ '\.xlsm$', '\.gdoc$', '\.gsheet$', '\.gslides$', '\.psd$',
-                  \ '\.png$', '\.jpg$', '\.jpeg$', '\.svg$', '\.raw$',
-                  \ '\.mp3$', '\.mp4$', '\.avi$', '\.url$', '\.cap$',
-                  \ 'Thumbs.db$', 'desktop.ini$']
+                  \ '\.png$', '\.jpg$', '\.jpeg$', '\.svg$', '\.raw$', '\.mp3$',
+                  \ '\.mp4$', '\.avi$', '\.url$', '\.cap$', '\.regtrans-ms$',
+                  \ '\.blf$', 'Thumbs.db$', 'desktop.ini$', 'ntuser.ini$']
 
 " *--------*
 " | Tagbar |
