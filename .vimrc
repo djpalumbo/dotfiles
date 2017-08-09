@@ -78,7 +78,7 @@ Plugin 'mhinz/vim-startify'
 " Colorschemes:
 Plugin 'tomasr/molokai'
 Plugin 'morhetz/gruvbox'
-Plugin 'ajmwagar/vim-dues'
+Plugin 'ajmwagar/vim-deus'
 Plugin 'dracula/vim'
 Plugin 'raphamorim/lucario'
 
@@ -176,6 +176,8 @@ let g:airline_theme='onedark' "simple'  " or onedark?
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " Show bookmarks whenever NERDTree is open
 let NERDTreeShowBookmarks = 1
+" Show hidden files (e.g. dotfiles)
+let NERDTreeShowHidden = 1
 " Change directory to current file
 cd %:p:h
 " Map NerdTree to CTRL+n
@@ -188,16 +190,17 @@ let NERDTreeIgnore=['\.bin$', '\.exe$', '\.pdf$', '\.doc$', '\.docx$', '\.odt$',
                   \ '\.xlsm$', '\.gdoc$', '\.gsheet$', '\.gslides$', '\.psd$',
                   \ '\.png$', '\.jpg$', '\.jpeg$', '\.svg$', '\.raw$', '\.mp3$',
                   \ '\.mp4$', '\.avi$', '\.url$', '\.cap$', '\.regtrans-ms$',
-                  \ '\.blf$', 'Thumbs.db$', 'desktop.ini$', 'ntuser.ini$']
-
+                  \ '\.blf$', 'Thumbs.db$', 'desktop.ini$', 'ntuser.ini$',
+                  \ '\.gif$', '\.flac$', '\.ogg$', '.webm$', '.mkv$', '\.zip$',
+                  \ '\.tar.gz$', '\.rar$', '\.DAT$', '\.LOG1$', '\.LOG1$']
 " *--------*
 " | Tagbar |
 " *--------*
 " Locate Exuberant Ctags installation (must be installed manually)
 if has('win32')
-  let g:tagbar_ctags_bin = '~/.vim/bundle/tagbar/dependencies/ctags58/ctags.exe'
+  let g:tagbar_ctags_bin = '~/.vim/bundle/tagbar/ctags58/ctags.exe'
 elseif has('unix')
-  let g:tagbar_ctags_bin = '~/.vim/bundle/tagbar/dependencies/ctags-5.8/ctags'
+  let g:tagbar_ctags_bin = '~/.vim/bundle/tagbar/ctags-5.8/ctags'
 endif
 nmap <F3> :TagbarToggle<CR>
 " Fix Tagbar window width to be less intrusive (thinner)
@@ -489,7 +492,7 @@ set background=dark
 syntax enable
 
 " Colorscheme
-colorscheme dues
+colorscheme deus
 " Make sure background is /very/ black
 highlight Normal guibg=black guifg=white
 
