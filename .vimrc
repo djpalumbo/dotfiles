@@ -156,7 +156,7 @@ filetype plugin indent on    " required
 " *----------*
 " | Startify |
 " *----------*
-map <leader><Esc> :Startify<cr>
+map <leader>e :Startify<cr>
 
 " *---------*
 " | Airline |
@@ -186,13 +186,13 @@ map <C-n> :NERDTreeToggle<CR>
 map <F2> :NERDTree %:p:h<CR>
 " Ignore files of certain types
 let NERDTreeIgnore=['\.bin$', '\.exe$', '\.pdf$', '\.doc$', '\.docx$', '\.odt$',
-                  \ '\.class$', '\.pptx$', '\.pptm$', '\.xls$', '\.xlsx$',
-                  \ '\.xlsm$', '\.gdoc$', '\.gsheet$', '\.gslides$', '\.psd$',
-                  \ '\.png$', '\.jpg$', '\.jpeg$', '\.svg$', '\.raw$', '\.mp3$',
-                  \ '\.mp4$', '\.avi$', '\.url$', '\.cap$', '\.regtrans-ms$',
-                  \ '\.blf$', 'Thumbs.db$', 'desktop.ini$', 'ntuser.ini$',
-                  \ '\.gif$', '\.flac$', '\.ogg$', '.webm$', '.mkv$', '\.zip$',
-                  \ '\.tar.gz$', '\.rar$', '\.DAT$', '\.LOG1$', '\.LOG1$']
+  \ '\.class$', '\.pptx$', '\.pptm$', '\.xls$', '\.xlsx$', '\.xlsm$', '\.gdoc$',
+  \ '\.gsheet$', '\.gslides$', '\.psd$', '\.png$', '\.svg$', '\.raw$', '\.mp3$',
+  \ '\.jpg$', '\.jpeg$', '\.mp4$', '\.avi$', '\.url$', '\.cap$', 'desktop.ini$',
+  \ '\.blf$', 'Thumbs.db$', 'ntuser.ini$', '\.regtrans-ms$', '\.ogg$', '.webm$',
+  \ '\.flac$', '.mkv$', '\.zip$', '\.tar.gz$', '\.rar$', '\.DAT$', '\.LOG1$',
+  \ '\.gif$', '\.dll$']
+
 " *--------*
 " | Tagbar |
 " *--------*
@@ -269,8 +269,10 @@ let g:NERDTrimTrailingWhitespace = 1
 " *----------*
 " | Fugitive |
 " *----------*
-map <F4> :Gstatus<cr>
-map <leader><F4> :Gpush<cr>
+map <leader>gs :Gstatus<cr>
+map <leader>gd :Gdiff<cr>
+map <leader>gc :Gcommit -m
+map <leader>gp :Gpush<cr>
 
 " *---------------------*
 " | Rainbow Parentheses |
