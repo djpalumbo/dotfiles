@@ -54,6 +54,9 @@ Plugin 'honza/vim-snippets' " More snippets
 " NERDCommenter: Awesome commenting
 Plugin 'scrooloose/nerdcommenter'
 
+" ALE: Asynchronous lint engine
+Plugin 'w0rp/ale'
+
 " EasyMotion: Speedy way to move around your file
 Plugin 'easymotion/vim-easymotion'
 
@@ -144,6 +147,14 @@ let g:NERDCustomDelimiters = {
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
+
+" *-----*
+" | ALE |
+" *-----*
+let g:ale_open_list = 1 " Show the list of errors
+let g:ale_list_window_size = 4 " Resize the error window
+
+let g:ale_lint_on_text_changed = 'never' " Only lint on save (limits CPU use)
 
 " *----------*
 " | Fugitive |
@@ -577,21 +588,19 @@ inoremap [      []<Left>
 inoremap [[     [
 inoremap []     []
 
-" Auto-single-quotes
-inoremap '      ''<Left>
-inoremap ''     '
-inoremap ''     ''
-
-" Auto-double-quotes
-inoremap "      ""<Left>
-inoremap ""     "
-inoremap ""     ""
-
 " Auto-curly-brackets
 inoremap {      {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
 inoremap {{     {
 inoremap {}     {}
+
+" Auto-single-quotes
+inoremap '      ''<Left>
+inoremap ''     '
+
+" Auto-double-quotes
+inoremap "      ""<Left>
+inoremap ""     "
 
 " Insert date and time
 iab xdate <C-r>=strftime("%a %b %d %H:%M:%S %Y %Z")<CR>
