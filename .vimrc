@@ -1,91 +1,35 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sections:
-"    -> Windows
-"    -> Plugins (Vundle)
-"    -> Plugin Settings & Bindings
-"    -> General
-"    -> VIM user interface
-"    -> Colors and Fonts
-"    -> Files and backups
-"    -> Text, tab and indent related
-"    -> Visual mode related
-"    -> Moving around, tabs and buffers
-"    -> Status line
-"    -> Editing mappings
-"    -> Spell checking
-"    -> Misc
-"    -> Helper functions
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"   -> Plugins (Vundle)
+"   -> Plugin Settings
+"   -> General
+"   -> Colors and Fonts
+"   -> Mappings
+"   -> Abbreviations/auto-complete
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Windows
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has('win32')
-  source $VIMRUNTIME/vimrc_example.vim
-  source $VIMRUNTIME/mswin.vim
-  behave mswin
-
-  set diffexpr=MyDiff()
-  function! MyDiff()
-    let opt = '-a --binary '
-    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-    let arg1 = v:fname_in
-    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-    let arg2 = v:fname_new
-    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-    let arg3 = v:fname_out
-    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-    if $VIMRUNTIME =~ ' '
-      if &sh =~ '\<cmd'
-        if empty(&shellxquote)
-          let l:shxq_sav = ''
-          set shellxquote&
-        endif
-        let cmd = '"' . $VIMRUNTIME . '\diff"'
-      else
-        let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-      endif
-    else
-      let cmd = $VIMRUNTIME . '\diff'
-    endif
-    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-    if exists('l:shxq_sav')
-      let &shellxquote=l:shxq_sav
-    endif
-  endfunction
-endif
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins (Vundle)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible              " be iMproved, required
-filetype off                  " required
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible
+filetype off
 " Set the runtime path to include Vundle and initialize
 " Set where Vundle installs plugins:
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin('~/.vim/bundle')
 
-" let Vundle manage Vundle, required
+" Let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
 " Startify: Startup screen with most recent files used and cowsay
 Plugin 'mhinz/vim-startify'
 
 " Colorschemes:
-Plugin 'tomasr/molokai'
-Plugin 'morhetz/gruvbox'
 Plugin 'ajmwagar/vim-deus'
-Plugin 'dracula/vim'
-Plugin 'raphamorim/lucario'
+Plugin 'tomasr/molokai'
 
 " Airline: Status/tabline
 Plugin 'bling/vim-airline'
-" Themes for Airline
-Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-airline/vim-airline-themes' " Themes for Airline
 
 " NERDTree: A file explorer
 Plugin 'scrooloose/nerdtree'
@@ -104,16 +48,8 @@ Plugin 'shougo/neocomplete.vim'
 
 " Neosnippet: Code snippets!
 Plugin 'Shougo/neosnippet'
-" Default snippet collection
-Plugin 'Shougo/neosnippet-snippets'
-" More snippets
-Plugin 'honza/vim-snippets'
-
-" Syntastic: Syntax checking
-"Plugin 'scrooloose/syntastic'
-
-" CtrlP: Fuzzy file, buffer, mru, tag, etc. finder
-Plugin 'kien/ctrlp.vim'
+Plugin 'Shougo/neosnippet-snippets' " Default snippet collection
+Plugin 'honza/vim-snippets' " More snippets
 
 " NERDCommenter: Awesome commenting
 Plugin 'scrooloose/nerdcommenter'
@@ -124,9 +60,6 @@ Plugin 'easymotion/vim-easymotion'
 " Fugitive: A Git wrapper
 Plugin 'tpope/vim-fugitive'
 
-" VimJavascript: Improved JS indentation & support in Vim
-Plugin 'pangloss/vim-javascript'
-
 " SearchIndex: Shows number of search results
 Plugin 'google/vim-searchindex'
 
@@ -135,7 +68,6 @@ Plugin 'luochen1990/rainbow'
 
 " TrailingWhitespace: Causes trailing whitespace to be highlighted in red
 Plugin 'bronson/vim-trailing-whitespace'
-" Call :FixWhitespace to fix the error
 
 
 " All of your Plugins must be added before the following line
@@ -143,25 +75,16 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-" see :h vundle for more details or wiki for FAQ
+
 " Put your non-Plugin stuff after this line
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugin Settings & Bindings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" *----------*
-" | Startify |
-" *----------*
-map <leader>e :Startify<cr>
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin Settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " *---------*
 " | Airline |
 " *---------*
-set laststatus=2  " Let statusline sppear all the time
 " Automatically display all buffers when there's only one tab open
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filenames (not abbreviated directories)
@@ -180,18 +103,14 @@ let NERDTreeShowBookmarks = 1
 let NERDTreeShowHidden = 1
 " Change directory to current file
 cd %:p:h
-" Map NerdTree to CTRL+n
-map <C-n> :NERDTreeToggle<CR>
-" F2 opens NerdTree to current buffer's directory
-map <F2> :NERDTree %:p:h<CR>
 " Ignore files of certain types
 let NERDTreeIgnore=['\.bin$', '\.exe$', '\.pdf$', '\.doc$', '\.docx$', '\.odt$',
   \ '\.class$', '\.pptx$', '\.pptm$', '\.xls$', '\.xlsx$', '\.xlsm$', '\.gdoc$',
   \ '\.gsheet$', '\.gslides$', '\.psd$', '\.png$', '\.svg$', '\.raw$', '\.mp3$',
   \ '\.jpg$', '\.jpeg$', '\.mp4$', '\.avi$', '\.url$', '\.cap$', 'desktop.ini$',
-  \ '\.blf$', 'Thumbs.db$', 'ntuser.ini$', '\.regtrans-ms$', '\.ogg$', '.webm$',
-  \ '\.flac$', '.mkv$', '\.zip$', '\.tar.gz$', '\.rar$', '\.DAT$', '\.LOG1$',
-  \ '\.gif$', '\.dll$']
+  \ '\.blf$', 'Thumbs.db$', 'ntuser.ini$', '\.regtrans-ms$', '\.ogg$', '\.mkv$',
+  \ '\.flac$', '\.webm$', '\.zip$', '\.tar.gz$', '\.rar$', '\.log1$', '\.log2$',
+  \ '\.dat$', '\.gif$', '\.dll$']
 
 " *--------*
 " | Tagbar |
@@ -202,52 +121,12 @@ if has('win32')
 elseif has('unix')
   let g:tagbar_ctags_bin = '~/.vim/bundle/tagbar/ctags-5.8/ctags'
 endif
-nmap <F3> :TagbarToggle<CR>
 " Fix Tagbar window width to be less intrusive (thinner)
 let g:tagbar_width = 30
-
-" *-----------*
-" | Syntastic |
-" *-----------*
-" syntax check
-"let g:syntastic_c_checkers = ['gcc']
-" Recommended settings ... Refer to :help syntastic
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-
-" *-------*
-" | CtrlP |
-" *-------*
-" Change the default mapping and the default command to invoke CtrlP
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-" Show buffer list - allows for selection using arrow keys
-map <F6> :CtrlPBuffer<CR>
-" When invoked, unless a starting directory is specified, CtrlP will set its
-"  local working directory according to this variable
-let g:ctrlp_working_path_mode = 'ra'
-" Exclude files and directories using Vim's wildignore and CtrlP's
-"  own g:ctrlp_custom_ignore
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-" Use a custom file listing command
-let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
 
 " *---------------*
 " | NERDCommenter |
 " *---------------*
-" Set \ to toggle comment
-map \ <Plug>NERDCommenterToggle
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 " Use compact syntax for prettified multi-line comments
@@ -269,20 +148,12 @@ let g:NERDTrimTrailingWhitespace = 1
 " *----------*
 " | Fugitive |
 " *----------*
-map <leader>gs :Gstatus<cr>
-map <leader>gd :Gdiff<cr>
-map <leader>gc :Gcommit -m
-map <leader>gp :Gpush<cr>
+set diffopt=vertical " Split screen down the middle during 'git diff'
 
 " *---------------------*
 " | Rainbow Parentheses |
 " *---------------------*
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
-
-" *--------------------*
-" | TrailingWhitespace |
-" *--------------------*
-" See 'Editing mappings' section
 
 " *-------------*
 " | Neocomplete |
@@ -376,147 +247,83 @@ endif
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Set how large the window is on startup
-set lines=52 columns=100
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set lines=52 columns=100 " Set the size of the window on startup
 
-" Sets how many lines of history VIM has to remember
-set history=500
+set number " Show line numbers
+set relativenumber " Make line numbers relative
+set laststatus=2  " Always show the status line
+set ruler " Always show current position
+
+syntax on " Enable syntax highlighting
+
+set history=500 " Sets how many lines of history VIM has to remember
+
+set autoread " Set to auto read when a file is changed from the outside
+set modeline " Last lines in document sets vim mode
+set esckeys " Enables recognition of arrow key codes
+
+set backspace=eol,start,indent " Configure backspace so it acts as it should act
+set scrolloff=5 " Set x lines to the cursor - when moving vertically using j/k
+set whichwrap+=<,>,h,l " Move around lines easier
+
+set hidden " A buffer becomes hidden when it is abandoned
 
 " Enable filetype plugins
 "filetype plugin on
-"filetype indent on
 
-set autoread " Set to auto read when a file is changed from the outside
-set relativenumber " Make line numbers relative
-set number " Show line numbers
-set modeline " last lines in document sets vim mode
-set ek "Enables recognition of arrow key codes
+" :w!! writes the file when you accidentally opened it w/o the right priveleges
+"cmap w!! w !sudo tee % > /dev/null
 
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
-
-" Fast saving
-nmap <leader>w :w!<cr>
-" Fast escape
-map <c-c> <Esc>
-
-" :w!! writes the file when you accidentally opened it without the right root priveleges
-cmap w!! w !sudo tee % > /dev/null
-
-" Folding
+" Folding code
 set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
 set foldlevel=2
-" Close folds with 7
-map 7 zc
-" Open folds with 8
-map 8 zo
-" Close all folds with F7
-map <F7> zM
-" Open all folds with F8
-map <F8> zR
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => VIM user interface
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Set 5 lines to the cursor - when moving vertically using j/k
-set so=5
-
-" Avoid garbled characters in Chinese language windows OS
-let $LANG='en'
-set langmenu=en
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
 
 " Turn on the WiLd menu
 set wildmenu
-" Ignore compiled files
-set wildignore=*.o,*~,*.pyc
+" Ignore files of certain types
+set wildignore=*.o,*~,*.pyc,*.bin,*.exe,*.pdf,*.doc,*.docx,*.odt,*.class,*.pptx,
+  \*.pptm,*.xls,*.xlsx,*.xlsm,*.gdoc,*.gsheet,*.gslides,*.psd,*.png,*.svg,*.raw,
+  \*.mp3,*.jpg,*.jpeg,*.mp4,*.avi,*.url,*.cap,desktop.ini,*.blf,Thumbs.db,
+  \ntuser.ini,*.regtrans-ms,*.ogg,*.webm,*.flac,*.mkv,*.zip,*.tar.gz,*.rar,
+  \*.dat,*.log1,*.log2,*.gif,*.dll
 if has("win16") || has("win32")
   set wildignore+=.git\*,.hg\*,.svn\*
 else
   set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
 
-"Always show current position
-set ruler
+" Searching
+set ignorecase " Ignore case when searching
+set smartcase " When searching try to be smart about cases
+set hlsearch " Highlight search results
+set incsearch " Makes search act like search in modern browsers
+set magic " For regular expressions turn magic on
 
-" A buffer becomes hidden when it is abandoned
-set hid
+" Line break & word wrap
+set linebreak
+set textwidth=80
+set wrap " Wrap lines
 
-" Configure backspace so it acts as it should act
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
+" Tabbing & indentation
+set shiftwidth=2 " 1 tab = x spaces
+set softtabstop=2
+set tabstop=2
+set expandtab " Use spaces instead of tabs
+set smarttab
+set autoindent
+set smartindent
 
-" Ignore case when searching
-set ignorecase
-" When searching try to be smart about cases
-set smartcase
-" Highlight search results
-set hlsearch
-" Makes search act like search in modern browsers
-set incsearch
+" Python tabbing & indentation configuration
+au BufNewFile,BufRead *.py
+   \ set tabstop=2 |
+   \ set softtabstop=2 |
+   \ set shiftwidth=2
 
-" Don't redraw while executing macros (good performance config)
-set lazyredraw
-
-" For regular expressions turn magic on
-set magic
-
-" Show matching brackets when text indicator is over them
-set showmatch
-" How many tenths of a second to blink when matching brackets
-set mat=2
-
-" No annoying sound on errors
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
-
-" Add a bit extra margin to the left
-"set foldcolumn=1
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors and Fonts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set background=dark
-
-" Enable syntax highlighting
-syntax enable
-
-" Colorscheme
-colorscheme deus
-" Make sure background is /very/ black
-highlight Normal guibg=black guifg=white
-
-" Set font
-set guifont=DejaVu\ Sans\ Mono:h10
-
-" GUI options (gVim)
-if has("gui_running")
-  set guioptions-=T  " gvim remove toolbar
-  set guioptions-=m  " gvim remove menu bar
-  set guioptions-=r  " gvim remove rhand scrollbar
-  set guioptions-=L  " gvim remove lhand scrollbar
-  set t_Co=256  " 256 color mode
-endif
-
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Choose the standard file type
 if has('win32')
   set ffs=dos,unix
@@ -524,59 +331,90 @@ elseif has('unix')
   set ffs=unix,dos
 endif
 
+" Specify the behavior when switching between buffers
+try
+  set switchbuf=useopen,usetab,newtab
+  set showtabline=2
+catch
+endtry
+
+" Return to last edit position when opening files
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
 " Turn backup off, since most stuff is in SVN, git etc anyway...
 set nobackup
 set nowb
 set noswapfile
 set noundofile
 
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use spaces instead of tabs
-set expandtab
+" Misc
+set showmatch " Show matching brackets when text indicator is over them
+set matchtime=2 " How many tenths of a second to blink when matching brackets
 
-" Be smart when using tabs ;)
-set smarttab
-
-" 1 tab == x spaces
-set shiftwidth=2
-set tabstop=2
-
-" Linebreak on 500 characters
-set lbr
-set tw=500
-
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
-set textwidth=80
-
-" Python configurations
-au BufNewFile,BufRead *.py
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4
+set lazyredraw " Don't redraw while executing macros (good performance config)
 
 
-""""""""""""""""""""""""""""""
-" => Visual mode related
-""""""""""""""""""""""""""""""
-" Visual mode pressing * or # searches for the current selection
-" Super useful! From an idea by Michael Naumann
-vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set guifont=DejaVu\ Sans\ Mono:h10
+
+colorscheme deus
+" Make sure background is /very/ black
+highlight Normal guibg=black
+
+" GUI options (gVim)
+if has("gui_running")
+  set guioptions-=T " gvim remove toolbar
+  set guioptions-=m " gvim remove menu bar
+  set guioptions-=r " gvim remove rhand scrollbar
+  set guioptions-=L " gvim remove lhand scrollbar
+  set t_Co=256 " 256 color mode
+endif
+
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Avoid garbled characters in Chinese language windows OS
+let $LANG='en'
+set langmenu=en
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Moving around, tabs, windows and buffers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" *-----------*
-" | SEARCHING |
-" *-----------*
-" Disable highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Mappings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set the <leader> key, allowing for more key combinations
+let mapleader = ","
+let g:mapleader = ","
+
+" Fast saving
+nmap <leader>w :w!<CR>
+
+" Copy selection into operating system's register
+map <leader>y "*y
+" Paste selection from operating system's register
+map <leader>p "*p
+
+" 0 moves to first non-blank character
+map 0 ^
+" 9 moves to the last character in a line
+map 9 $
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<CR>:pwd<CR>
+
+" Open vimrc for editing
+map <leader><F12> :e $MYVIMRC<CR>
+" Refresh vimrc
+noremap <F5> :so %<CR>
 
 " *---------*
 " | BUFFERS |
@@ -585,171 +423,13 @@ map <silent> <leader><cr> :noh<cr>
 map <leader>bn :enew<CR>
 
 " Move between buffers
-map <leader>l :bnext<cr>
-map <leader>h :bprevious<cr>
-
-" List all current buffers
-":nnoremap <F6> :buffers<CR>:buffer<Space>
+map <leader>l :bnext<CR>
+map <leader>h :bprevious<CR>
 
 " Close the current buffer
-map <leader>bd :Bclose<cr>:tabclose<cr>gT
+map <leader>bd :Bclose<CR>
 
-" Close all the buffers
-map <leader>ba :bufdo bd<cr>
-
-" *--------------*
-" | TABS/WINDOWS |
-" *--------------*
-" Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-" Useful mappings for managing tabs
-map <F10> :vsplit<CR>
-map <F11> :split<CR>
-map <F12> :close<CR>
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-map <leader>t<leader> :tabnext
-
-" Let 'tl' toggle between this and the last accessed tab
-let g:lasttab = 1
-nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
-
-" *------*
-" | MISC |
-" *------*
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
-
-" Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
-" Specify the behavior when switching between buffers
-try
-  set switchbuf=useopen,usetab,newtab
-  set stal=2
-catch
-endtry
-
-" Return to last edit position when opening files (You want this!)
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-
-""""""""""""""""""""""""""""""
-" => Status line
-""""""""""""""""""""""""""""""
-" Always show the status line
-set laststatus=2
-
-" Format the status line
-"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Editing mappings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Copy selection into operating system's register
-map <leader>y "*y
-
-" Clear whitespace at the end of lines
-map <leader><Space> :FixWhitespace<CR>
-
-" Open vimrc for editing
-map <leader><F12> :e $MYVIMRC<CR>
-" Refresh vimrc
-noremap <F5> :so %<CR>
-
-" Remap VIM 0 to first non-blank character
-map 0 ^
-" 9 moves to the last character in a line
-map 9 $
-
-" Insert date and time
-iab xdate <c-r>=strftime("%a %b %d %H:%M:%S %Y %Z")<cr>
-
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Spell checking
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Pressing ,sc will toggle and untoggle spell checking
-map <leader>sc :setlocal spell!<cr>
-
-" Shortcuts using <leader>
-map <leader>sn ]s
-map <leader>sp [s
-map <leader>sa zg
-map <leader>s? z=
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Misc
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
-" Quickly open a buffer for scribble
-map <leader>q :e ~/buffer<cr>
-
-" Quickly open a markdown buffer for scribble
-map <leader>x :e ~/buffer.md<cr>
-
-" Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Helper functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"function! CmdLine(str)
-"   exe "menu Foo.Bar :" . a:str
-"   emenu Foo.Bar
-"   unmenu Foo
-"endfunction
-
-function! VisualSelection(direction, extra_filter) range
-   let l:saved_reg = @"
-   execute "normal! vgvy"
-
-   let l:pattern = escape(@", "\\/.*'$^~[]")
-   let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-   if a:direction == 'gv'
-       call CmdLine("Ag '" . l:pattern . "' " )
-   elseif a:direction == 'replace'
-       call CmdLine("%s" . '/'. l:pattern . '/')
-   endif
-
-   let @/ = l:pattern
-   let @" = l:saved_reg
-endfunction
-
-
-" Returns true if paste mode is enabled
-function! HasPaste()
-   if &paste
-       return 'PASTE MODE  '
-   endif
-   return ''
-endfunction
-
-" Don't close window, when deleting a buffer
-command! Bclose call <SID>BufcloseCloseIt()
+command! Bclose call <SID>BufcloseCloseIt() " Don't close window when deleting buffer
 function! <SID>BufcloseCloseIt()
   let l:currentBufNum = bufnr("%")
   let l:alternateBufNum = bufnr("#")
@@ -769,7 +449,150 @@ function! <SID>BufcloseCloseIt()
   endif
 endfunction
 
-" Make VIM remember position in file after reopen
-" if has("autocmd")
-"   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-"endif
+" *--------------*
+" | TABS/WINDOWS |
+" *--------------*
+" Window management
+map <F10> :split<CR>
+map <F11> :vsplit<CR>
+map <F12> :close<CR>
+
+" Window navigation
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Window resize (based on upper-left-most window)
+map <C-S-Right> :vertical resize +1<CR>
+map <C-S-Left> :vertical resize -1<CR>
+map <C-S-Down> :resize +1<CR>
+map <C-S-Up> :resize -1<CR>
+
+" *---------*
+" | FOLDING |
+" *---------*
+" Close folds with 7
+map 7 zc
+" Open folds with 8
+map 8 zo
+" Close all folds with F7
+map <F7> zM
+" Open all folds with F8
+map <F8> zR
+
+" *-----------*
+" | SEARCHING |
+" *-----------*
+" Disable highlight when <leader><CR> is pressed
+map <silent> <leader><CR> :noh<CR>
+
+" Pressing * or # searches for the current selection
+" Super useful! Idea by Michael Naumann
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+
+function! VisualSelection(direction, extra_filter) range
+  let l:saved_reg = @"
+  execute "normal! vgvy"
+
+  let l:pattern = escape(@", "\\/.*'$^~[]")
+  let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+  if a:direction == 'gv'
+      call CmdLine("Ag '" . l:pattern . "' " )
+  elseif a:direction == 'replace'
+      call CmdLine("%s" . '/'. l:pattern . '/')
+  endif
+
+  let @/ = l:pattern
+  let @" = l:saved_reg
+endfunction
+
+function! CmdLine(str)
+  exe "menu Foo.Bar :" . a:str
+  emenu Foo.Bar
+  unmenu Foo
+endfunction
+
+" *-------------*
+" | PLUGIN MAPS |
+" *-------------*
+" Startify
+map <leader>e :Startify<CR>
+
+" NERDTree (F2 opens to current buffer's directory)
+map <C-n> :NERDTreeToggle<CR>
+map <F2> :NERDTree %:p:h<CR>
+
+" Tagbar
+nmap <F3> :TagbarToggle<CR>
+
+" NERDCommenter (\ toggles comments)
+map \ <Plug>NERDCommenterToggle
+
+" Fugitive
+map <leader>gs :Gstatus<CR>
+map <leader>gd :Gdiff<CR>
+map <leader>gc :Gcommit -m
+map <leader>gp :Gpush<CR>
+
+" TrailingWhitespace
+map <leader><Space> :FixWhitespace<CR>
+
+" *-------------*
+" | SPELL CHECK |
+" *-------------*
+" Pressing ,sc will toggle and untoggle spell checking
+map <leader>sc :setlocal spell!<CR>
+" Go to next misspelled word
+map <leader>sn ]s
+" Go to previous misspelled word
+map <leader>sp [s
+" Add word to dictionary
+map <leader>sa zg
+" Make a correction to a misspelled word
+map <leader>s? z=
+
+" *------*
+" | MISC |
+" *------*
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>m mmHmt:%s/<C-V><CR>//ge<CR>'tzt'm
+
+" Toggle paste mode on and off
+map <leader>pp :setlocal paste!<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Abbreviations/auto-complete
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Auto-parentheses
+inoremap (      ()<Left>
+inoremap ((     (
+inoremap ()     ()
+
+" Auto-brackets
+inoremap [      []<Left>
+inoremap [[     [
+inoremap []     []
+
+" Auto-single-quotes
+inoremap '      ''<Left>
+inoremap ''     '
+inoremap ''     ''
+
+" Auto-double-quotes
+inoremap "      ""<Left>
+inoremap ""     "
+inoremap ""     ""
+
+" Auto-curly-brackets
+inoremap {      {}<Left>
+inoremap {<CR>  {<CR>}<Esc>O
+inoremap {{     {
+inoremap {}     {}
+
+" Insert date and time
+iab xdate <C-r>=strftime("%a %b %d %H:%M:%S %Y %Z")<CR>
+
