@@ -261,7 +261,9 @@ let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set lines=52 columns=100 " Set the size of the window on startup
+if has('gvim')
+  set lines=52 columns=100 " Set the size of the window on startup
+endif
 
 set number " Show line numbers
 set relativenumber " Make line numbers relative
@@ -274,7 +276,9 @@ set history=500 " Sets how many lines of history VIM has to remember
 
 set autoread " Set to auto read when a file is changed from the outside
 set modeline " Last lines in document sets vim mode
-set esckeys " Enables recognition of arrow key codes
+if !has('nvim')
+  set esckeys " Enables recognition of arrow key codes
+endif
 
 set backspace=eol,start,indent " Configure backspace so it acts as it should act
 set scrolloff=5 " Set x lines to the cursor - when moving vertically using j/k
@@ -376,7 +380,11 @@ set lazyredraw " Don't redraw while executing macros (good performance config)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set guifont=DejaVu\ Sans\ Mono:h10
 
-colorscheme deus
+if has('nvim')
+  colorscheme molokai
+else
+  colorscheme deus
+endif
 " Make sure background is /very/ black
 highlight Normal guibg=black
 
