@@ -1,0 +1,2 @@
+#!/bin/sh
+feh  --bg-fill '/home/dave/Pictures/atom_low_poly.png' 
