@@ -16,3 +16,6 @@ complete -cf sudo
 
 # Line wrap on window resize
 shopt -s checkwinsize
+
+# Import/refresh colorscheme from 'wal'
+(wal -r -t &)

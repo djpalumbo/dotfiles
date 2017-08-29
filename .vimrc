@@ -380,13 +380,11 @@ set lazyredraw " Don't redraw while executing macros (good performance config)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set guifont=DejaVu\ Sans\ Mono:h10
 
-if has('nvim')
-  colorscheme molokai
-else
+if has('gvim')
   colorscheme deus
+  " Make sure background is /very/ black
+  highlight Normal guibg=black
 endif
-" Make sure background is /very/ black
-highlight Normal guibg=black
 
 " GUI options (gVim)
 if has("gui_running")

@@ -20,8 +20,8 @@ if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
 
-#############
-# MY SETTINGS
-#############
+###############
+# MY SETTINGS #
+###############
 exec i3
 
