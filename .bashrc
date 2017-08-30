@@ -9,9 +9,11 @@ alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
 # User settings
+export EDITOR="nvim"
 alias vim='nvim'
 
 # Tab-completion
+complete -c man which
 complete -cf sudo
 
 # Line wrap on window resize

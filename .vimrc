@@ -415,10 +415,14 @@ let g:mapleader = ","
 " Fast saving
 nmap <leader>w :w!<CR>
 
-" Copy selection into operating system's register
-map <leader>y "*y
-" Paste selection from operating system's register
-map <leader>p "*p
+" Copy and paste selections into operating system's register
+if has('win32') " and maybe gvim?
+  map <leader>y "*y
+  map <leader>p "*p
+else " if has('unix')
+  map <leader>y "+y
+  map <leader>p "+p
+endif
 
 " 0 moves to first non-blank character
 map 0 ^
