@@ -18,10 +18,15 @@ primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
-[bar/example]
+[global/wm]
+margin-top = 0
+margin-bottom = 5
+
+[bar/mybar]
+bottom = false
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 27
+height = 25
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 6.0
@@ -33,7 +38,7 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 4
+border-size = 2
 border-color = #00000000
 
 padding-left = 0
@@ -46,12 +51,12 @@ font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
-modules-left = bspwm i3
-modules-center =
-modules-right = filesystem xbacklight volume xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-left = i3 mpd
+;modules-center =
+modules-right = home filesystem volume memory cpu wlan eth battery temperature date powermenu
 
 tray-position = right
-tray-padding = 2
+tray-padding = 0
 ;tray-transparent = true
 ;tray-background = #0063ff
 
@@ -159,7 +164,7 @@ icon-play = 
 icon-pause = 
 icon-next = 
 
-label-song-maxlen = 25
+label-song-maxlen = 70
 label-song-ellipsis = true
 
 [module/xbacklight]
@@ -263,7 +268,7 @@ label-volume-foreground = ${root.foreground}
 
 format-muted-prefix = " "
 format-muted-foreground = ${colors.foreground-alt}
-label-muted = sound muted
+label-muted = MUTE
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
@@ -363,12 +368,5 @@ screenchange-reload = true
 ;compositing-background = screen
 ;compositing-foreground = source
 ;compositing-border = over
-
-[global/wm]
-margin-top = 5
-margin-bottom = 5
-
-; Put the bar at the bottom of the screen
-bottom = false
 
 ; vim:ft=dosini
