@@ -269,6 +269,7 @@ set number " Show line numbers
 set relativenumber " Make line numbers relative
 set laststatus=2  " Always show the status line
 set ruler " Always show current position
+set mouse=a " Enable mouse
 
 syntax on " Enable syntax highlighting
 

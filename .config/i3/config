@@ -21,10 +21,10 @@ bindsym XF86MonBrightnessUp exec light -A 2
 bindsym XF86AudioMute exec amixer sset Master toggle
 bindsym XF86AudioLowerVolume exec amixer sset Master 2%-
 bindsym XF86AudioRaiseVolume exec amixer sset Master 2%+
-#bindsym XF86AudioPlay
-#bindsym XF86AudioStop
-#bindsym XF86AudioPrev
-#bindsym XF86AudioNext
+bindsym XF86AudioPlay exec --no-startup-id mpc toggle
+#bindsym XF86AudioStop exec --no-startup-id mpc pause
+bindsym XF86AudioPrev exec --no-startup-id mpc prev
+bindsym XF86AudioNext exec --no-startup-id mpc next
 # Calculator
 bindsym XF86Calculator exec speedcrunch
 
@@ -84,7 +84,7 @@ bindsym $mod+Shift+semicolon exec --no-startup-id rofi -show run
 # Start a task manager
 bindsym Ctrl+$alt+Delete exec --no-startup-id $term -e vtop
 # Open a music player
-bindsym $mod+XF86AudioPlay exec --no-startup-id $term -e ncmpcpp
+bindsym XF86AudioStop exec --no-startup-id $term -e ncmpcpp
 # Cycle wallpapers and apply new colorscheme
 bindsym $mod+w exec wal -i $HOME/Pictures/Wallpapers -o wal-set -t
 
