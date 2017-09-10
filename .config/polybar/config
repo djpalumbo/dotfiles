@@ -160,16 +160,24 @@ type = internal/mpd
 host = 127.0.0.1
 port = 6600
 
-format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+format-online = <icon-prev> <toggle> <icon-next>   <label-song>   <label-time>
 
 icon-prev = 
-icon-stop = 
+;icon-seekb = ⏪
+;icon-stop = 
 icon-play = 
 icon-pause = 
+;icon-seekf = ⏩
 icon-next = 
+;icon-random = 🔀
+;icon-repeat = 🔁
+;icon-repeatone = 🔂
 
-label-song-maxlen = 70
+label-song = %artist% - %album% - %title%
+label-song-maxlen = 120
 label-song-ellipsis = true
+
+label-time = [ %elapsed% / %total% ]
 
 [module/xbacklight]
 type = internal/xbacklight
@@ -346,24 +354,24 @@ format-spacing = 1
 
 label-open = 
 label-open-foreground = ${colors.secondary}
-label-close =  cancel
+label-close =  Cancel
 label-close-foreground = ${colors.secondary}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
 
-menu-0-0 = reboot
+menu-0-0 = Reboot
 menu-0-0-exec = menu-open-1
-menu-0-1 = power off
+menu-0-1 = Shutdown
 menu-0-1-exec = menu-open-2
 
-menu-1-0 = cancel
+menu-1-0 = Cancel
 menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
+menu-1-1 = Reboot
+menu-1-1-exec = reboot
 
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
+menu-2-0 = Shutdown
+menu-2-0-exec = shutdown now
+menu-2-1 = Cancel
 menu-2-1-exec = menu-open-0
 
 [settings]
