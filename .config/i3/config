@@ -7,6 +7,7 @@ set $super Mod4
 
 set $term termite
 set $shell bash
+set $locker pixlock
 
 ########################
 # LAPTOP FUNCTION KEYS #
@@ -38,22 +39,26 @@ exec --no-startup-id xinput set-prop "Asus TouchPad" "Synaptics Tap Action" 1 1 
 # Natural scrolling (inverted?)
 exec --no-startup-id xinput set-prop "Asus TouchPad" "Synaptics Scrolling Distance" -66 -66
 
-##############
-# APPEARANCE #
-##############
+########################
+# STARTUP & APPEARANCE #
+########################
 # Font for window titles. Will also be used by the bar unless a different font
 #  is used in the bar {} block below.
 font pango:DejaVu Sans Mono 11
 # Set desktop wallpaper and terminal colorscheme (set via ~/.wallpaper).
 #  Also, note the 'wal -r' in .bashrc
 exec --no-startup-id wal -i $HOME/Pictures/Wallpapers -o wal-set -t
-exec --no-startup-id feh --bg-fill "$(< "${HOME}/.wallpaper")"
+exec --no-startup-id feh --bg-fill "$(< "${HOME}/.cache/wal/wal")"
 # Window transparency
 exec --no-startup-id compton -b
 # Status bar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # Adjust screen brightness/color based on time of day (like f.lux)
 exec --no-startup-id redshift -t 5500:2250
+# Start session with numlock enabled
+exec --no-startup-id numlockx
+# Lock on lid close
+exec --no-startup-id xss-lock basiclock
 
 #####################
 # TRAY APPLICATIONS #
@@ -68,9 +73,6 @@ exec --no-startup-id redshift -t 5500:2250
 ###########
 # GENERAL #
 ###########
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
 # Start a terminal
 bindsym $super+Return exec $term
 bindsym $super+t exec $term
@@ -84,7 +86,6 @@ bindsym $super+v exec $term -e nvim
 bindsym $super+i exec chromium
 # Start a program launcher
 bindsym $super+r exec --no-startup-id rofi -show run
-bindsym $super+Shift+semicolon exec --no-startup-id rofi -show run
 # Start a task manager
 bindsym Ctrl+$alt+Delete exec --no-startup-id $term -e vtop
 # Open a music player
@@ -108,6 +109,10 @@ bindsym $super+Shift+j move down
 bindsym $super+Shift+k move up
 bindsym $super+Shift+l move right
 
+# Border on (see where focus is)
+bindsym $mod+period exec i3-msg border pixel 2
+bindsym --release $mod+period exec i3-msg border pixel 0
+
 # Split in horizontal orientation
 bindsym $super+F11 split h
 # Split in vertical orientation
@@ -115,6 +120,9 @@ bindsym $super+F10 split v
 
 # Enter fullscreen mode for the focused container
 bindsym $super+space fullscreen toggle
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
 
 # Change container layout (stacked, tabbed, toggle split)
 #bindsym $mod+s layout stacking
@@ -158,13 +166,31 @@ bindsym $super+F5 reload
 # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $super+Shift+F5 restart
 
-# Exit i3 (logs you out of your X session)
-bindsym $super+Escape exec "i3-nagbar -t warning -m 'Are you sure you want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# System functions
+bindsym $super+Escape mode "$system"
+
+set $system (l)ock,   (e)xit,   (s)uspend,   (h)ibernate,   (r)eboot,   (S)hutdown
+mode "$system"
+{
+  bindsym l exec --no-startup-id $locker, mode "default"
+  bindsym e exec --no-startup-id i3-msg exit, mode "default"
+  #bindsym u exec --no-startup-id dm-tool switch-to-greeter, mode "default"
+  bindsym s exec --no-startup-id $locker && systemctl suspend, mode "default"
+  bindsym h exec --no-startup-id $locker && systemctl hibernate, mode "default"
+  bindsym r exec --no-startup-id systemctl reboot, mode "default"
+  bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
+
+  # Back to normal
+  bindsym $super+Escape mode "default"
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym q mode "default"
+}
 
 # Resize window (you can also use the mouse for that)
-bindsym $super+Shift+r mode "resize"
+bindsym $super+Shift+r mode "Resize"
 
-mode "resize"
+mode "Resize"
 {
   # These bindings trigger as soon as you enter the resize mode
   bindsym h resize shrink width 5 px or 5 ppt
@@ -172,18 +198,12 @@ mode "resize"
   bindsym k resize shrink height 5 px or 5 ppt
   bindsym l resize grow width 5 px or 5 ppt
 
-  # Back to normal: Enter or Escape
+  # Back to normal
   bindsym $super+Shift+r mode "default"
   bindsym Return mode "default"
   bindsym Escape mode "default"
+  bindsym q mode "default"
 }
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-#  finds out, if available)
-#bar
-#{
-#  status_command i3status
-#}
 
 ####################
 # I3-GAPS SETTINGS #
