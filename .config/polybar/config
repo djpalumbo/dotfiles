@@ -55,7 +55,7 @@ font-2 = "Wuncon Siji:pixelsize=10;1"
 
 modules-left = i3 mpd
 ;modules-center =
-modules-right = volume backlight-acpi filesystem cpu memory temperature wlan eth battery date powermenu
+modules-right = volume backlight-acpi filesystem cpu memory temperature wlan eth battery date
 
 tray-position = right
 tray-padding = 0

@@ -526,13 +526,13 @@ map <C-S-Up> :resize -1<CR>
 " | FOLDING |
 " *---------*
 " Close folds with 7
-map 7 zc
+"map 7 zc
 " Open folds with 8
-map 8 zo
+"map 8 zo
 " Close all folds with F7
-map <F7> zM
+"map <F7> zM
 " Open all folds with F8
-map <F8> zR
+"map <F8> zR
 
 " *-----------*
 " | SEARCHING |

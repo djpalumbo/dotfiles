@@ -19,5 +19,5 @@ complete -cf sudo
 # Line wrap on window resize
 shopt -s checkwinsize
 
-# Import/refresh colorscheme from 'wal'
-(wal -r -t &)
+# Import/refresh colorscheme from 'wal' (termite)
+#(wal -r -t &)
