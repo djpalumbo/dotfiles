@@ -35,7 +35,7 @@ alias vim="nvim"
 export KEYTIMEOUT=1
 
 # Settings via .Xresources
-!! export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
-!! bindkey ';5D' backward-word
-!! bindkey ';5C' forward-word
+export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
+bindkey ';5D' backward-word
+bindkey ';5C' forward-word
 
