@@ -9,7 +9,8 @@ alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
 # User settings
-export EDITOR="nvim"
+export EDITOR=nvim
+export BROWSER=chromium
 alias vim='nvim'
 
 # Tab-completion
@@ -19,5 +20,16 @@ complete -cf sudo
 # Line wrap on window resize
 shopt -s checkwinsize
 
+# Run Powerline
+if [ -f `which powerline-daemon` ]; then
+  powerline-daemon -q
+  POWERLINE_BASH_CONTINUATION=1
+  POWERLINE_BASH_SELECT=1
+  source /usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
+fi
+
 # Import/refresh colorscheme from 'wal' (termite)
-#(wal -r -t &)
+if [ $TERM = 'xterm-termite' ]
+then
+  (wal -r -t &)
+fi

@@ -2,7 +2,7 @@
 URxvt.internalBorder: 0
 URxvt.scrollBar: false
 URxvt.scrollstyle: plain
-URxvt.font: xft:DejaVu Sans Mono:size=12
+URxvt.font: xft:DejaVu\ Sans\ Mono:size=12,xft:Inconsolata for Powerline:size=12
 
 !! Perl extensions
 URxvt.perl-ext-common: default,keyboard-select,matcher,resize-font,selection-to-clipboard
@@ -31,6 +31,6 @@ URxvt.keysym.Control-Right: \033[1;5C
 !! bindkey ';5D' backward-word
 !! bindkey ';5C' forward-word
 
-!! Misc
-URxvt.iso14755: false
+!! Unicode mode activates with Ctrl+Shift
+URxvt.iso14755: true
 URxvt.iso14755_52: false

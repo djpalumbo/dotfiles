@@ -525,14 +525,25 @@ map <C-S-Up> :resize -1<CR>
 " *---------*
 " | FOLDING |
 " *---------*
-" Close folds with 7
-"map 7 zc
-" Open folds with 8
-"map 8 zo
-" Close all folds with F7
-"map <F7> zM
-" Open all folds with F8
-"map <F8> zR
+" Use zo and zc to open or close a single fold
+" Close all folds
+map <F7> zM
+" Open all folds
+map <F8> zR
+
+" " Close all folds
+" map <S-F7> zM
+" " Open all folds
+" map <S-F8> zR
+"
+" " Terminal-specific keycodes
+" if $TERM=~'rxvt-unicode-256color'
+"   map <F17> <S-F7>
+"   map <F18> <S-F8>
+" elseif $TERM=~'xterm-termite'
+"   map <F19> <S-F7>
+"   map <F20> <S-F8>
+" endif
 
 " *-----------*
 " | SEARCHING |

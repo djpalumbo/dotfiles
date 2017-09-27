@@ -5,7 +5,8 @@ set $mod Mod4
 set $alt Mod1
 set $super Mod4
 
-set $term urxvt
+set $term termite
+set $term2 urxvt
 set $shell bash
 set $locker pixlock
 
@@ -25,6 +26,7 @@ bindsym XF86AudioRaiseVolume exec amixer sset Master 2%+
 bindsym XF86AudioPlay exec --no-startup-id mpc toggle
 bindsym XF86AudioPrev exec --no-startup-id mpc prev
 bindsym XF86AudioNext exec --no-startup-id mpc next
+bindsym XF86AudioStop exec --no-startup-id mpc stop
 # Calculator
 bindsym XF86Calculator exec speedcrunch
 
@@ -47,7 +49,7 @@ font pango:DejaVu Sans Mono 11
 # Set desktop wallpaper and terminal colorscheme (set via ~/.wallpaper).
 #  Also, note the 'wal -r' in .bashrc
 exec --no-startup-id wal -i $HOME/Pictures/Wallpapers -o wal-set -t -e
-#exec --no-startup-id feh --bg-fill "$(< "${HOME}/.cache/wal/wal")"
+# exec --no-startup-id feh --bg-fill "$(< "${HOME}/.cache/wal/wal")"
 # Window transparency
 exec --no-startup-id compton -b
 # Status bar
@@ -97,24 +99,28 @@ mode "$tray"
 ###########
 # Start a terminal
 bindsym $super+Return exec $term
+bindsym $super+Shift+Return exec $term2
 bindsym $super+t exec $term
+bindsym $super+Shift+t exec $term2
 bindsym $alt+t exec $term
+bindsym $alt+Shift+t exec $term2
 # Open a file explorer
-bindsym $super+f exec nemo
-bindsym $super+Shift+f exec $term -e ranger
+bindsym $super+f exec $term2 -e ranger
+bindsym $super+Shift+f exec nemo
 # Open a text editor
-bindsym $super+v exec $term -e nvim
+bindsym $super+v exec $term2 -e nvim
 # Open a web browser
 bindsym $super+i exec chromium
+bindsym $super+Shift+i exec firefox
 # Start a program launcher
 bindsym $super+r exec --no-startup-id rofi -show run
 # Start a task manager
-bindsym Ctrl+$alt+Delete exec --no-startup-id $term -e vtop
-bindsym Ctrl+$alt+Shift+Delete exec --no-startup-id $term -e htop
+bindsym Ctrl+$alt+Delete exec --no-startup-id $term2 -e vtop
+bindsym Ctrl+$alt+Shift+Delete exec --no-startup-id $term2 -e htop
 # Open a music player
+bindsym $super+XF86AudioPlay exec --no-startup-id $term2 -e ncmpcpp
 bindsym Shift+XF86AudioPlay exec --no-startup-id mopidy
 bindsym Shift+XF86AudioStop exec --no-startup-id killall mopidy
-bindsym $super+XF86AudioPlay exec --no-startup-id $term -e ncmpcpp
 # Cycle wallpapers and apply new colorscheme
 bindsym $super+w exec wal -i $HOME/Pictures/Wallpapers -o wal-set -t
 
@@ -185,6 +191,8 @@ bindsym $super+Shift+6 move container to workspace 6
 bindsym $super+Shift+7 move container to workspace 7
 bindsym $super+Shift+8 move container to workspace 8
 bindsym $super+Shift+9 move container to workspace 9
+# Switch to previous workspace
+bindsym $alt+Tab workspace back_and_forth
 
 # Reload the configuration file
 bindsym $super+F5 reload
