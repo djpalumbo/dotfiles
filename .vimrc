@@ -44,7 +44,7 @@ if has('nvim')
   "  https://github.com/Shougo/deoplete.nvim/wiki/Completion-Sources
 else
   " Neocomplete: Auto-code-completion
-  Plugin 'shougo/neocomplete.vim'
+  Plug 'Shougo/neocomplete.vim'
 
   " Neosnippet: Code snippets!
   Plug 'Shougo/neosnippet'
@@ -272,7 +272,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has('gvim')
+if has('gui_running')
   set lines=52 columns=100 " Set the size of the window on startup
 endif
 
@@ -396,7 +396,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set guifont=DejaVu\ Sans\ Mono:h10
 
-if has('gvim')
+if has('gui_running')
   colorscheme deus
   " Make sure background is /very/ black
   highlight Normal guibg=black
