@@ -69,7 +69,7 @@ exec --no-startup-id xrdb -merge ~/.cache/wal/colors.Xresources
 # TRAY APPLICATIONS #
 #####################
 # Start/stop a tray application
-bindsym $super+Home mode "$tray"
+bindsym $super+Menu mode "$tray"
 
 set $tray (i)nsync,   (n)etwork manager,   (r)edshift
 mode "$tray"
@@ -88,7 +88,7 @@ mode "$tray"
   bindsym Shift+r exec --no-startup-id killall redshift, mode "default"
 
   # Back to normal
-  bindsym $super+Home mode "default"
+  bindsym $super+Menu mode "default"
   bindsym Return mode "default"
   bindsym Escape mode "default"
   bindsym q mode "default"

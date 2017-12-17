@@ -40,7 +40,11 @@ if has('nvim')
   " Deoplete: Asynchronous auto-completion
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-  " Maybe get some more completion sources later:
+  " Completion sources
+  Plug 'Shougo/neco-syntax'
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+
+  " More completion sources here:
   "  https://github.com/Shougo/deoplete.nvim/wiki/Completion-Sources
 else
   " Neocomplete: Auto-code-completion
@@ -63,6 +67,9 @@ Plug 'easymotion/vim-easymotion'
 
 " Fugitive: A Git wrapper
 Plug 'tpope/vim-fugitive'
+
+" Vimwiki: A personal wiki for Vim
+Plug 'vimwiki/vimwiki'
 
 " SearchIndex: Shows number of search results
 Plug 'google/vim-searchindex'
@@ -98,7 +105,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " Show bookmarks whenever NERDTree is open
 let NERDTreeShowBookmarks = 1
 " Show hidden files (e.g. dotfiles)
-let NERDTreeShowHidden = 1
+"let NERDTreeShowHidden = 1
 " Change directory to current file
 cd %:p:h
 " Ignore files of certain types
@@ -506,9 +513,8 @@ endfunction
 " | TABS/WINDOWS |
 " *--------------*
 " Window management
-map <F10> :split<CR>
-map <F11> :vsplit<CR>
-map <F12> :close<CR>
+map <leader>sh :split<CR>
+map <leader>sv :vsplit<CR>
 
 " Window navigation
 map <C-j> <C-W>j
