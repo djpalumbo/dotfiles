@@ -1,10 +1,54 @@
 {
+    "workbench.colorTheme": "Monokai Dimmed",
     "editor.tabSize": 2,
+    "editor.wordWrap": "on",
 
     "vim.leader": ",",
+    "vim.foldfix": true,
+    "vim.visualstar": true,
+    "vim.hlsearch": true,
+    "vim.cmdLineInitialColon": true,
     "vim.otherModesKeyBindingsNonRecursive": [
-        {
-            "before":["<C-n>"],
+        { // Quick-save
+            "before": ["leader", "w"],
+            "commands": [
+                {
+                    "command": "workbench.action.files.save",
+                }
+            ]
+        },
+        { // Toggle comments
+            "before":["\\"],
+            "after":[],
+            "commands": [
+                {
+                    "command": "editor.action.commentLine",
+                    "args": []
+                }
+            ]
+        },
+        { // New file ("buffer, new")
+            "before":["leader", "b", "n"],
+            "after":[],
+            "commands": [
+                {
+                    "command": "workbench.action.files.newUntitledFile",
+                    "args": []
+                }
+            ]
+        },
+        { // Close file ("buffer, delete")
+            "before":["leader", "b", "d"],
+            "after":[],
+            "commands": [
+                {
+                    "command": "workbench.action.closeActiveEditor",
+                    "args": []
+                }
+            ]
+        },
+        { // Clear highlights
+            "before":["leader", "<CR>"],
             "after":[],
             "commands": [
                 {
@@ -13,15 +57,19 @@
                 }
             ]
         },
-        {
-            "before": ["leader", "w"],
-            "after": [],
+        { // Delete trailing whitespace
+            "before":["leader", "<space>"],
+            "after":[],
             "commands": [
                 {
-                    "command": "workbench.action.files.save",
+                    "command": "trailing-spaces.deleteTrailingSpaces",
                     "args": []
                 }
             ]
         }
-    ]
+    ],
+
+    "trailing-spaces.highlightCurrentLine": false,
+
+    "telemetry.enableTelemetry": false
 }
