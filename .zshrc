@@ -26,7 +26,7 @@ fi
 # Import/refresh colorscheme from 'wal' (termite)
 if [ $TERM = 'xterm-termite' ]
 then
-  (wal -r -t &)
+  (cat ~/.cache/wal/sequences &)
 fi
 
 alias vim="nvim"

@@ -342,6 +342,7 @@ set magic " For regular expressions turn magic on
 set linebreak
 set textwidth=80
 set wrap " Wrap lines
+set breakindent " Fix line wrapping to have the right indentation
 
 " Tabbing & indentation
 set shiftwidth=2 " 1 tab = x spaces
