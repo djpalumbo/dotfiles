@@ -2,6 +2,7 @@
     "workbench.colorTheme": "Monokai Dimmed",
     "editor.tabSize": 2,
     "editor.wordWrap": "on",
+    "editor.lineNumbers": "relative",
 
     "vim.leader": ",",
     "vim.foldfix": true,
