@@ -9,8 +9,8 @@ alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
 # User settings
-export EDITOR=nvim
-export BROWSER=chromium
+export EDITOR=/bin/nvim
+export BROWSER=/bin/chromium
 alias vim='nvim'
 
 # Tab-completion

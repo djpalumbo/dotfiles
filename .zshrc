@@ -1,5 +1,4 @@
 # The following lines were added by compinstall
-
 zstyle ':completion:*' completer _complete _ignored
 zstyle ':completion:*' matcher-list ''
 zstyle :compinstall filename '/home/dave/.zshrc'
@@ -16,6 +15,7 @@ setopt autocd extendedglob
 bindkey -v
 # End of lines configured by zsh-newuser-install
 
+# Use Powerline
 if [ -f `which powerline-daemon` ]; then
   powerline-daemon -q
   POWERLINE_BASH_CONTINUATION=1
@@ -29,6 +29,9 @@ then
   (cat ~/.cache/wal/sequences &)
 fi
 
+# User settings
+export EDITOR=/bin/nvim
+export BROWSER=/bin/chromium
 alias vim="nvim"
 
 # Short delay to change mode after hitting Esc key
