@@ -8,11 +8,6 @@
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
-# User settings
-export EDITOR=/bin/nvim
-export BROWSER=/bin/chromium
-alias vim='nvim'
-
 # Tab-completion
 complete -c man which
 complete -cf sudo
@@ -33,3 +28,10 @@ if [ $TERM = 'xterm-termite' ]
 then
   (cat ~/.cache/wal/sequences &)
 fi
+
+# User settings
+export EDITOR=/bin/nvim
+export BROWSER=/bin/chromium
+alias vim='nvim'
+alias cookie="fortune -s | cowsay -f tux | lolcat"
+

@@ -62,7 +62,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id numlockx
 # Lock on system power change
 exec --no-startup-id xss-lock basiclock
-# Make wal colors automatic (urxvt)
+# Make wal colors automatic (urxvt, polybar)
 exec --no-startup-id xrdb -merge ~/.cache/wal/colors.Xresources
 
 #####################
@@ -71,10 +71,12 @@ exec --no-startup-id xrdb -merge ~/.cache/wal/colors.Xresources
 # Start/stop a tray application
 bindsym $super+Menu mode "$tray"
 
-set $tray (i)nsync,   ra(m)box,   (n)etwork manager,   (r)edshift,   (t)ransmission
+set $tray (b)lueman,   (i)nsync,   ra(m)box,   (n)etwork manager,   (r)edshift,   (t)ransmission
 mode "$tray"
 {
   # These bindings trigger as soon as you enter the tray mode
+  # Bluetooth tray icon (using Blueman)
+  bindsym b exec --no-startup-id blueman-applet start, mode "default"
   # Sync gdrive folder with cloud
   bindsym i exec --no-startup-id insync start, mode "default"
   # WiFi tray icon (using Network Manager)
@@ -87,6 +89,7 @@ mode "$tray"
   bindsym t exec --no-startup-id transmission-daemon -t -u arch -v linux -p 9091 -a "127.0.0.1", mode "default"
 
   # Stop tray applications
+  bindsym Shift+b exec --no-startup-id killall blueman-applet, mode "default"
   bindsym Shift+i exec --no-startup-id killall insync, mode "default"
   bindsym Shift+n exec --no-startup-id killall nm-applet, mode "default"
   bindsym Shift+m exec --no-startup-id killall rambox, mode "default"

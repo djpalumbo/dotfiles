@@ -29,11 +29,6 @@ then
   (cat ~/.cache/wal/sequences &)
 fi
 
-# User settings
-export EDITOR=/bin/nvim
-export BROWSER=/bin/chromium
-alias vim="nvim"
-
 # Short delay to change mode after hitting Esc key
 export KEYTIMEOUT=1
 
@@ -41,4 +36,10 @@ export KEYTIMEOUT=1
 export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
 bindkey ';5D' backward-word
 bindkey ';5C' forward-word
+
+# User settings
+export EDITOR=/bin/nvim
+export BROWSER=/bin/chromium
+alias vim="nvim"
+alias cookie="fortune -s | cowsay -f tux | lolcat"
 
