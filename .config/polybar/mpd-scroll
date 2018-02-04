@@ -6,7 +6,7 @@ if ! mpc >/dev/null 2>&1; then
   echo
   exit 1
 elif mpc status | grep -q playing; then
-  ( mpc current | zscroll -l 64 -d 0.3 ) &
+  ( zscroll -b "♫ " -l 62 -d 0.3 "$(mpc current)") &
 else
   echo Not playing
 fi
