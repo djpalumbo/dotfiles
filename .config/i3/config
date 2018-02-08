@@ -132,6 +132,8 @@ bindsym Shift+XF86AudioPlay exec --no-startup-id mopidy
 bindsym Shift+XF86AudioStop exec --no-startup-id killall mopidy
 # Cycle wallpapers and apply new colorscheme
 bindsym $super+w exec wal -i $HOME/Pictures/Wallpapers -o wal-set -t
+# Take a screenshot
+bindsym $super+Print exec --no-startup-id scrot -e 'mv $f ~/Pictures/Screenshots/'
 
 # Kill focused window
 bindsym $super+q kill
