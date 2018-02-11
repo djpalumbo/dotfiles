@@ -47,9 +47,10 @@ module-margin-left = 1
 module-margin-right = 2
 
 font-0 = xft:iosevka:pixelsize=11:style=medium:antialias=true;3
-font-1 = Font Awesome 5 Free:style=Regular:pixelsize=11;1
-font-2 = Font Awesome 5 Free:style=Solid:pixelsize=11;1
-;font-3 = Font Awesome 5 Brands:pixelsize=11;1
+font-1 = xft:iosevka:pixelsize=13:style=medium:antialias=true;3
+font-2 = Font Awesome 5 Free:style=Regular:pixelsize=11;1
+font-3 = Font Awesome 5 Free:style=Solid:pixelsize=11;1
+;font-4 = Font Awesome 5 Brands:pixelsize=11;1
 
 modules-left = i3
 modules-center = mpd-scroll
@@ -71,7 +72,7 @@ interval = 25
 mount-0 = /
 mount-1 = /home
 
-label-mounted =  %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-mounted =  %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
@@ -116,8 +117,14 @@ interval = 0
 [module/xbacklight]
 type = internal/xbacklight
 
-format = <label>
-label =  %percentage%%
+format = <ramp> <label>
+label = %percentage%%
+
+ramp-0 = %{T2}🌕%{T-}
+ramp-1 = %{T2}🌔%{T-}
+ramp-2 = %{T2}🌓%{T-}
+ramp-3 = %{T2}🌒%{T-}
+ramp-4 = %{T2}🌑%{T-}
 
 
 [module/backlight-acpi]
@@ -129,7 +136,7 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 label = %percentage%%
 
@@ -137,7 +144,7 @@ label = %percentage%%
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 label = %percentage_used%%
 
@@ -184,23 +191,6 @@ label-volume-foreground = ${root.foreground}
 
 label-muted =  Muted
 
-; bar-volume-width = 8
-; bar-volume-foreground-0 = #55aa55
-; bar-volume-foreground-1 = #55aa55
-; bar-volume-foreground-2 = #55aa55
-; bar-volume-foreground-3 = #55aa55
-; bar-volume-foreground-4 = #55aa55
-; bar-volume-foreground-5 = #f5a70a
-; bar-volume-foreground-6 = #ff5555
-; bar-volume-gradient = false
-; bar-volume-indicator = |
-; bar-volume-indicator-font = 2
-; bar-volume-fill = ─
-; bar-volume-fill-font = 2
-; bar-volume-empty = ─
-; bar-volume-empty-font = 2
-; bar-volume-empty-foreground = ${colors.foreground-alt}
-
 
 [module/battery]
 type = internal/battery
@@ -210,14 +200,11 @@ full-at = 99
 
 poll-interval = 5
 
-format-charging = %{T2}<label-charging>%{T-}
-format-discharging = %{T2}<ramp-capacity> <label-discharging>%{T-}
+format-charging = <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
 label-charging =  %percentage%%
 label-discharging = %percentage%%
 label-full =  Full
-
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 

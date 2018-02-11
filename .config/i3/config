@@ -253,7 +253,7 @@ mode "Resize"
 # I3-GAPS SETTINGS #
 ####################
 for_window [class="^.*"] border pixel 0
-gaps inner 10
+gaps inner 13
 gaps outer 0
 smart_gaps on
 
