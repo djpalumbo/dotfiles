@@ -8,7 +8,7 @@
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugins (Vundle)
+" => Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
 call plug#begin('~/.vim/plugged')
@@ -17,8 +17,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'mhinz/vim-startify'
 
 " Colorschemes:
-Plug 'ajmwagar/vim-deus'
-Plug 'tomasr/molokai'
+if has('win32')
+  Plug 'ajmwagar/vim-deus'
+  Plug 'tomasr/molokai'
+endif
 
 " Airline: Status/tabline
 Plug 'bling/vim-airline'
@@ -402,7 +404,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set guifont=DejaVu\ Sans\ Mono:h10
+set guifont=Dejavu\ Sans\ Mono:h10
 
 if has('gui_running')
   colorscheme deus
@@ -439,6 +441,11 @@ let g:mapleader = ","
 " Fast saving
 nmap <leader>w :update!<CR>
 
+" Open a terminal in neovim
+if has('nvim')
+  map <leader>te :terminal<CR>
+endif
+
 " Copy and paste selections into operating system's register
 if has('win32') " and maybe gvim?
   map <leader>y "*y
@@ -454,8 +461,6 @@ endif
 
 " 0 moves to first non-blank character
 map 0 ^
-" 9 moves to the last character in a line
-map 9 $
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<CR>:pwd<CR>

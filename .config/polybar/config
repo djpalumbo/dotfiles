@@ -48,9 +48,7 @@ module-margin-right = 2
 
 font-0 = xft:iosevka:pixelsize=11:style=medium:antialias=true;3
 font-1 = xft:iosevka:pixelsize=13:style=medium:antialias=true;3
-font-2 = Font Awesome 5 Free:style=Regular:pixelsize=11;1
-font-3 = Font Awesome 5 Free:style=Solid:pixelsize=11;1
-;font-4 = Font Awesome 5 Brands:pixelsize=11;1
+font-2 = FontAwesome:style=Regular:pixelsize=11;1
 
 modules-left = i3
 modules-center = mpd-scroll
