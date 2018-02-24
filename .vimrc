@@ -125,11 +125,9 @@ let NERDTreeIgnore=['\.bin$', '\.exe$', '\.pdf$', '\.doc$', '\.docx$', '\.odt$',
 " *--------*
 " | Tagbar |
 " *--------*
-" Locate Exuberant Ctags installation (must be installed manually)
+" Locate Universal Ctags installation (must be installed manually on Windows)
 if has('win32')
-  let g:tagbar_ctags_bin = '~/.vim/plugged/tagbar/ctags58/ctags.exe'
-elseif has('unix')
-  let g:tagbar_ctags_bin = '~/.vim/plugged/tagbar/ctags-5.8/ctags'
+  let g:tagbar_ctags_bin = '~/.vim/plugged/tagbar/ctags/ctags.exe'
 endif
 " Fix Tagbar window width to be less intrusive (thinner)
 let g:tagbar_width = 30
