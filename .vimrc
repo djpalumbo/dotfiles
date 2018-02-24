@@ -73,6 +73,9 @@ Plug 'tpope/vim-fugitive'
 " Vimwiki: A personal wiki for Vim
 Plug 'vimwiki/vimwiki'
 
+" Neoformat: Code formatter
+Plug 'sbdchd/neoformat'
+
 " SearchIndex: Shows number of search results
 Plug 'google/vim-searchindex'
 
@@ -648,4 +651,11 @@ inoremap {<CR>  {<CR>}<Esc>O
 
 " Insert date and time
 iab xdate <C-r>=strftime("%a %b %d %H:%M:%S %Y %Z")<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => In Progress
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Insert newline after current line but stay in place
+"nmap <C-Enter> :let col=virtcol('.')<CR> o<Esc>S<Esc>k :call cursor(0,col)<CR>
 
