@@ -257,3 +257,6 @@ gaps inner 13
 gaps outer 0
 smart_gaps on
 
+# Chromium bugfix to fix the issue of chromium opening in a different workspace
+for_window [class="^chromium$"] move window to workspace current
+for_window [class="^Chromium$"] move window to workspace current
