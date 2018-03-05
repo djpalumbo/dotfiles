@@ -98,3 +98,4 @@ wget https://raw.githubusercontent.com/djpalumbo/dotfiles/master/.scripts/arch_s
 mv arch_setup.sh /mnt/
 chmod +x /mnt/arch_setup.sh
 arch-chroot /mnt ./arch_setup.sh
+
