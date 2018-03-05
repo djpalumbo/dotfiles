@@ -94,6 +94,7 @@ echo "LANG=\"en_US.UTF-8\"\nLC_ALL=\"en_US.UTF-8\"" >> /etc/environment
 
 
 # Create a hook for every time pacman-mirrorlist upgrades
+mkdir -p /etc/pacman.d/hooks/
 echo -e "[Trigger]
 Operation = Upgrade
 Type = Package
@@ -121,18 +122,18 @@ modprobe btusb
 
 ################################################################################
 
-# Switch from root to user
-su -l $username
-cd ~
-
-
 # Make sure everything is up to date
 echo "Checking for system updates..."
 pacman -Syu
 
 
 # If the base-devel group wasn't already installed, get it
-sudo pacman -S binutils make gcc fakeroot pkg-config --noconfirm --needed
+pacman -S binutils make gcc fakeroot pkg-config --noconfirm --needed
+
+
+# Switch from root to user
+su -l $username
+cd ~
 
 
 # Install trizen, an AUR package manager and pacman companion
