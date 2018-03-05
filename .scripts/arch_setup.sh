@@ -65,7 +65,7 @@ while [[ $confirm != y && $confirm != Y ]]; do
     echo; read -p "What's your username? " username
   fi
 done
-useradd -m -g users -G wheel,storage,power -s $(which zsh) $username
+useradd -m -g users -G wheel,storage,power -s /bin/bash $username
 read -s -p "New password for $username: " password; echo
 read -s -p "Again, please: " password2; echo -e "\n"
 while [[ $password != $password2 ]] ; do
@@ -120,6 +120,11 @@ modprobe btusb
 
 
 ################################################################################
+
+# Switch from root to user
+su -l $username
+cd ~
+
 
 # Make sure everything is up to date
 echo "Checking for system updates..."
@@ -208,11 +213,6 @@ pacman -R iw wpa_actiond
 
 
 ################################################################################
-
-# Switch from root to user
-su -l $username
-cd ~
-
 
 # Configure git
 echo "Let's configure git for $username."
