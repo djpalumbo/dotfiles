@@ -83,11 +83,11 @@ pacstrap -i /mnt                                                               \
 
 
 # Generate mount configuration file
-genfstab -U -p /mnt >> /mnt/etc/fstab
+genfstab -U -p /mnt > /mnt/etc/fstab
 
 
 # Switch from USB to Arch root on your system!
-curl https://raw.githubusercontent.com/djpalumbo/dotfiles/master/.scripts/arch_setup.sh /mnt/arch_setup.sh
+wget https://raw.githubusercontent.com/djpalumbo/dotfiles/master/.scripts/arch_setup.sh
+mv arch_setup.sh /mnt/
 chmod +x /mnt/arch_setup.sh
 arch-chroot /mnt ./arch_setup.sh
-
