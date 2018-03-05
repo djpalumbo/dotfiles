@@ -1,6 +1,11 @@
 #!/bin/bash
 
 
+# Remove boot files if previous install
+rm /mnt/boot/vmlinuz-linux
+rm /mnt/boot/intel-ucode.img
+
+
 # Make sure WiFi network is accessible
 while [[ "0%" != $(ping -c 3 8.8.8.8 | grep "packet loss" | cut -d " " -f 6) ]]
 do
@@ -19,9 +24,11 @@ reflector --verbose --country 'United States' --sort rate --save /etc/pacman.d/m
 pacstrap -i /mnt                                                               \
   base  base-devel                                                             \
 \
+  wget                                                                         \
+\
   efibootmgr  intel-ucode  ntfs-3g  gksu                                       \
 \
-  wpa_supplicant  dialog  iw  wpa_actiond                                      \
+  wpa_supplicant  dialog  wireless_tools  iw  wpa_actiond                      \
   networkmanager  network-manager-applet                                       \
   dhclient  gnome-keyring                                                      \
   networkmanager-openconnect                                                   \

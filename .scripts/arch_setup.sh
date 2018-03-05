@@ -9,6 +9,7 @@ do
 done
 # Start WiFi daemon on boot
 systemctl enable netctl-auto@wlp3s0.service
+systemctl start netctl-auto@wlp3s0.service
 # FIX: grep "ip link" to get interface name
 
 
@@ -120,8 +121,6 @@ gconftool-2 --set --type boolean /apps/gksu/sudo-mode true
 modprobe btusb
 
 
-################################################################################
-
 # Make sure everything is up to date
 echo "Checking for system updates..."
 pacman -Syu
@@ -136,6 +135,8 @@ su -l $username
 cd ~
 
 
+################################################################################
+
 # Install trizen, an AUR package manager and pacman companion
 mkdir -p /tmp/trizen_install
 cd /tmp/trizen_install
@@ -146,6 +147,10 @@ cd /
 rm -r /tmp/trizen_install
 
 
+# Remove quirky directory so that universal-ctags can install
+sudo rm /usr/local/share/man
+
+
 # Install packages from the AUR
 trizen -S                                                                      \
   light-git                                                                    \
@@ -153,7 +158,7 @@ trizen -S                                                                      \
   xss-lock                                                                     \
 \
   wireless-tools  zscroll-git                                                  \
-  ttf-iosekva  ttf-font-awesome-4  ttf-material-design-icons                   \
+  ttf-iosevka  ttf-font-awesome-4  ttf-material-design-icons                   \
   polybar-git                                                                  \
 \
   paper-icon-theme-git                                                         \
@@ -175,8 +180,6 @@ trizen -S                                                                      \
   rambox-bin                                                                   \
 \
   masterpdfeditor                                                              \
-\
-  libftdi  qlcplus                                                             \
 \
   neofetch  bash-pipes  cli-visualizer  cava                                   \
 \
@@ -201,16 +204,16 @@ sed -i -e "s/Current=/Current=aerial/g" /etc/sddm.conf.d/sddm.conf
 
 
 # Start certain daemons on boot
-systemctl enable NetworkManager.service
-systemctl enable wpa_supplicant.service
-systemctl enable sddm.service
-systemctl enable bluetooth.service
-systemctl enable insync@$username.service
+sudo systemctl enable NetworkManager.service
+sudo systemctl enable wpa_supplicant.service
+sudo systemctl enable sddm.service
+sudo systemctl enable bluetooth.service
+sudo systemctl enable insync@$username.service
 
 
 # Remove unnecessary WiFi configuration now that NetworkManager is installed
 systemctl disable netctl-auto@wlp3s0.service
-pacman -R iw wpa_actiond
+sudo pacman -R iw wpa_actiond
 
 
 ################################################################################
@@ -242,7 +245,8 @@ echo -e "Git settings have been configured.\n"
 # Clone my dotfiles
 git init
 git remote add origin https://github.com/djpalumbo/dotfiles.git
-git pull origin master
+git fetch --all
+git reset --hard origin/master
 
 
 # Move scripts into /usr/bin
