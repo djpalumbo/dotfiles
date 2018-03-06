@@ -72,5 +72,6 @@
 
     "trailing-spaces.highlightCurrentLine": false,
 
-    "telemetry.enableTelemetry": false
+    "telemetry.enableTelemetry": false,
+    "workbench.iconTheme": "vscode-icons"
 }

@@ -24,14 +24,14 @@ cp /usr/share/systemd/bootctl/arch.conf /boot/loader/entries/
 # Fix options
 sed -i -e "s/rootfstype=XXXX add_efi_memmap/rootfstype=ext4 add_efi_memmap rw/g" /boot/loader/entries/arch.conf
 # Replace UUID with that of the new root partition
-rootpart=$(lsblk | grep "/$" | cut -d " " -f 1 | sed "s/├─//")
+rootpart=$(lsblk | grep "/$" | cut -d " " -f 1 | sed "s/.*s/s/g")
 sed -i -e "s/PARTUUID=XXXX/PARTUUID=$(blkid /dev/$rootpart | cut -d "\"" -f 6)/g" /boot/loader/entries/arch.conf
 # Ensure that intel microcode is used
 sed -i -e "/vmlinuz-linux/a initrd  \/intel-ucode.img" /boot/loader/entries/arch.conf
 
 
 # Enable hibernation
-swappart=$(lsblk | grep "SWAP" | cut -d " " -f 1 | sed "s/├─//")
+swappart=$(lsblk | grep "SWAP" | cut -d " " -f 1 | sed "s/.*s/s/g")
 echo "options resume=UUID=$(blkid /dev/$swappart | cut -d "\"" -f 2)" >> /boot/loader/entries/arch.conf
 # Configure the initramfs
 sed -i -e "s/^HOOKS.*/HOOKS=\"base udev resume autodetect modconf block filesystems keyboard fsck\"/g" /etc/mkinitcpio.conf
@@ -116,7 +116,6 @@ modprobe btusb
 
 
 # Make sure everything is up to date
-echo "Checking for system updates..."
 pacman -Syu
 
 

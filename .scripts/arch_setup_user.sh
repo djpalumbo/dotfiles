@@ -28,7 +28,7 @@ sudo rm /usr/local/share/man
 
 
 # Install packages from the AUR
-trizen -S                                                                      \
+trizen -S --noedit --noconfirm                                                 \
   light-git                                                                    \
 \
   xss-lock                                                                     \
@@ -38,14 +38,14 @@ trizen -S                                                                      \
   polybar-git                                                                  \
 \
   paper-icon-theme-git                                                         \
-\
   urxvt-resize-font-git                                                        \
   powerline-fonts-git                                                          \
 \
   python-pywal                                                                 \
 \
-  visual-studio-code-bin  android-studio                                       \
   universal-ctags                                                              \
+  visual-studio-code-bin                                                       \
+  android-studio  android-tools  android-udev                                  \
 \
   insync                                                                       \
 \
@@ -85,7 +85,7 @@ sudo systemctl enable NetworkManager.service
 sudo systemctl enable wpa_supplicant.service
 sudo systemctl enable sddm.service
 sudo systemctl enable bluetooth.service
-sudo systemctl enable insync@$username.service
+sudo systemctl enable insync@$(whoami).service
 
 
 # Remove unnecessary WiFi configuration now that NetworkManager is installed
@@ -96,7 +96,7 @@ sudo pacman -R iw wpa_actiond
 ################################################################################
 
 # Configure git
-echo "Let's configure git for $username."
+echo "Let's configure git for $(whoami)."
 read -p "What's your email? " email
 confirm=n
 while [[ $confirm != y && $confirm != Y ]]; do

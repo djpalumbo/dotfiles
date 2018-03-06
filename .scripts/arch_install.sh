@@ -21,8 +21,10 @@ reflector --verbose --country 'United States' --sort rate --save /etc/pacman.d/m
 
 
 # Install packages
-pacstrap -i /mnt                                                               \
+pacstrap -i /mnt --noconfirm                                                   \
   base  base-devel                                                             \
+\
+  linux-headers                                                                \
 \
   wget                                                                         \
 \
