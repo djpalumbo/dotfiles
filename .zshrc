@@ -40,6 +40,7 @@ bindkey ';5C' forward-word
 # User settings
 export EDITOR=/bin/nvim
 export BROWSER=/bin/chromium
+export ANDROID_HOME=/opt/android-sdk
 alias vim="nvim"
 alias cookie="fortune -s | cowsay -f tux | lolcat"
 

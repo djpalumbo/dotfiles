@@ -61,6 +61,20 @@ trizen -S --noedit --noconfirm                                                 \
 \
 
 
+# Allow Android Studio to manage SDK installations via a user group
+sudo groupadd sdkusers
+sudo gpasswd -a $(whoami) sdkusers
+sudo mkdir /opt/android-sdk
+sudo chown -R :sdkusers /opt/android-sdk/
+sudo chmod -R g+w /opt/android-sdk/
+# NOTE: Once the system has rebooted, open Android Studio
+#       Install the sdk to /opt/android-sdk/
+#       Then you can download various SDK's
+#       Finally, delete the following directories (they cause problems):
+#         /opt/android-sdk/emulator/lib/libstdc++
+#         /opt/android-sdk/emulator/lib64/libstdc++
+
+
 # Install packages from NPM
 sudo npm install -g                                                            \
   vtop  gtop                                                                   \
@@ -72,10 +86,10 @@ sudo npm install -g                                                            \
 
 
 # Set up SDDM
-cp -r /usr/lib/sddm/sddm.conf.d /etc/
+sudo cp -r /usr/lib/sddm/sddm.conf.d /etc/
 # Install the Aerial SDDM theme
-pacman -S qt5-multimedia  gst-libav  phonon-qt5-gstreamer  gst-plugins-good
-git clone https://github.com/3ximus/aerial-sddm-theme \
+sudo pacman -S qt5-multimedia  gst-libav  phonon-qt5-gstreamer  gst-plugins-good
+sudo git clone https://github.com/3ximus/aerial-sddm-theme \
   /usr/share/sddm/themes/aerial
 sudo sed -i -e "s/Current=/Current=aerial/g" /etc/sddm.conf.d/sddm.conf
 
@@ -89,7 +103,7 @@ sudo systemctl enable insync@$(whoami).service
 
 
 # Remove unnecessary WiFi configuration now that NetworkManager is installed
-systemctl disable netctl-auto@wlp3s0.service
+sudo systemctl disable netctl-auto@wlp3s0.service
 sudo pacman -R iw wpa_actiond
 
 
