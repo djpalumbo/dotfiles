@@ -20,11 +20,7 @@ git clone https://aur.archlinux.org/trizen.git /tmp/trizen
 cd /tmp/trizen
 makepkg -si
 cd ~
-sudo rm -r /tmp/trizen
-
-
-# Remove quirky 'man' directory so that universal-ctags can install
-sudo rm /usr/local/share/man
+rm -r /tmp/trizen
 
 
 # Install packages from the AUR
@@ -61,56 +57,10 @@ trizen -S --noedit --noconfirm                                                 \
 \
 
 
-# Allow Android Studio to manage SDK installations via a user group
-sudo groupadd sdkusers
-sudo gpasswd -a $(whoami) sdkusers
-sudo mkdir /opt/android-sdk
-sudo chown -R :sdkusers /opt/android-sdk/
-sudo chmod -R g+w /opt/android-sdk/
-# NOTE: Once the system has rebooted, open Android Studio
-#       Install the sdk to /opt/android-sdk/
-#       Then you can download various SDK's
-#       Finally, delete the following directories (they cause problems):
-#         /opt/android-sdk/emulator/lib/libstdc++
-#         /opt/android-sdk/emulator/lib64/libstdc++
-
-
-# Install packages from NPM
-sudo npm install -g                                                            \
-  vtop  gtop                                                                   \
-\
-  js-beautify                                                                  \
-\
-  react-native-cli                                                             \
-\
-
-
-# Set up SDDM
-sudo cp -r /usr/lib/sddm/sddm.conf.d /etc/
-# Install the Aerial SDDM theme
-sudo pacman -S qt5-multimedia  gst-libav  phonon-qt5-gstreamer  gst-plugins-good
-sudo git clone https://github.com/3ximus/aerial-sddm-theme \
-  /usr/share/sddm/themes/aerial
-sudo sed -i -e "s/Current=/Current=aerial/g" /etc/sddm.conf.d/sddm.conf
-
-
-# Start certain daemons on boot
-sudo systemctl enable NetworkManager.service
-sudo systemctl enable wpa_supplicant.service
-sudo systemctl enable sddm.service
-sudo systemctl enable bluetooth.service
-sudo systemctl enable insync@$(whoami).service
-
-
-# Remove unnecessary WiFi configuration now that NetworkManager is installed
-sudo systemctl disable netctl-auto@wlp3s0.service
-sudo pacman -R iw wpa_actiond
-
-
 ################################################################################
 
 # Configure git
-echo "Let's configure git for $(whoami)."
+echo -e "\nLet's configure git."
 read -p "What's your email? " email
 confirm=n
 while [[ $confirm != y && $confirm != Y ]]; do
@@ -182,5 +132,6 @@ chsh -s $(which zsh)
 
 ################################################################################
 
+# Done!
 reboot
 

@@ -30,7 +30,7 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   efibootmgr  intel-ucode  ntfs-3g  gksu                                       \
 \
-  wpa_supplicant  dialog  wireless_tools  iw  wpa_actiond                      \
+  wpa_supplicant  dialog  wireless_tools                                       \
   networkmanager  network-manager-applet                                       \
   dhclient  gnome-keyring                                                      \
   networkmanager-openconnect                                                   \
@@ -95,7 +95,7 @@ pacstrap -i /mnt --noconfirm                                                   \
 genfstab -U -p /mnt > /mnt/etc/fstab
 
 
-# Switch from USB to Arch root on your system!
+# Switch from USB to Arch root on your system
 wget https://raw.githubusercontent.com/djpalumbo/dotfiles/master/.scripts/arch_setup.sh
 mv arch_setup.sh /mnt/
 chmod +x /mnt/arch_setup.sh
