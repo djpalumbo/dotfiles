@@ -34,5 +34,6 @@ export EDITOR=/bin/nvim
 export BROWSER=/bin/chromium
 export ANDROID_HOME=/opt/android-sdk
 alias vim='nvim'
+alias emulator="/opt/android-sdk/emulator/emulator"
 alias cookie="fortune -s | cowsay -f tux | lolcat"
 
