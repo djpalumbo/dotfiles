@@ -157,9 +157,6 @@ chmod -R g+w /opt/android-sdk/
 # NOTE: Once the system has rebooted, open Android Studio
 #       Install the sdk to /opt/android-sdk/
 #       Then you can download various SDK's
-#       Finally, delete the following directories (they cause problems):
-#         /opt/android-sdk/emulator/lib/libstdc++
-#         /opt/android-sdk/emulator/lib64/libstdc++
 
 
 ################################################################################
