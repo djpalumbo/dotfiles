@@ -125,6 +125,8 @@ npm install -g                                                                 \
 \
   react-native-cli                                                             \
 \
+  gulp                                                                         \
+\
 
 
 # Set up SDDM

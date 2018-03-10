@@ -463,6 +463,20 @@ endif
 " 0 moves to first non-blank character
 map 0 ^
 
+" Toggle the textwidth between 0 and it's initial setting
+let twinit = &textwidth
+let twon = 1
+nmap <leader>tw :call ToggleTextWidth()<CR>:echo "textwidth ="&textwidth<CR>
+function! ToggleTextWidth()
+  if g:twon
+    let &textwidth=0
+    let g:twon=0
+  else
+    let &textwidth=g:twinit
+    let g:twon=1
+  endif
+endfunction
+
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<CR>:pwd<CR>
 
