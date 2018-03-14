@@ -22,7 +22,8 @@ margin-bottom = 0
 
 
 [bar/mybar]
-monitor = eDP-1
+; eDP-1
+monitor = ${env:MONITOR:}
 bottom = false
 fixed-center = true
 width = 100%

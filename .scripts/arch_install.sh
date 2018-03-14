@@ -48,7 +48,7 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   htop  powertop                                                               \
 \
-  nodejs  npm  jdk8-openjdk  python  python2  cmake  clang                     \
+  nodejs  npm  jdk8-openjdk  python  python2  cmake  clang  gdb                \
   uncrustify  yapf                                                             \
 \
   git  termite  rxvt-unicode  zsh  powerline                                   \
