@@ -1,0 +1,16 @@
+#!/bin/sh
+
+HDMI_OUT=$1
+DIMENSIONS=$2
+
+# Toggle whether or not video is displayed via the HDMI port
+if xrandr | grep "$HDMI_OUT connected $DIMENSIONS"; then
+  xrandr --output $HDMI_OUT --off
+  pactl set-card-profile 0 output:analog-stereo
+else
+  xrandr --output $HDMI_OUT --mode $DIMENSIONS
+  pactl set-card-profile 0 output:hdmi-stereo-extra1
+fi
+
+# Reload polybar
+~/.config/polybar/launch.sh

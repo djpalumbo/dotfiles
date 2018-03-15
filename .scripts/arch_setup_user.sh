@@ -90,15 +90,6 @@ git fetch --all
 git reset --hard origin/master
 
 
-# Move scripts into /usr/bin
-sudo cp ~/.scripts/basiclock /usr/bin
-sudo cp ~/.scripts/blurlock /usr/bin
-sudo cp ~/.scripts/pixlock /usr/bin
-sudo chmod +x /usr/bin/basiclock /usr/bin/blurlock /usr/bin/pixlock
-sudo cp ~/.scripts/wal-set /usr/bin
-sudo chmod +x /usr/bin/wal-set
-
-
 # Create user directories
 xdg-user-dirs-update
 mkdir ~/Pictures/Screenshots
