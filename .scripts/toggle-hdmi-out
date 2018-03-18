@@ -1,17 +1,20 @@
 #!/bin/sh
 
-HDMI_OUT=$1
-DIMENSIONS=$2
-AUDIO_DEFAULT=output:analog-stereo
-AUDIO_HDMI_OUT=output:hdmi-stereo-extra1
+# Video
+HDMI_OUT=HDMI-1
+DIMENSIONS=1920x1080
+# Audio
+CARD=alsa_card.pci-0000_00_1f.3
+PROFILE_LAPTOP=output:analog-stereo+input:analog-stereo
+PROFILE_HDMI=output:hdmi-stereo-extra1+input:analog-stereo
 
 # Toggle video & audio outputs via the HDMI port, then reload polybar
 if xrandr | grep "$HDMI_OUT connected $DIMENSIONS"; then
   xrandr --output $HDMI_OUT --off
-  pactl set-card-profile 0 $AUDIO_DEFAULT
+  pactl set-card-profile $CARD $PROFILE_LAPTOP
   ~/.config/polybar/launch.sh
 elif xrandr | grep "$HDMI_OUT connected"; then
   xrandr --output $HDMI_OUT --mode $DIMENSIONS
-  pactl set-card-profile 0 $AUDIO_HDMI_OUT
+  pactl set-card-profile $CARD $PROFILE_HDMI
   ~/.config/polybar/launch.sh
 fi
