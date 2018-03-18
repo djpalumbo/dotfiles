@@ -30,6 +30,8 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   efibootmgr  intel-ucode  ntfs-3g  gksu                                       \
 \
+  tlp                                                                          \
+\
   wpa_supplicant  dialog  wireless_tools                                       \
   networkmanager  network-manager-applet                                       \
   dhclient  gnome-keyring                                                      \
@@ -49,11 +51,15 @@ pacstrap -i /mnt --noconfirm                                                   \
   htop  powertop                                                               \
 \
   nodejs  npm  jdk8-openjdk  python  python2  cmake  clang  gdb                \
+  mariadb  mysqlworkbench                                                      \
+  mongodb  mongodb-tools                                                       \
   uncrustify  yapf                                                             \
 \
   git  termite  rxvt-unicode  zsh  powerline                                   \
   neovim  python-neovim  python2-neovim                                        \
   ranger  atool  w3m  rofi  compton  feh  scrot                                \
+\
+  virtualbox  virtualbox-host-modules-arch  vagrant                            \
 \
   xdg-user-dirs                                                                \
   nemo  nemo-fileroller  nemo-preview                                          \
@@ -77,7 +83,8 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   python-xdg  redshift                                                         \
 \
-  audacity  gimp  blender                                                      \
+  audacity  gimp                                                               \
+  blender  cura                                                                \
 \
   transmission-cli                                                             \
 \

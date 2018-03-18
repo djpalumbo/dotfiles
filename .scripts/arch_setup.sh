@@ -138,14 +138,6 @@ git clone https://github.com/3ximus/aerial-sddm-theme \
 sed -i -e "s/Current=/Current=aerial/g" /etc/sddm.conf.d/sddm.conf
 
 
-# Start certain daemons on boot
-systemctl enable NetworkManager.service
-systemctl enable wpa_supplicant.service
-systemctl enable sddm.service
-systemctl enable bluetooth.service
-systemctl enable insync@$username.service
-
-
 # Remove quirky 'man' directory so that universal-ctags (AUR) can install
 rm /usr/local/share/man
 
@@ -159,6 +151,33 @@ chmod -R g+w /opt/android-sdk/
 # NOTE: Once the system has rebooted, open Android Studio
 #       Install the sdk to /opt/android-sdk/
 #       Then you can download various SDK's
+
+
+# Set up MariaDB (MySQL)
+#mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+#systemctl start mariadb.service
+#mysql_secure_installation
+# Add a user:
+#   https://wiki.archlinux.org/index.php/MySQL#Add_user
+# It may be necessary to reset the root password:
+#   https://wiki.archlinux.org/index.php/MySQL#Reset_the_root_password
+
+
+# Start certain daemons on boot
+systemctl enable NetworkManager.service
+systemctl enable wpa_supplicant.service
+systemctl enable sddm.service
+systemctl enable tlp.service
+systemctl enable tlp-sleep.service
+systemctl enable bluetooth.service
+systemctl enable insync@$username.service
+#systemctl enable mariadb.service
+#systemctl enable mongodb.service
+
+
+# Mask certain systemd services so that TLP power management works correctly
+systemctl mask systemd-rfkill.service
+systemctl mask systemd-rfkill.socket
 
 
 ################################################################################

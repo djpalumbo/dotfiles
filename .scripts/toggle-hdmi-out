@@ -2,14 +2,16 @@
 
 HDMI_OUT=$1
 DIMENSIONS=$2
+AUDIO_DEFAULT=output:analog-stereo
+AUDIO_HDMI_OUT=output:hdmi-stereo-extra1
 
 # Toggle video & audio outputs via the HDMI port, then reload polybar
 if xrandr | grep "$HDMI_OUT connected $DIMENSIONS"; then
   xrandr --output $HDMI_OUT --off
-  pactl set-card-profile 0 output:analog-stereo
+  pactl set-card-profile 0 $AUDIO_DEFAULT
   ~/.config/polybar/launch.sh
 elif xrandr | grep "$HDMI_OUT connected"; then
   xrandr --output $HDMI_OUT --mode $DIMENSIONS
-  pactl set-card-profile 0 output:hdmi-stereo-extra1
+  pactl set-card-profile 0 $AUDIO_HDMI_OUT
   ~/.config/polybar/launch.sh
 fi
