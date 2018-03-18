@@ -43,6 +43,8 @@ trizen -S --noedit --noconfirm                                                 \
   visual-studio-code-bin                                                       \
   android-studio  android-tools  android-udev                                  \
 \
+  vmware-workstation                                                           \
+\
   insync                                                                       \
 \
   chromium-widevine                                                            \
@@ -119,6 +121,19 @@ nvim +PlugInstall +UpdateRemotePlugins +xall
 
 # Use zsh instead of bash
 chsh -s $(which zsh)
+
+
+################################################################################
+
+# Set up VMWare
+# Enable these services as desired:
+#sudo systemctl enable vmware-networks.service       # network access
+#sudo systemctl enable vmware-usbarbitrator.service  # connecting USB devices
+#sudo systemctl enable vmware-hostd.service          # sharing virtual machines
+# Lastly, load the VMware modules:
+#sudo modprobe vmw_vmci
+#sudo modprobe vmmon
+# Run 'vmplayer' unless you have a Workstation license key
 
 
 ################################################################################

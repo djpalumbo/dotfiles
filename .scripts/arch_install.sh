@@ -59,7 +59,8 @@ pacstrap -i /mnt --noconfirm                                                   \
   neovim  python-neovim  python2-neovim                                        \
   ranger  atool  w3m  rofi  compton  feh  scrot                                \
 \
-  virtualbox  virtualbox-host-modules-arch  vagrant                            \
+  virtualbox  virtualbox-host-modules-arch                                     \
+  vagrant                                                                      \
 \
   xdg-user-dirs                                                                \
   nemo  nemo-fileroller  nemo-preview                                          \
