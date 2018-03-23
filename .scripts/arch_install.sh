@@ -50,9 +50,14 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   htop  powertop                                                               \
 \
-  nodejs  npm  jdk8-openjdk  python  python2  cmake  clang  gdb                \
+  cmake  clang  gdb  peda                                                      \
+  jdk8-openjdk                                                                 \
+  python  python2  python-pip                                                  \
+  nodejs  npm                                                                  \
+\
   mariadb  mysqlworkbench                                                      \
   mongodb  mongodb-tools                                                       \
+\
   uncrustify  yapf                                                             \
 \
   git  termite  rxvt-unicode  zsh  powerline                                   \

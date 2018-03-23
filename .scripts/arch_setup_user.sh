@@ -43,6 +43,8 @@ trizen -S --noedit --noconfirm                                                 \
   visual-studio-code-bin                                                       \
   android-studio  android-tools  android-udev                                  \
 \
+  studio-3t                                                                    \
+\
   vmware-workstation                                                           \
 \
   insync                                                                       \
@@ -124,6 +126,11 @@ chsh -s $(which zsh)
 
 
 ################################################################################
+
+
+# Enable gdb-peda
+echo "source ~/peda/peda.py" >> ~/.gdbinit
+
 
 # Set up VMWare
 # Enable these services as desired:
