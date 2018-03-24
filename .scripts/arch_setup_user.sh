@@ -37,7 +37,7 @@ trizen -S --noedit --noconfirm                                                 \
   urxvt-resize-font-git                                                        \
   powerline-fonts-git                                                          \
 \
-  python-pywal                                                                 \
+  python-pywal  oomox                                                          \
 \
   universal-ctags                                                              \
   visual-studio-code-bin                                                       \

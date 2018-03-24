@@ -69,7 +69,7 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   xdg-user-dirs                                                                \
   nemo  nemo-fileroller  nemo-preview                                          \
-  arc-gtk-theme  lxappearance                                                  \
+  lxappearance                                                                 \
 \
   chromium  firefox                                                            \
   pepper-flash                                                                 \
