@@ -117,6 +117,12 @@ pacman -Syu
 
 ################################################################################
 
+# Enable the multilib repository for pacman
+multilib=$(awk "/\#\[multilib\]/{ print NR; exit }" /etc/pacman.conf)
+sed -i -e "$multilib s/\#//g" /etc/pacman.conf
+sed -i -e "$((multilib+1)) s/\#//g" /etc/pacman.conf
+
+
 # Install packages from NPM
 npm install -g                                                                 \
   vtop  gtop                                                                   \

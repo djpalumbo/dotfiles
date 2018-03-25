@@ -102,6 +102,7 @@ ln -s /mnt/windows/Users/Dave ~/dwin
 ln -s /mnt/windows/Users/Dave/Google\ Drive ~/gdrive
 ln -s /mnt/windows/Users/Dave/Google\ Drive/vimwiki ~/vimwiki
 ln -s /mnt/windows/Users/Dave/Google\ Drive/Wallpapers ~/Pictures/Wallpapers
+ln -s /mnt/windows/Users/Dave/Google Drive/3D_Models ~/Documents/3D_Models
 ln -s /mnt/windows/Users/Dave/repos ~/repos
 
 
