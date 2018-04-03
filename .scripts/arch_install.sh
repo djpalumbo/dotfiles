@@ -69,7 +69,7 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   xdg-user-dirs                                                                \
   nemo  nemo-fileroller  nemo-preview                                          \
-  lxappearance                                                                 \
+  arc-gtk-theme  lxappearance                                                  \
 \
   chromium  firefox                                                            \
   pepper-flash                                                                 \
@@ -84,7 +84,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   mpd  mpc  ncmpcpp  mopidy                                                    \
   vlc  qt4                                                                     \
 \
-  speedcrunch                                                                  \
+  speedcrunch  bc                                                              \
   p7zip                                                                        \
 \
   python-xdg  redshift                                                         \

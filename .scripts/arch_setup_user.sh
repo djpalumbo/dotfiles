@@ -37,7 +37,7 @@ trizen -S --noedit --noconfirm                                                 \
   urxvt-resize-font-git                                                        \
   powerline-fonts-git                                                          \
 \
-  python-pywal  oomox                                                          \
+  python-pywal                                                                 \
 \
   universal-ctags                                                              \
   visual-studio-code-bin                                                       \
@@ -102,7 +102,8 @@ ln -s /mnt/windows/Users/Dave ~/dwin
 ln -s /mnt/windows/Users/Dave/Google\ Drive ~/gdrive
 ln -s /mnt/windows/Users/Dave/Google\ Drive/vimwiki ~/vimwiki
 ln -s /mnt/windows/Users/Dave/Google\ Drive/Wallpapers ~/Pictures/Wallpapers
-ln -s /mnt/windows/Users/Dave/Google Drive/3D_Models ~/Documents/3D_Models
+ln -s /mnt/windows/Users/Dave/Google\ Drive/3D\ Models ~/Documents/3D\ Models
+ln -s /mnt/windows/Users/Dave/Google\ Drive/VLC\ Playlists ~/Music/VLC\ Playlists
 ln -s /mnt/windows/Users/Dave/repos ~/repos
 
 

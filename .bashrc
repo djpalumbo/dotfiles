@@ -37,4 +37,5 @@ export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 alias vim='nvim'
 alias emulator="/opt/android-sdk/emulator/emulator"
 alias cookie="fortune -s | cowsay -f tux | lolcat"
+alias trizen="trizen --noedit"
 
