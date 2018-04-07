@@ -123,6 +123,10 @@ sed -i -e "$multilib s/\#//g" /etc/pacman.conf
 sed -i -e "$((multilib+1)) s/\#//g" /etc/pacman.conf
 
 
+# Limit the amount of logs retained by systemd/journalctl to 64M
+sed -i -e "s/#SystemMaxUse=/SystemMaxUse=64M/g" /etc/systemd/journald.conf
+
+
 # Install packages from NPM
 npm install -g                                                                 \
   vtop  gtop                                                                   \
