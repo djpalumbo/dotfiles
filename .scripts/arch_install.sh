@@ -79,6 +79,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   texlive-most                                                                 \
   libreoffice                                                                  \
 \
+  xss-lock                                                                     \
   i3lock  imagemagick                                                          \
 \
   mpd  mpc  ncmpcpp  mopidy                                                    \
@@ -97,9 +98,11 @@ pacstrap -i /mnt --noconfirm                                                   \
   openssh  aws-cli                                                             \
 \
   ttf-dejavu  ttf-inconsolata                                                  \
+  adobe-source-han-sans-kr-fonts                                               \
 \
   parted  gparted                                                              \
 \
+  neofetch                                                                     \
   fortune-mod  cowsay  lolcat  cmatrix                                         \
 \
 

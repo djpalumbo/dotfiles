@@ -26,14 +26,13 @@ rm -r /tmp/trizen
 # Install packages from the AUR
 trizen -S --noedit --noconfirm                                                 \
   light-git                                                                    \
-\
-  xss-lock                                                                     \
+  openbox-patched                                                              \
 \
   zscroll-git                                                                  \
   ttf-iosevka  ttf-font-awesome-4  ttf-material-design-icons                   \
   polybar-git                                                                  \
 \
-  paper-icon-theme-git                                                         \
+  ultra-flat-icons-blue                                                        \
   urxvt-resize-font-git                                                        \
   powerline-fonts-git                                                          \
 \
@@ -57,7 +56,7 @@ trizen -S --noedit --noconfirm                                                 \
 \
   masterpdfeditor                                                              \
 \
-  neofetch  bash-pipes  cli-visualizer  cava                                   \
+  bash-pipes  cli-visualizer  cava                                             \
 \
 
 
@@ -84,6 +83,8 @@ while [[ $confirm != y && $confirm != Y ]]; do
   fi
 done
 git config --global user.name "$gitname"
+# Cache credentials for one hour
+git config credential.helper 'cache --timeout=3600'
 echo -e "Git settings have been configured.\n"
 
 

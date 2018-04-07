@@ -176,7 +176,7 @@ systemctl enable sddm.service
 systemctl enable tlp.service
 systemctl enable tlp-sleep.service
 systemctl enable bluetooth.service
-systemctl enable insync@$username.service
+#systemctl enable insync@$username.service
 #systemctl enable mariadb.service
 #systemctl enable mongodb.service
 
