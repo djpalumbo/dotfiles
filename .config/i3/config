@@ -19,8 +19,8 @@ bindsym XF86KbdBrightnessUp exec light -k -A 1
 # Screen brightness
 bindsym XF86MonBrightnessDown exec light -U 2
 bindsym XF86MonBrightnessUp exec light -A 2
-# External monitor -- FIX: Wrong function key being used temporarily
-bindsym XF86TouchpadToggle exec --no-startup-id ~/.scripts/toggle-hdmi-out
+# External monitor - Note: $super+p maps to XF86Display (i.e. Fn+F8)
+bindsym $super+p exec --no-startup-id ~/.scripts/toggle-hdmi-out
 # Audio controls
 bindsym XF86AudioMute exec amixer sset Master toggle
 bindsym XF86AudioLowerVolume exec amixer sset Master 2%-

@@ -345,8 +345,8 @@
         <command>light -A 2</command>
       </action>
     </keybind>
-    <!-- External monitor - FIX: Wrong function key being used temporarily -->
-    <keybind key="XF86TouchpadToggle">
+    <!-- External monitor - Note: Super-p maps to XF86Display (i.e. Fn+F8) -->
+    <keybind key="Super-p">
       <action name="Execute">
         <command>~/.scripts/toggle-hdmi-out</command>
       </action>
@@ -396,7 +396,7 @@
     <!-- Start a terminal -->
     <keybind key="A-t">
       <action name="Execute">
-        <command>termite</command>
+        <command>termite --geometry=852x496</command>
       </action>
     </keybind>
     <!-- Open a file explorer -->

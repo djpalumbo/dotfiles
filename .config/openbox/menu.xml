@@ -5,7 +5,7 @@
 <menu id="apps-term-menu" label="Terminals">
   <item label="Termite">
     <action name="Execute">
-      <command>termite</command>
+      <command>termite --geometry=852x496</command>
       <startupnotify>
         <enabled>yes</enabled>
       </startupnotify>
