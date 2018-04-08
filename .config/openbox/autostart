@@ -1,0 +1,49 @@
+#
+# These things are run when an Openbox X Session is started.
+# You may place a similar script in $HOME/.config/openbox/autostart
+# to run user-specific things.
+#
+
+# If you want to use GNOME config tools...
+#
+#if test -x /usr/lib/openbox/gnome-settings-daemon >/dev/null; then
+#  /usr/lib/openbox/gnome-settings-daemon &
+#elif which gnome-settings-daemon >/dev/null 2>&1; then
+#  gnome-settings-daemon &
+#fi
+
+# If you want to use XFCE config tools...
+#
+#xfce-mcs-manager &
+
+###################
+# LAPTOP TOUCHPAD #
+###################
+# Mouse sensitivity
+xinput set-prop "Asus TouchPad" "Device Accel Constant Deceleration" 1.30
+# Tap to click
+xinput set-prop "Asus TouchPad" "Synaptics Tap Action" 1 1 1 1 1 1 1
+# Natural scrolling
+xinput set-prop "Asus TouchPad" "Synaptics Scrolling Distance" -66 -66
+
+####################
+# STARTUP SETTINGS #
+####################
+# Start session with numlock enabled
+numlockx
+# Lock on system power change
+xss-lock ~/.scripts/basiclock
+# Make wal colors automatic (urxvt, polybar)
+xrdb -merge ~/.cache/wal/colors.Xresources
+
+##############
+# APPEARANCE #
+##############
+# Set desktop wallpaper and terminal colorscheme (set via ~/.wallpaper).
+#  Also, note the (cat ~/.cache/wal/sequences &) in .bashrc & .zshrc
+wal -i ~/Pictures/Wallpapers -o ~/.scripts/wal-set -e
+# Window transparency
+compton -b
+# Status bar
+~/.config/polybar/launch.sh
+

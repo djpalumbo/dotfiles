@@ -124,6 +124,18 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 nvim +PlugInstall +UpdateRemotePlugins +xall
 
 
+# Download themes
+# GTK
+git clone https://github.com/addy-dclxvi/gtk-theme-collections /tmp/gtk-theme-collections
+mv /tmp/gtk-theme-collections/Fantome ~/.themes/Fantome
+rm -rf /tmp/gtk-theme-collections/
+# Openbox
+git clone https://github.com/addy-dclxvi/openbox-theme-collections /tmp/openbox-theme-collections
+mv /tmp/openbox-theme-collections/Triste-Froly ~/.themes/Triste-Froly
+mv /tmp/openbox-theme-collections/Vent ~/.themes/Vent
+rm -rf /tmp/openbox-theme-collections/
+
+
 # Use zsh instead of bash
 chsh -s $(which zsh)
 

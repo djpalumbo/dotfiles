@@ -41,6 +41,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   xf86-video-nouveau                                                           \
 \
   i3-gaps  sddm                                                                \
+  obconf                                                                       \
 \
   xorg-xinput  xorg-xev  xf86-input-synaptics                                  \
   xclip  numlockx  gucharmap                                                   \
@@ -69,7 +70,7 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   xdg-user-dirs                                                                \
   nemo  nemo-fileroller  nemo-preview                                          \
-  arc-gtk-theme  lxappearance                                                  \
+  lxappearance                                                                 \
 \
   chromium  firefox                                                            \
   pepper-flash                                                                 \
@@ -97,7 +98,7 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   openssh  aws-cli                                                             \
 \
-  ttf-dejavu  ttf-inconsolata                                                  \
+  ttf-dejavu  ttf-inconsolata  ttf-roboto                                      \
   adobe-source-han-sans-kr-fonts                                               \
 \
   parted  gparted                                                              \

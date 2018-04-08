@@ -5,6 +5,7 @@
 !.config/gtk-3.0/settings.ini
 !.config/i3/config
 !.config/mpd/mpd.conf
+!.config/openbox/autostart
 !.config/openbox/menu.xml
 !.config/openbox/rc.xml
 !.config/polybar/config

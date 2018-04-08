@@ -50,12 +50,11 @@ exec --no-startup-id xinput set-prop "Asus TouchPad" "Synaptics Scrolling Distan
 font pango:DejaVu Sans Mono 11
 # Set desktop wallpaper and terminal colorscheme (set via ~/.wallpaper).
 #  Also, note the (cat ~/.cache/wal/sequences &) in .bashrc & .zshrc
-exec --no-startup-id wal -i $HOME/Pictures/Wallpapers -o ~/.scripts/wal-set -e
-# exec --no-startup-id feh --bg-fill "$(< "${HOME}/.cache/wal/wal")"
+exec --no-startup-id wal -i ~/Pictures/Wallpapers -o ~/.scripts/wal-set -e
 # Window transparency
 exec --no-startup-id compton -b
 # Status bar
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 ####################
 # STARTUP SETTINGS #
@@ -109,8 +108,6 @@ mode "$tray"
 # GENERAL #
 ###########
 # Start a terminal
-bindsym $super+t exec $term
-bindsym $super+Shift+t exec $term2
 bindsym $alt+t exec $term
 bindsym $alt+Shift+t exec $term2
 # Open a file explorer
@@ -131,7 +128,7 @@ bindsym $super+XF86AudioPlay exec --no-startup-id $term2 -e ncmpcpp
 bindsym Shift+XF86AudioPlay exec --no-startup-id mopidy
 bindsym Shift+XF86AudioStop exec --no-startup-id killall mopidy
 # Cycle wallpapers and apply new colorscheme
-bindsym $super+w exec wal -i $HOME/Pictures/Wallpapers -o ~/.scripts/wal-set
+bindsym $super+w exec wal -i ~/Pictures/Wallpapers -o ~/.scripts/wal-set
 # Take a screenshot
 bindsym $super+Print exec --no-startup-id scrot -e 'mv $f ~/Pictures/Screenshots/'
 
