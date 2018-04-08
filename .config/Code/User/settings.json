@@ -18,6 +18,30 @@
                 }
             ]
         },
+        { // Move left one 'buffer'
+            "before": ["leader", "h"],
+            "commands": [
+                {
+                    "command": "workbench.action.previousEditor",
+                }
+            ]
+        },
+        { // Move right one 'buffer'
+            "before": ["leader", "l"],
+            "commands": [
+                {
+                    "command": "workbench.action.nextEditor",
+                }
+            ]
+        },
+        { // Close current buffer
+            "before": ["leader", "b", "d"],
+            "commands": [
+                {
+                    "command": "workbench.action.closeActiveEditor",
+                }
+            ]
+        },
         { // Toggle comments
             "before":["\\"],
             "after":[],
@@ -73,5 +97,6 @@
     "trailing-spaces.highlightCurrentLine": false,
 
     "telemetry.enableTelemetry": false,
-    "workbench.iconTheme": "vscode-icons"
+    "workbench.iconTheme": "vscode-icons",
+    "window.zoomLevel": 1
 }
