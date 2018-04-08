@@ -14,81 +14,63 @@
             "before": ["leader", "w"],
             "commands": [
                 {
-                    "command": "workbench.action.files.save",
+                    "command": "workbench.action.files.save"
                 }
             ]
         },
-        { // Move left one 'buffer'
+        { // Move left one tab
             "before": ["leader", "h"],
             "commands": [
                 {
-                    "command": "workbench.action.previousEditor",
+                    "command": "workbench.action.previousEditor"
                 }
             ]
         },
-        { // Move right one 'buffer'
+        { // Move right one tab
             "before": ["leader", "l"],
             "commands": [
                 {
-                    "command": "workbench.action.nextEditor",
-                }
-            ]
-        },
-        { // Close current buffer
-            "before": ["leader", "b", "d"],
-            "commands": [
-                {
-                    "command": "workbench.action.closeActiveEditor",
+                    "command": "workbench.action.nextEditor"
                 }
             ]
         },
         { // Toggle comments
             "before":["\\"],
-            "after":[],
             "commands": [
                 {
-                    "command": "editor.action.commentLine",
-                    "args": []
+                    "command": "editor.action.commentLine"
                 }
             ]
         },
         { // New file ("buffer, new")
             "before":["leader", "b", "n"],
-            "after":[],
             "commands": [
                 {
-                    "command": "workbench.action.files.newUntitledFile",
-                    "args": []
+                    "command": "workbench.action.files.newUntitledFile"
                 }
             ]
         },
         { // Close file ("buffer, delete")
             "before":["leader", "b", "d"],
-            "after":[],
             "commands": [
                 {
-                    "command": "workbench.action.closeActiveEditor",
-                    "args": []
+                    "command": "workbench.action.closeActiveEditor"
                 }
             ]
         },
-        { // Clear highlights
+        { // Clear search highlights
             "before":["leader", "<CR>"],
-            "after":[],
             "commands": [
                 {
-                    "command": ":nohl",
-                    "args": []
+                    "command": ":nohl"
                 }
             ]
         },
         { // Delete trailing whitespace
             "before":["leader", "<space>"],
-            "after":[],
             "commands": [
                 {
-                    "command": "trailing-spaces.deleteTrailingSpaces",
-                    "args": []
+                    "command": "trailing-spaces.deleteTrailingSpaces"
                 }
             ]
         }

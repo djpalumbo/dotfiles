@@ -128,11 +128,16 @@ sed -i -e "s/#SystemMaxUse=/SystemMaxUse=64M/g" /etc/systemd/journald.conf
 
 
 # Install packages from NPM
-npm install -g                                                                 \
+#  Note: Some work needs to be done with this for permissions to work. See:
+#   https://wiki.archlinux.org/index.php/Node.js_ and
+#   https://docs.npmjs.com/getting-started/fixing-npm-permissions
+#  For now, I'll simply use the flag, --unsafe-perm
+npm install -g --unsafe-perm                                                   \
   vtop  gtop                                                                   \
 \
   js-beautify                                                                  \
 \
+  @angular/cli                                                                 \
   react-native-cli                                                             \
 \
   gulp                                                                         \
