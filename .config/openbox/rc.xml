@@ -314,7 +314,7 @@
       </action>
     </keybind>
 
-    <!-- Relative window moving/shifting with vim motions -->
+    <!-- Relative window moving/shifting between desktops with vim motions -->
     <keybind key="Super-S-h">
       <action name="SendToDesktop">
         <to>left</to>
@@ -340,7 +340,7 @@
       </action>
     </keybind>
 
-    <!-- Direct window movement to specific desktops -->
+    <!-- Direct window movement between specific desktops -->
     <keybind key="Super-S-1">
       <action name="SendToDesktop">
         <to>1</to>
@@ -366,22 +366,40 @@
       </action>
     </keybind>
 
-    <!-- Window docking -->
+    <!-- Window resizing -->
     <keybind key="Super-Left">
       <action name="UnmaximizeFull"/>
-      <action name="MoveResizeTo"><x>0</x><y>0</y><height>100%</height><width>50%</width></action>
+      <action name="MoveResizeTo"><width>50%</width></action>
     </keybind>
     <keybind key="Super-Right">
       <action name="UnmaximizeFull"/>
-      <action name="MoveResizeTo"><x>-0</x><y>0</y><height>100%</height><width>50%</width></action>
+      <action name="MoveResizeTo"><width>100%</width></action>
     </keybind>
     <keybind key="Super-Up">
       <action name="UnmaximizeFull"/>
-      <action name="MoveResizeTo"><y>0</y><height>50%</height></action>
+      <action name="MoveResizeTo"><height>100%</height></action>
     </keybind>
     <keybind key="Super-Down">
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo"><y>-0</y><height>50%</height></action>
+    </keybind>
+
+    <!-- Window shifting -->
+    <keybind key="Super-S-Left">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo"><x>0</x></action>
+    </keybind>
+    <keybind key="Super-S-Right">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo"><x>-0</x></action>
+    </keybind>
+    <keybind key="Super-S-Up">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo"><y>0</y></action>
+    </keybind>
+    <keybind key="Super-S-Down">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo"><y>-0</y></action>
     </keybind>
 
     <!-- Keyboard backlight -->
