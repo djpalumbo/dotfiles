@@ -18,8 +18,6 @@ compton -b
 wal -i ~/Pictures/Wallpapers -o ~/.scripts/wal-set -e
 # Make wal colors automatic (urxvt, polybar)
 xrdb -merge ~/.cache/wal/colors.Xresources
-# Status bar
-~/.config/polybar/launch.sh
 
 ####################
 # STARTUP SETTINGS #
@@ -27,5 +25,5 @@ xrdb -merge ~/.cache/wal/colors.Xresources
 # Start session with numlock enabled
 numlockx
 # Lock on system power change
-xss-lock ~/.scripts/basiclock
+xss-lock ~/.scripts/basiclock &
 

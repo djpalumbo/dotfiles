@@ -2,3 +2,9 @@
 
 # Use my personal settings
 ~/.scripts/wm-settings.sh
+
+# Status bar
+~/.config/polybar/launch.sh
+# Run a dock
+plank -n dock1
+

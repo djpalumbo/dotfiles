@@ -5,9 +5,8 @@
 !.config/gtk-3.0/settings.ini
 !.config/i3/config
 !.config/mpd/mpd.conf
-!.config/openbox/autostart
-!.config/openbox/menu.xml
-!.config/openbox/rc.xml
+!.config/openbox/
+!.config/plank/
 !.config/polybar/config
 !.config/polybar/launch.sh
 !.config/polybar/mpd-scroll
@@ -19,8 +18,8 @@
 !.config/mimeapps.list
 !.ncmpcpp/bindings
 !.ncmpcpp/config
-!.scripts
-!.xlock
+!.scripts/
+!.xlock/
 !.Xresources
 !.bash_profile
 !.bashrc

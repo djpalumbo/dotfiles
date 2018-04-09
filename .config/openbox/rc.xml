@@ -131,7 +131,7 @@
       <name>3</name>
       <name>4</name>
     </names>
-    <popupTime>350</popupTime>
+    <popupTime>425</popupTime>
     <!-- The number of milliseconds to show the popup for when switching
        desktops.  Set this to 0 to disable the popup. -->
   </desktops>
