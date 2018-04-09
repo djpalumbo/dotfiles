@@ -32,15 +32,11 @@ bindsym XF86AudioStop exec --no-startup-id mpc stop
 # Calculator
 bindsym XF86Calculator exec speedcrunch
 
-###################
-# LAPTOP TOUCHPAD #
-###################
-# Mouse sensitivity
-exec --no-startup-id xinput set-prop "Asus TouchPad" "Device Accel Constant Deceleration" 1.30
-# Tap to click
-exec --no-startup-id xinput set-prop "Asus TouchPad" "Synaptics Tap Action" 1 1 1 1 1 1 1
-# Natural scrolling
-exec --no-startup-id xinput set-prop "Asus TouchPad" "Synaptics Scrolling Distance" -66 -66
+####################
+# GENERAL SETTINGS #
+####################
+# Use my personal settings
+exec --no-startup-id ~/.scripts/wm-settings.sh
 
 ##############
 # APPEARANCE #
@@ -48,23 +44,6 @@ exec --no-startup-id xinput set-prop "Asus TouchPad" "Synaptics Scrolling Distan
 # Font for window titles. Will also be used by the bar unless a different font
 #  is used in the bar {} block below.
 font pango:DejaVu Sans Mono 11
-# Set desktop wallpaper and terminal colorscheme (set via ~/.wallpaper).
-#  Also, note the (cat ~/.cache/wal/sequences &) in .bashrc & .zshrc
-exec --no-startup-id wal -i ~/Pictures/Wallpapers -o ~/.scripts/wal-set -e
-# Window transparency
-exec --no-startup-id compton -b
-# Status bar
-exec_always --no-startup-id ~/.config/polybar/launch.sh
-
-####################
-# STARTUP SETTINGS #
-####################
-# Start session with numlock enabled
-exec --no-startup-id numlockx
-# Lock on system power change
-exec --no-startup-id xss-lock ~/.scripts/basiclock
-# Make wal colors automatic (urxvt, polybar)
-exec --no-startup-id xrdb -merge ~/.cache/wal/colors.Xresources
 
 #####################
 # TRAY APPLICATIONS #

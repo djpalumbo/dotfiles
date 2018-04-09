@@ -4,6 +4,7 @@
     <strength>25</strength>
     <screen_edge_strength>50</screen_edge_strength>
   </resistance>
+
   <focus>
     <focusNew>yes</focusNew>
     <!-- always try to focus new windows when they appear. other rules do
@@ -22,6 +23,7 @@
     <!-- when followMouse is enabled, and a window is given focus by moving the
        mouse into it, also raise the window -->
   </focus>
+
   <placement>
     <policy>Smart</policy>
     <!-- 'Smart' or 'UnderMouse' -->
@@ -39,6 +41,7 @@
        following: 'Mouse' - where the mouse is, or
                   'Active' - where the active window is -->
   </placement>
+
   <theme>
     <cornerRadius menu="yes">9</cornerRadius>
     <name>Triste-Froly</name>
@@ -52,7 +55,7 @@
       C: close
       S: shade (roll up/down)
       D: omnipresent (on all desktops).
-  -->
+    -->
     <keepBorder>yes</keepBorder>
     <animateIconify>yes</animateIconify>
     <font place="ActiveWindow">
@@ -110,6 +113,7 @@
       <!-- 'italic' or 'normal' -->
     </font>
   </theme>
+
   <desktops>
     <!-- this stuff is only used at startup, pagers allow you to change them
        during a session
@@ -131,6 +135,7 @@
     <!-- The number of milliseconds to show the popup for when switching
        desktops.  Set this to 0 to disable the popup. -->
   </desktops>
+
   <resize>
     <drawContents>yes</drawContents>
     <popupShow>Nonpixel</popupShow>
@@ -147,6 +152,7 @@
          distance from bottom edge, or 'Center' -->
     </popupFixedPosition>
   </resize>
+
   <!-- You can reserve a portion of your screen where windows will not cover when
      they are maximized, or when they are initially placed.
      Many programs reserve space automatically, but you can use this in other
@@ -157,6 +163,7 @@
     <left>0</left>
     <right>0</right>
   </margins>
+
   <dock>
     <position>TopLeft</position>
     <!-- (Top|Bottom)(Left|Right|)|Top|Bottom|Left|Right|Floating -->
@@ -175,6 +182,7 @@
     <moveButton>Middle</moveButton>
     <!-- 'Left', 'Middle', 'Right' -->
   </dock>
+
   <keyboard>
     <chainQuitKey>C-g</chainQuitKey>
     <!-- Refresh Openbox configuration -->
@@ -183,55 +191,34 @@
         <command>openbox --reconfigure</command>
       </action>
     </keybind>
-    <!-- Keybindings for desktop switching -->
-    <keybind key="C-A-Left">
+
+    <!-- Relative desktop switching using vim motions -->
+    <keybind key="C-Super-h">
       <action name="GoToDesktop">
         <to>left</to>
         <wrap>no</wrap>
       </action>
     </keybind>
-    <keybind key="C-A-Right">
+    <keybind key="C-Super-l">
       <action name="GoToDesktop">
         <to>right</to>
         <wrap>no</wrap>
       </action>
     </keybind>
-    <keybind key="C-A-Up">
+    <keybind key="C-Super-k">
       <action name="GoToDesktop">
         <to>up</to>
         <wrap>no</wrap>
       </action>
     </keybind>
-    <keybind key="C-A-Down">
+    <keybind key="C-Super-j">
       <action name="GoToDesktop">
         <to>down</to>
         <wrap>no</wrap>
       </action>
     </keybind>
-    <keybind key="S-A-Left">
-      <action name="SendToDesktop">
-        <to>left</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="S-A-Right">
-      <action name="SendToDesktop">
-        <to>right</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="S-A-Up">
-      <action name="SendToDesktop">
-        <to>up</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
-    <keybind key="S-A-Down">
-      <action name="SendToDesktop">
-        <to>down</to>
-        <wrap>no</wrap>
-      </action>
-    </keybind>
+
+    <!-- Direct desktop switching -->
     <keybind key="Super-1">
       <action name="GoToDesktop">
         <to>1</to>
@@ -252,27 +239,29 @@
         <to>4</to>
       </action>
     </keybind>
-    <keybind key="Super-d">
-      <action name="ToggleShowDesktop"/>
-    </keybind>
-    <!-- Keybindings for windows -->
+
+    <!-- Miscellaneous window functions -->
     <keybind key="A-F4">
       <action name="Close"/>
     </keybind>
     <keybind key="A-q">
       <action name="Close"/>
     </keybind>
+    <keybind key="Super-d">
+      <action name="ToggleShowDesktop"/>
+    </keybind>
     <keybind key="A-Escape">
       <action name="Lower"/>
       <action name="FocusToBottom"/>
       <action name="Unfocus"/>
     </keybind>
-    <keybind key="A-space">
+    <keybind key="A-Menu">
       <action name="ShowMenu">
         <menu>client-menu</menu>
       </action>
     </keybind>
-    <!-- Keybindings for window switching -->
+
+    <!-- Window switching -->
     <keybind key="A-Tab">
       <action name="NextWindow">
         <finalactions>
@@ -302,7 +291,8 @@
         </finalactions>
       </action>
     </keybind>
-    <!-- Keybindings for window switching with the arrow keys -->
+
+    <!-- Relative window switching with vim motions -->
     <keybind key="Super-l">
       <action name="DirectionalCycleWindows">
         <direction>right</direction>
@@ -323,6 +313,77 @@
         <direction>down</direction>
       </action>
     </keybind>
+
+    <!-- Relative window moving/shifting with vim motions -->
+    <keybind key="Super-S-h">
+      <action name="SendToDesktop">
+        <to>left</to>
+        <wrap>no</wrap>
+      </action>
+    </keybind>
+    <keybind key="Super-S-l">
+      <action name="SendToDesktop">
+        <to>right</to>
+        <wrap>no</wrap>
+      </action>
+    </keybind>
+    <keybind key="Super-S-k">
+      <action name="SendToDesktop">
+        <to>up</to>
+        <wrap>no</wrap>
+      </action>
+    </keybind>
+    <keybind key="Super-S-j">
+      <action name="SendToDesktop">
+        <to>down</to>
+        <wrap>no</wrap>
+      </action>
+    </keybind>
+
+    <!-- Direct window movement to specific desktops -->
+    <keybind key="Super-S-1">
+      <action name="SendToDesktop">
+        <to>1</to>
+        <wrap>no</wrap>
+      </action>
+    </keybind>
+    <keybind key="Super-S-2">
+      <action name="SendToDesktop">
+        <to>2</to>
+        <wrap>no</wrap>
+      </action>
+    </keybind>
+    <keybind key="Super-S-3">
+      <action name="SendToDesktop">
+        <to>3</to>
+        <wrap>no</wrap>
+      </action>
+    </keybind>
+    <keybind key="Super-S-4">
+      <action name="SendToDesktop">
+        <to>4</to>
+        <wrap>no</wrap>
+      </action>
+    </keybind>
+
+    <!-- Window docking -->
+    <keybind key="Super-Left">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo"><x>0</x><y>0</y><height>100%</height><width>50%</width></action>
+    </keybind>
+    <keybind key="Super-Right">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo"><x>-0</x><y>0</y><height>100%</height><width>50%</width></action>
+    </keybind>
+    <keybind key="Super-Up">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo"><y>0</y><height>50%</height></action>
+    </keybind>
+    <keybind key="Super-Down">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo"><y>-0</y><height>50%</height></action>
+    </keybind>
+
     <!-- Keyboard backlight -->
     <keybind key="XF86KbdBrightnessDown">
       <action name="Execute">
@@ -334,6 +395,7 @@
         <command>light -k -A 1</command>
       </action>
     </keybind>
+
     <!-- Screen brightness -->
     <keybind key="XF86MonBrightnessDown">
       <action name="Execute">
@@ -345,12 +407,14 @@
         <command>light -A 2</command>
       </action>
     </keybind>
+
     <!-- External monitor - Note: Super-p maps to XF86Display (i.e. Fn+F8) -->
     <keybind key="Super-p">
       <action name="Execute">
         <command>~/.scripts/toggle-hdmi-out</command>
       </action>
     </keybind>
+
     <!-- Audio controls -->
     <keybind key="XF86AudioMute">
       <action name="Execute">
@@ -387,18 +451,21 @@
         <command>mpc stop</command>
       </action>
     </keybind>
+
     <!-- Calculator -->
     <keybind key="XF86Calculator">
       <action name="Execute">
         <command>speedcrunch</command>
       </action>
     </keybind>
+
     <!-- Start a terminal -->
     <keybind key="A-t">
       <action name="Execute">
         <command>termite --geometry=852x496</command>
       </action>
     </keybind>
+
     <!-- Open a file explorer -->
     <keybind key="Super-f">
       <action name="Execute">
@@ -410,12 +477,14 @@
         <command>nemo</command>
       </action>
     </keybind>
+
     <!-- Open a text editor -->
     <keybind key="Super-v">
       <action name="Execute">
         <command>urxvt -e nvim</command>
       </action>
     </keybind>
+
     <!-- Open a web browser -->
     <keybind key="Super-i">
       <action name="Execute">
@@ -427,25 +496,34 @@
         <command>firefox</command>
       </action>
     </keybind>
+
     <!-- Start a program launcher -->
     <keybind key="Super-r">
       <action name="Execute">
         <command>rofi -show run</command>
       </action>
     </keybind>
+
     <!-- Cycle wallpapers and apply new colorscheme -->
     <keybind key="Super-w">
       <action name="Execute">
         <command>wal -i ~/Pictures/Wallpapers -o ~/.scripts/wal-set</command>
       </action>
     </keybind>
+
     <!-- Take a screenshot -->
     <keybind key="Super-Print">
       <action name="Execute">
         <command>scrot -e 'mv $f ~/Pictures/Screenshots/'</command>
       </action>
     </keybind>
+
+    <!-- Fullscreen the current window -->
+    <keybind key="Super-space">
+      <action name="ToggleFullscreen"/>
+    </keybind>
   </keyboard>
+
   <mouse>
     <dragThreshold>1</dragThreshold>
     <!-- number of pixels the mouse must move before a drag begins -->
@@ -780,6 +858,7 @@
       </mousebind>
     </context>
   </mouse>
+
   <menu>
     <!-- You can specify more than one menu file in here and they are all loaded,
        just don't make menu ids clash or, well, it'll be kind of pointless -->
@@ -805,6 +884,7 @@
     <manageDesktops>yes</manageDesktops>
     <!-- show the manage desktops section in the client-list-(combined-)menu -->
   </menu>
+
   <applications>
     <!--
   # this is an example with comments through out. use these to make your
