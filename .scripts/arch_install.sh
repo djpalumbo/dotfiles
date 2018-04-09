@@ -41,7 +41,6 @@ pacstrap -i /mnt --noconfirm                                                   \
   xf86-video-nouveau                                                           \
 \
   i3-gaps  sddm                                                                \
-  obconf                                                                       \
 \
   xorg-xinput  xorg-xev  xf86-input-synaptics                                  \
   xclip  numlockx  gucharmap                                                   \

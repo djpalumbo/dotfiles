@@ -2,22 +2,6 @@
 
 <openbox_menu xmlns="http://openbox.org/3.4/menu">
 
-<menu id="apps-term-menu" label="Terminals">
-  <item label="Termite">
-    <action name="Execute">
-      <command>termite --geometry=852x496</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-  <item label="Rxvt Unicode">
-    <action name="Execute">
-      <command>urxvt</command>
-    </action>
-  </item>
-</menu>
-
 <menu id="apps-net-menu" label="Internet">
   <item label="Chromium">
     <action name="Execute">
@@ -43,28 +27,11 @@
   <item label="Calculator">
     <action name="Execute">
       <command>speedcrunch</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
     </action>
   </item>
-  <item label="Character Map">
+  <item label="Char Map">
     <action name="Execute">
       <command>gucharmap</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-</menu>
-
-<menu id="apps-graphics-menu" label="Graphics">
-  <item label="Gimp">
-    <action name="Execute">
-      <command>gimp</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
     </action>
   </item>
 </menu>
@@ -87,22 +54,88 @@
   </item>
 </menu>
 
+<menu id="apps-programs-menu" label="Programs">
+  <menu id="apps-accessories-menu"/>
+  <menu id="apps-office-menu"/>
+  <item label="Rambox">
+    <action name="Execute">
+      <command>rambox</command>
+    </action>
+  </item>
+  <item label="Gimp">
+    <action name="Execute">
+      <command>gimp</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+</menu>
+
+<menu id="apps-daemons-menu" label="Daemons">
+  <!-- Bluetooth tray icon (using Blueman) -->
+  <item label="Blueman">
+    <action name="Execute">
+      <command>blueman-applet start</command>
+    </action>
+  </item>
+  <!-- Sync gdrive folder with cloud -->
+  <item label="Insync">
+    <action name="Execute">
+      <command>insync start</command>
+    </action>
+  </item>
+  <!-- WiFi tray icon (using Network Manager) -->
+  <item label="NM Applet">
+    <action name="Execute">
+      <command>nm-applet</command>
+    </action>
+  </item>
+  <!-- Adjust screen brightness/color based on time of day (like f.lux) -->
+  <item label="Redshift">
+    <action name="Execute">
+      <command>redshift-gtk -t 5500:2625</command>
+    </action>
+  </item>
+  <!-- Start torrenting client -->
+  <item label="Transmission">
+    <action name="Execute">
+      <command>transmission-daemon -t -u arch -v linux -p 9091 -a "127.0.0.1"</command>
+    </action>
+  </item>
+</menu>
+
 <menu id="root-menu" label="Openbox 3">
   <separator label="Applications" />
+  <item label="Terminal">
+    <action name="Execute">
+      <command>termite --geometry=852x490</command>
+    </action>
+  </item>
   <item label="File Explorer">
     <action name="Execute">
       <command>nemo</command>
     </action>
   </item>
-  <menu id="apps-term-menu"/>
   <menu id="apps-net-menu"/>
-  <menu id="apps-accessories-menu"/>
-  <menu id="apps-graphics-menu"/>
-  <menu id="apps-office-menu"/>
+  <menu id="apps-programs-menu"/>
+  <menu id="apps-daemons-menu"/>
   <separator label="System" />
   <item label="Log Out">
     <action name="Exit">
       <prompt>yes</prompt>
+    </action>
+  </item>
+  <item label="Reboot">
+    <action name="Execute">
+      <prompt>Are you sure you want to reboot?</prompt>
+      <execute>reboot</execute>
+    </action>
+  </item>
+  <item label="Shutdown">
+    <action name="Execute">
+      <prompt>Are you sure you want to shutdown?</prompt>
+      <execute>shutdown now</execute>
     </action>
   </item>
 </menu>
