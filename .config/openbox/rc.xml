@@ -185,6 +185,7 @@
 
   <keyboard>
     <chainQuitKey>C-g</chainQuitKey>
+
     <!-- Refresh Openbox configuration -->
     <keybind key="Super-F5">
       <action name="Execute">
@@ -192,8 +193,8 @@
       </action>
     </keybind>
 
-    <!-- Alternate desktops with Alt+Tab -->
-    <keybind key="A-Tab">
+    <!-- Alternate desktops with Super+Tab -->
+    <keybind key="Super-Tab">
       <action name="GoToDesktop">
         <to>last</to>
       </action>
@@ -244,6 +245,17 @@
     <keybind key="Super-4">
       <action name="GoToDesktop">
         <to>4</to>
+      </action>
+    </keybind>
+
+    <!-- Alternate windows with Alt+Tab -->
+    <keybind key="A-Tab">
+      <action name="NextWindow">
+        <finalactions>
+          <action name="Focus"/>
+          <action name="Raise"/>
+          <action name="Unshade"/>
+        </finalactions>
       </action>
     </keybind>
 
