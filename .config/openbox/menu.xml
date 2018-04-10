@@ -23,6 +23,65 @@
   </item>
 </menu>
 
+<menu id="apps-dbs-menu" label="Databases">
+  <item label="MySQL Workbench">
+    <action name="Execute">
+      <command>mysql-workbench</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <item label="Studio 3T">
+    <action name="Execute">
+      <command>studio-3t</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+</menu>
+
+<menu id="apps-hyperv-menu" label="Hypervisors">
+  <item label="VirtualBox">
+    <action name="Execute">
+      <command>virtualbox</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <item label="VMWare Player">
+    <action name="Execute">
+      <command>vmplayer</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+</menu>
+
+<menu id="apps-dev-menu" label="Development">
+  <menu id="apps-dbs-menu"/>
+  <menu id="apps-hyperv-menu"/>
+  <item label="Android Studio">
+    <action name="Execute">
+      <command>android-studio</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <item label="VSCode">
+    <action name="Execute">
+      <command>code</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+</menu>
+
 <menu id="apps-accessories-menu" label="Accessories">
   <item label="Calculator">
     <action name="Execute">
@@ -52,14 +111,30 @@
       <command>libreoffice -impress</command>
     </action>
   </item>
+  <item label="Zathura">
+    <action name="Execute">
+      <command>zathura</command>
+    </action>
+  </item>
 </menu>
 
 <menu id="apps-programs-menu" label="Programs">
   <menu id="apps-accessories-menu"/>
   <menu id="apps-office-menu"/>
-  <item label="Rambox">
+  <item label="Blender">
     <action name="Execute">
-      <command>rambox</command>
+      <command>blender</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <item label="Cura">
+    <action name="Execute">
+      <command>cura</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
     </action>
   </item>
   <item label="Gimp">
@@ -68,6 +143,19 @@
       <startupnotify>
         <enabled>yes</enabled>
       </startupnotify>
+    </action>
+  </item>
+  <item label="Rambox">
+    <action name="Execute">
+      <command>rambox</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <item label="VLC">
+    <action name="Execute">
+      <command>vlc</command>
     </action>
   </item>
 </menu>
@@ -105,25 +193,39 @@
   </item>
 </menu>
 
-<menu id="root-menu" label="Openbox 3">
-  <separator label="Applications" />
-  <item label="Terminal">
+<menu id="apps-settings-menu" label="Settings">
+  <item label="LXAppearance">
     <action name="Execute">
-      <command>termite --geometry=852x490</command>
+      <command>lxappearance</command>
     </action>
   </item>
-  <item label="File Explorer">
+  <item label="PulseAudio">
     <action name="Execute">
-      <command>nemo</command>
+      <command>pavucontrol</command>
     </action>
   </item>
-  <menu id="apps-net-menu"/>
-  <menu id="apps-programs-menu"/>
-  <menu id="apps-daemons-menu"/>
-  <separator label="System" />
-  <item label="Log Out">
+</menu>
+
+<menu id="system-menu" label="System">
+  <menu id="apps-settings-menu"/>
+  <item label="Lock">
+    <action name="Execute">
+      <execute>~/.scripts/pixlock</execute>
+    </action>
+  </item>
+  <item label="Exit">
     <action name="Exit">
       <prompt>yes</prompt>
+    </action>
+  </item>
+  <item label="Suspend">
+    <action name="Execute">
+      <execute>systemctl suspend</execute>
+    </action>
+  </item>
+  <item label="Hibernate">
+    <action name="Execute">
+      <execute>systemctl hibernate</execute>
     </action>
   </item>
   <item label="Reboot">
@@ -138,6 +240,25 @@
       <execute>shutdown now</execute>
     </action>
   </item>
+</menu>
+
+<menu id="root-menu" label="Openbox 3">
+  <separator label="Applications" />
+  <item label="Terminal">
+    <action name="Execute">
+      <command>termite --geometry=852x490</command>
+    </action>
+  </item>
+  <item label="File Explorer">
+    <action name="Execute">
+      <command>nemo</command>
+    </action>
+  </item>
+  <menu id="apps-net-menu"/>
+  <menu id="apps-dev-menu"/>
+  <menu id="apps-programs-menu"/>
+  <menu id="apps-daemons-menu"/>
+  <menu id="system-menu"/>
 </menu>
 
 </openbox_menu>
