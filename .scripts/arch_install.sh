@@ -26,6 +26,8 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   linux-headers                                                                \
 \
+  reflector                                                                    \
+\
   wget                                                                         \
 \
   efibootmgr  intel-ucode  ntfs-3g  gksu                                       \

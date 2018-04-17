@@ -182,6 +182,7 @@ bindsym $super+Shift+8 move container to workspace 8
 bindsym $super+Shift+9 move container to workspace 9
 # Switch to previous workspace
 bindsym $alt+Tab workspace back_and_forth
+bindsym $super+Tab workspace back_and_forth
 
 # Reload the configuration file
 bindsym $super+F5 reload

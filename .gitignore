@@ -1,6 +1,7 @@
 *
 !.gitignore
 
+!.android/adb_usb.ini
 !.config/Code/User/settings.json
 !.config/gtk-3.0/settings.ini
 !.config/i3/config

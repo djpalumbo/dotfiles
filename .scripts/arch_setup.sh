@@ -160,12 +160,17 @@ rm /usr/local/share/man
 # Allow Android Studio to manage SDK installations via a user group
 groupadd sdkusers
 gpasswd -a $username sdkusers
+groupadd adbusers
+gpasswd -a $username adbusers
 mkdir /opt/android-sdk
 chown -R :sdkusers /opt/android-sdk/
 chmod -R g+w /opt/android-sdk/
 # NOTE: Once the system has rebooted, open Android Studio
-#       Install the sdk to /opt/android-sdk/
-#       Then you can download various SDK's
+#   Install the sdk to /opt/android-sdk/
+#   Then you can download various SDK's
+# Also note that this does not set up devices to be connected via USB
+#   For that, refer to https://wiki.archlinux.org/index.php/Android
+#   Once Developer Mode is enabled, don't forget to turn on "USB Debugging"
 
 
 # Set up MariaDB (MySQL)
