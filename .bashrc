@@ -35,7 +35,8 @@ export BROWSER=/bin/chromium
 export ANDROID_HOME=/opt/android-sdk
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 alias vim='nvim'
-alias emulator="/opt/android-sdk/emulator/emulator"
+alias android-emulator="/opt/android-sdk/emulator/emulator"
+alias android-monitor="/opt/android-sdk/tools/monitor"
 alias cookie="fortune -s | cowsay -f tux | lolcat"
 alias trizen="trizen --noedit"
 

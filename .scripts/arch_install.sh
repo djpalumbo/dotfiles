@@ -92,7 +92,8 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   python-xdg  redshift                                                         \
 \
-  audacity  gimp                                                               \
+  audacity                                                                     \
+  gimp  inkscape                                                               \
   blender  cura                                                                \
 \
   transmission-cli                                                             \
