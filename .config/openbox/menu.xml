@@ -145,6 +145,14 @@
       </startupnotify>
     </action>
   </item>
+  <item label="Inkscape">
+    <action name="Execute">
+      <command>inkscape</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
   <item label="Rambox">
     <action name="Execute">
       <command>rambox</command>
