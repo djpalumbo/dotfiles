@@ -6,5 +6,4 @@
 # Status bar
 ~/.config/polybar/launch.sh
 # Run a dock
-plank -n dock1
-
+plank -n main

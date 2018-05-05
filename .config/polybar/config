@@ -21,7 +21,7 @@ margin-top = 0
 margin-bottom = 0
 
 
-[bar/mybar]
+[bar/main]
 ; eDP-1
 monitor = ${env:MONITOR:}
 bottom = false
@@ -175,8 +175,8 @@ interval = 5
 date = %b %d, %Y
 time = %H:%M
 
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
+;format-prefix = 
+;format-prefix-foreground = ${colors.foreground-alt}
 
 label =  %date%   %time%
 

@@ -1,2 +1,6 @@
 [Default Applications]
 inode/directory=nemo.desktop
+application/pdf=org.pwmt.zathura-pdf-mupdf.desktop
+
+[Added Associations]
+application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;
