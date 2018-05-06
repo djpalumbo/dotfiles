@@ -17,4 +17,8 @@ elif xrandr | grep "$HDMI_OUT connected"; then
   xrandr --output $HDMI_OUT --mode $DIMENSIONS
   pactl set-card-profile $CARD $PROFILE_HDMI
   ~/.config/polybar/launch.sh
+else
+  xrandr --output $HDMI_OUT --off
+  pactl set-card-profile $CARD $PROFILE_LAPTOP
+  ~/.config/polybar/launch.sh
 fi
