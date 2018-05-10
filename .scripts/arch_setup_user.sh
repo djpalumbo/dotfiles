@@ -38,7 +38,7 @@ trizen -S --noedit --noconfirm                                                 \
 \
   python-pywal                                                                 \
 \
-  universal-ctags                                                              \
+  universal-ctags-git                                                          \
   visual-studio-code-bin                                                       \
   android-studio  android-tools  android-udev                                  \
 \

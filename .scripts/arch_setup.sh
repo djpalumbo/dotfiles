@@ -154,7 +154,8 @@ sed -i -e "s/Current=/Current=aerial/g" /etc/sddm.conf.d/sddm.conf
 
 
 # Remove quirky 'man' directory so that universal-ctags (AUR) can install
-rm /usr/local/share/man
+# May not be necessary with universal-ctags-git (AUR)... Requires testing
+#rm /usr/local/share/man
 
 
 # Allow Android Studio to manage SDK installations via a user group
