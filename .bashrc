@@ -29,6 +29,9 @@ then
   (cat ~/.cache/wal/sequences &)
 fi
 
+# Use vi mode
+set -o vi
+
 # fzf keybindings and completions
 source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
@@ -36,7 +39,7 @@ source /usr/share/fzf/completion.bash
 # User settings
 export EDITOR=/bin/nvim
 export BROWSER=/bin/chromium
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g "" -u'
 export ANDROID_HOME=/opt/android-sdk
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 alias vim='nvim'

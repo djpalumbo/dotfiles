@@ -44,7 +44,7 @@ source /usr/share/fzf/completion.zsh
 # User settings
 export EDITOR=/bin/nvim
 export BROWSER=/bin/chromium
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g "" -u'
 export ANDROID_HOME=/opt/android-sdk
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 alias vim='nvim'
