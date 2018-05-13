@@ -1,5 +1,5 @@
 " Sections:
-"   -> Plugins (Vundle)
+"   -> Plugins
 "   -> Plugin Settings
 "   -> General
 "   -> Colors and Fonts
@@ -24,10 +24,19 @@ endif
 
 " Airline: Status/tabline
 Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes' " Themes for Airline
+Plug 'vim-airline/vim-airline-themes'
 
 " NERDTree: A file explorer
 Plug 'scrooloose/nerdtree'
+
+" FZF: Fuzzy file finder
+if executable('fzf')
+  Plug '/usr/bin/fzf'
+  Plug 'junegunn/fzf.vim'
+endif
+
+" Ack: A text search tool for programmers. Searches source code
+Plug 'mileszs/ack.vim'
 
 " Tagbar: A class outline viewer
 Plug 'majutsushi/tagbar'
@@ -64,8 +73,14 @@ Plug 'scrooloose/nerdcommenter'
 " ALE: Asynchronous lint engine
 "Plug 'w0rp/ale'
 
-" EasyMotion: Speedy way to move around your file
-Plug 'easymotion/vim-easymotion'
+" Vim JavaScript: Improved JS indentation and syntax support
+Plug 'pangloss/vim-javascript'
+
+" Vim JSON: Improved JSON syntax support
+Plug 'elzr/vim-json'
+
+" Vim JSX: React JSX indentation and syntax support
+"Plug 'mxw/vim-jsx'
 
 " Fugitive: A Git wrapper
 Plug 'tpope/vim-fugitive'
@@ -121,6 +136,14 @@ let NERDTreeIgnore=['\.bin$', '\.exe$', '\.pdf$', '\.doc$', '\.docx$', '\.odt$',
   \ '\.blf$', 'Thumbs.db$', 'ntuser.ini$', '\.regtrans-ms$', '\.ogg$', '\.mkv$',
   \ '\.flac$', '\.webm$', '\.zip$', '\.tar.gz$', '\.rar$', '\.log1$', '\.log2$',
   \ '\.dat$', '\.gif$', '\.dll$']
+
+" *-----*
+" | Ack |
+" *-----*
+" Allow Ack to use ag (the_silver_searcher)
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 " *--------*
 " | Tagbar |
@@ -616,11 +639,22 @@ map <leader>e :Startify<CR>
 map <C-n> :NERDTreeToggle<CR>
 map <F2> :NERDTree %:p:h<CR>
 
+" FZF
+map <leader>f :FZF<CR>
+
+" Ack
+map <C-S-f> :Ack!<Space>
+
 " Tagbar
 nmap <F3> :TagbarToggle<CR>
 
-" NERDCommenter (\ toggles comments)
+" NERDCommenter (backslash or Ctrl+slash toggles comments)
 map \ <Plug>NERDCommenterToggle
+if has('win32')
+  map <C-/> <Plug>NERDCommenterToggle
+else
+  map <C-_> <Plug>NERDCommenterToggle
+endif
 
 " Fugitive
 map <leader>gs :Gstatus<CR>
@@ -658,8 +692,11 @@ map <leader>pp :setlocal paste!<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Abbreviations/auto-complete
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Auto-curly-brackets
-inoremap {<CR>  {<CR>}<Esc>O
+" Auto-brackets
+inoremap ( ()<Left>
+inoremap [ []<Left>
+inoremap { {}<Left>
+inoremap {<CR>  {<CR>}<Esc>O<Tab>
 
 " Insert date and time
 iab xdate <C-r>=strftime("%a %b %d %H:%M:%S %Y %Z")<CR>

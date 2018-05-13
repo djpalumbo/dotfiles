@@ -65,6 +65,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   git  termite  rxvt-unicode  zsh  powerline                                   \
   neovim  python-neovim  python2-neovim                                        \
   ranger  atool  w3m  rofi  compton  feh  scrot                                \
+  fzf  the_silver_searcher  ack                                                \
 \
   virtualbox  virtualbox-host-modules-arch                                     \
   vagrant                                                                      \

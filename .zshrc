@@ -37,6 +37,10 @@ export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
 bindkey ';5D' backward-word
 bindkey ';5C' forward-word
 
+# fzf keybindings and completions
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
 # User settings
 export EDITOR=/bin/nvim
 export BROWSER=/bin/chromium
@@ -47,5 +51,5 @@ alias android-emulator="/opt/android-sdk/emulator/emulator"
 alias android-monitor="/opt/android-sdk/tools/monitor"
 alias cookie="fortune -s | cowsay -f tux | lolcat"
 alias trizen="trizen --noedit"
-alias news="curl -s https://www.archlinux.org/feeds/news/ | xmllint --xpath //item/title\ \|\ //item/pubDate /dev/stdin | sed -r -e \"s:<title>([^<]*?)</title><pubDate>([^<]*?)</pubDate>:\2\t\1\n:g\""
+alias syu="curl -s https://www.archlinux.org/feeds/news/ | xmllint --xpath //item/title\ \|\ //item/pubDate /dev/stdin | sed -r -e \"s:<title>([^<]*?)</title><pubDate>([^<]*?)</pubDate>:\2\t\1\n:g\" && trizen -Syu --noedit"
 
