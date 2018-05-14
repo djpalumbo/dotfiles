@@ -693,6 +693,7 @@ map <leader>pp :setlocal paste!<CR>
 " => Abbreviations/auto-complete
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Auto-brackets
+inoremap () ()
 inoremap ( ()<Left>
 inoremap [ []<Left>
 inoremap { {}<Left>

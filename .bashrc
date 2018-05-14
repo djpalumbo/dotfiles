@@ -40,6 +40,7 @@ source /usr/share/fzf/completion.bash
 export EDITOR=/bin/nvim
 export BROWSER=/bin/chromium
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g "" -u'
+export FZF_DEFAULT_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200' --bind=tab:up,btab:down"
 export ANDROID_HOME=/opt/android-sdk
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 alias vim='nvim'
