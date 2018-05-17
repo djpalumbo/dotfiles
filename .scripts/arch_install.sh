@@ -50,6 +50,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   pulseaudio  pulseaudio-alsa  pavucontrol  alsa-utils                         \
   blueman  pulseaudio-bluetooth  bluez  bluez-libs  bluez-utils                \
 \
+  tree                                                                         \
   htop  powertop                                                               \
 \
   cmake  clang  gdb  peda                                                      \
@@ -101,7 +102,7 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   openssh  aws-cli                                                             \
 \
-  ttf-dejavu  ttf-inconsolata  ttf-roboto                                      \
+  ttf-dejavu  ttf-inconsolata  ttf-roboto  ttf-hack                            \
   adobe-source-han-sans-kr-fonts                                               \
 \
   parted  gparted                                                              \

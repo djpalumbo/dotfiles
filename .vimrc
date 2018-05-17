@@ -428,16 +428,14 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set guifont=Dejavu\ Sans\ Mono:h10
-
+" GUI options (gVim)
 if has('gui_running')
+  set guifont=Dejavu\ Sans\ Mono:h10
+
   colorscheme deus
   " Make sure background is /very/ black
   highlight Normal guibg=black
-endif
 
-" GUI options (gVim)
-if has("gui_running")
   set guioptions-=T " gvim remove toolbar
   set guioptions-=m " gvim remove menu bar
   set guioptions-=r " gvim remove rhand scrollbar
@@ -695,7 +693,9 @@ map <leader>pp :setlocal paste!<CR>
 " Auto-brackets
 inoremap () ()
 inoremap ( ()<Left>
+inoremap [] []
 inoremap [ []<Left>
+inoremap {} {}
 inoremap { {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O<Tab>
 

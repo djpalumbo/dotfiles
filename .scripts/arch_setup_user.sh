@@ -34,7 +34,6 @@ trizen -S --noedit --noconfirm                                                 \
 \
   ultra-flat-icons-blue                                                        \
   urxvt-resize-font-git                                                        \
-  powerline-fonts-git                                                          \
 \
   python-pywal                                                                 \
 \
