@@ -92,6 +92,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   speedcrunch  bc                                                              \
   p7zip                                                                        \
 \
+  python-pywal                                                                 \
   python-xdg  redshift                                                         \
 \
   audacity                                                                     \

@@ -35,6 +35,12 @@ sed -i -e "s/^HOOKS.*/HOOKS=\"base udev resume autodetect modconf block filesyst
 mkinitcpio -c /etc/mkinitcpio.conf -g /boot/initramfs-linux.img
 
 
+# Create generic mount locations
+mkdir /mnt/windows
+mkdir /mnt/usb
+mkdir /mnt/sd
+
+
 # Allow Arch to see the Windows partition, assuming that it's on sda3
 echo "/dev/sda3 /mnt/windows ntfs-3g defaults 0 0" >> /etc/fstab
 

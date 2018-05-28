@@ -35,8 +35,6 @@ trizen -S --noedit --noconfirm                                                 \
   ultra-flat-icons-blue                                                        \
   urxvt-resize-font-git                                                        \
 \
-  python-pywal                                                                 \
-\
   universal-ctags-git                                                          \
   visual-studio-code-bin                                                       \
   android-studio  android-tools  android-udev                                  \
