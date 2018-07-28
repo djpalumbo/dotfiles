@@ -86,8 +86,9 @@ pacstrap -i /mnt --noconfirm                                                   \
   xss-lock                                                                     \
   i3lock  imagemagick                                                          \
 \
-  mpd  mpc  ncmpcpp  mopidy                                                    \
+  mpd  mpc  ncmpcpp                                                            \
   vlc  qt4                                                                     \
+  playerctl                                                                    \
 \
   speedcrunch  bc                                                              \
   p7zip                                                                        \

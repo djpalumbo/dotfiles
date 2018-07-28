@@ -599,6 +599,9 @@ map <F8> zR
 " Disable highlight when <leader><CR> is pressed
 map <silent> <leader><CR> :noh<CR>
 
+" Search in part of a file. Thanks to Reddit user /u/vimplication
+nnoremap <expr> z/ '/\%(\%>'.(line('w0')-1).'l\%<'.(line('w$')+1).'l\)\&'
+
 " Pressing * or # searches for the current selection
 " Super useful! Idea by Michael Naumann
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>

@@ -47,7 +47,7 @@ trizen -S --noedit --noconfirm                                                 \
 \
   chromium-widevine                                                            \
 \
-  mopidy-soundcloud  mopidy-spotify  mopidy-spotify-web                        \
+  spotify                                                                      \
 \
   rambox-bin                                                                   \
 \

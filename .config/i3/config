@@ -25,10 +25,10 @@ bindsym $super+p exec --no-startup-id ~/.scripts/toggle-hdmi-out
 bindsym XF86AudioMute exec amixer sset Master toggle
 bindsym XF86AudioLowerVolume exec amixer sset Master 2%-
 bindsym XF86AudioRaiseVolume exec amixer sset Master 2%+
-bindsym XF86AudioPlay exec --no-startup-id mpc toggle
-bindsym XF86AudioPrev exec --no-startup-id mpc prev
-bindsym XF86AudioNext exec --no-startup-id mpc next
-bindsym XF86AudioStop exec --no-startup-id mpc stop
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioStop exec --no-startup-id playerctl stop
 # Calculator
 bindsym XF86Calculator exec speedcrunch
 
@@ -105,9 +105,7 @@ bindsym $super+r exec --no-startup-id rofi -show run
 bindsym Ctrl+$alt+Delete exec --no-startup-id $term2 -e vtop
 bindsym Ctrl+$alt+Shift+Delete exec --no-startup-id $term2 -e htop
 # Open a music player
-bindsym $super+XF86AudioPlay exec --no-startup-id $term2 -e ncmpcpp
-bindsym Shift+XF86AudioPlay exec --no-startup-id mopidy
-bindsym Shift+XF86AudioStop exec --no-startup-id killall mopidy
+bindsym $super+XF86AudioPlay exec spotify
 # Cycle wallpapers and apply new colorscheme
 bindsym $super+w exec wal -i ~/Pictures/Wallpapers -o ~/.scripts/wal-set
 # Take a screenshot
