@@ -8,71 +8,42 @@
     "vim.foldfix": true,
     "vim.visualstar": true,
     "vim.hlsearch": true,
-    "vim.cmdLineInitialColon": true,
-    "vim.otherModesKeyBindingsNonRecursive": [
+    "vim.normalModeKeyBindingsNonRecursive": [
+        { // Move to first non-whitespace character
+            "before": ["0"],
+            "after": ["^"]
+        },
         { // Quick-save
-            "before": ["leader", "w"],
-            "commands": [
-                {
-                    "command": "workbench.action.files.save"
-                }
-            ]
+            "before": ["<leader>", "w"],
+            "commands": ["workbench.action.files.save"]
         },
         { // Move left one tab
-            "before": ["leader", "h"],
-            "commands": [
-                {
-                    "command": "workbench.action.previousEditor"
-                }
-            ]
+            "before": ["<leader>", "h"],
+            "commands": ["workbench.action.previousEditor"]
         },
         { // Move right one tab
-            "before": ["leader", "l"],
-            "commands": [
-                {
-                    "command": "workbench.action.nextEditor"
-                }
-            ]
+            "before": ["<leader>", "l"],
+            "commands": ["workbench.action.nextEditor"]
         },
         { // Toggle comments
             "before":["\\"],
-            "commands": [
-                {
-                    "command": "editor.action.commentLine"
-                }
-            ]
+            "commands": ["editor.action.commentLine"]
         },
         { // New file ("buffer, new")
-            "before":["leader", "b", "n"],
-            "commands": [
-                {
-                    "command": "workbench.action.files.newUntitledFile"
-                }
-            ]
+            "before":["<leader>", "b", "n"],
+            "commands": ["workbench.action.files.newUntitledFile"]
         },
         { // Close file ("buffer, delete")
-            "before":["leader", "b", "d"],
-            "commands": [
-                {
-                    "command": "workbench.action.closeActiveEditor"
-                }
-            ]
+            "before":["<leader>", "b", "d"],
+            "commands": ["workbench.action.closeActiveEditor"]
         },
         { // Clear search highlights
-            "before":["leader", "<CR>"],
-            "commands": [
-                {
-                    "command": ":nohl"
-                }
-            ]
+            "before":["<leader>", "<CR>"],
+            "commands": [":nohl"]
         },
         { // Delete trailing whitespace
-            "before":["leader", "<space>"],
-            "commands": [
-                {
-                    "command": "trailing-spaces.deleteTrailingSpaces"
-                }
-            ]
+            "before":["<leader>", "<space>"],
+            "commands": ["trailing-spaces.deleteTrailingSpaces"]
         }
     ],
 

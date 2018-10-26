@@ -23,6 +23,7 @@
 !.gtkrc-2.0
 !.ncmpcpp/bindings
 !.ncmpcpp/config
+!.profile
 !.scripts/
 !.tmux.conf
 !.uncrustify.cfg
@@ -30,4 +31,5 @@
 !.xinitrc
 !.xlock/
 !.xserverrc
+!.zprofile
 !.zshrc

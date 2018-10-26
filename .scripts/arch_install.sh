@@ -57,6 +57,9 @@ pacstrap -i /mnt --noconfirm                                                   \
   jdk8-openjdk                                                                 \
   python  python2  python-pip                                                  \
   nodejs  npm                                                                  \
+  ruby
+  ghc                                                                          \
+  r  tk  gcc-fortran                                                           \
 \
   mariadb  mysqlworkbench                                                      \
   mongodb  mongodb-tools                                                       \

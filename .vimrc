@@ -82,6 +82,9 @@ Plug 'elzr/vim-json'
 " Vim JSX: React JSX indentation and syntax support
 "Plug 'mxw/vim-jsx'
 
+" Nvim-R: Improved R language support
+Plug 'jalvesaq/Nvim-R'
+
 " Fugitive: A Git wrapper
 Plug 'tpope/vim-fugitive'
 

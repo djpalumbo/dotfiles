@@ -66,7 +66,7 @@ mode "$tray"
   # Open messaging application
   bindsym m exec --no-startup-id rambox, mode "default"
   # Adjust screen brightness/color based on time of day (like f.lux)
-  bindsym r exec --no-startup-id redshift-gtk -t 5500:2625, mode "default"
+  bindsym r exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent, exec --no-startup-id redshift-gtk -t 5500:2625, mode "default"
   # Start torrenting client
   bindsym t exec --no-startup-id transmission-daemon -t -u arch -v linux -p 9091 -a "127.0.0.1", mode "default"
 
@@ -75,7 +75,7 @@ mode "$tray"
   bindsym Shift+i exec --no-startup-id killall insync, mode "default"
   bindsym Shift+n exec --no-startup-id killall nm-applet, mode "default"
   bindsym Shift+m exec --no-startup-id killall rambox, mode "default"
-  bindsym Shift+r exec --no-startup-id killall redshift, mode "default"
+  bindsym Shift+r exec --no-startup-id killall redshift-gtk, exec --no-startup-id killall /usr/lib/geoclue-2.0/demos/agent, mode "default"
   bindsym Shift+t exec --no-startup-id killall transmission-daemon, mode "default"
 
   # Back to normal
@@ -92,10 +92,7 @@ mode "$tray"
 bindsym $alt+t exec $term
 bindsym $alt+Shift+t exec $term2
 # Open a file explorer
-bindsym $super+f exec $term2 -e ranger
-bindsym $super+Shift+f exec nemo
-# Open a text editor
-bindsym $super+v exec $term2 -e nvim
+bindsym $super+f exec nemo
 # Open a web browser
 bindsym $super+i exec chromium
 bindsym $super+Shift+i exec firefox
@@ -105,7 +102,9 @@ bindsym $super+r exec --no-startup-id rofi -show run
 bindsym Ctrl+$alt+Delete exec --no-startup-id $term2 -e vtop
 bindsym Ctrl+$alt+Shift+Delete exec --no-startup-id $term2 -e htop
 # Open a music player
-bindsym $super+XF86AudioPlay exec spotify
+bindsym $super+m exec spotify
+# Open a git client
+bindsym $super+g exec gitkraken
 # Cycle wallpapers and apply new colorscheme
 bindsym $super+w exec wal -i ~/Pictures/Wallpapers -o ~/.scripts/wal-set
 # Take a screenshot

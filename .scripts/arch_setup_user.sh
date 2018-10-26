@@ -29,17 +29,21 @@ trizen -S --noedit --noconfirm                                                 \
   openbox-patched                                                              \
 \
   zscroll-git                                                                  \
-  ttf-iosevka  ttf-font-awesome-4  ttf-material-design-icons                   \
+  ttf-iosevka  ttf-font-awesome-4  ttf-material-design-icons  ttf-ms-fonts     \
   polybar-git                                                                  \
 \
   ultra-flat-icons-blue                                                        \
   urxvt-resize-font-git                                                        \
 \
+  fsharp                                                                       \
+\
   universal-ctags-git                                                          \
   visual-studio-code-bin                                                       \
   android-studio  android-tools  android-udev                                  \
-\
+  rstudio-desktop-bin                                                          \
   studio-3t                                                                    \
+\
+  gitkraken
 \
   vmware-workstation                                                           \
 \
