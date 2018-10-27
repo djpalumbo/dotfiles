@@ -427,6 +427,9 @@ if has('nvim') " Allow for escape from terminal mode in neovim
   tnoremap <Esc> <C-\><C-n>
 endif
 
+" Make sure all .tex files default to type 'tex' (rather than 'plaintex')
+let g:tex_flavor = "latex"
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -519,7 +522,7 @@ autocmd Filetype java   nnoremap <buffer> <F5> :update
   \<Bar>execute '!javac    '.shellescape(@%, 1)<CR>
 autocmd Filetype tex    nnoremap <buffer> <F5> :update
   \<Bar>cd %:p:h
-  \<Bar>execute '!pdflatex '.shellescape(@%, 1)<CR>
+  \<Bar>execute '!while [ "$(pwd)" \!= "/" ]; do if [ -f main.tex ]; then pdflatex main.tex; break; else cd ..; fi; done'<CR>
 
 " *---------*
 " | BUFFERS |
