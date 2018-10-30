@@ -644,7 +644,14 @@ map <leader>e :Startify<CR>
 
 " NERDTree (F2 opens to current buffer's directory)
 map <C-n> :NERDTreeToggle<CR>
-map <F2> :NERDTree %:p:h<CR>
+function! ToggleNERDTreeAtBuffer()
+  if g:NERDTree.IsOpen()
+    NERDTreeClose
+  else
+    NERDTree %:p:h
+  endif
+endfunction
+map <F2> :call ToggleNERDTreeAtBuffer()<CR>
 
 " FZF
 map <leader>f :FZF<CR>
