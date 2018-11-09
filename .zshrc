@@ -11,6 +11,7 @@ compinit
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
+setopt hist_ignore_dups
 setopt autocd extendedglob
 bindkey -v
 # End of lines configured by zsh-newuser-install

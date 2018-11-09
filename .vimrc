@@ -510,17 +510,20 @@ map <leader>cd :cd %:p:h<CR>:pwd<CR>
 " Open vimrc for editing
 map <leader><F12> :e $MYVIMRC<CR>
 
-" Refresh vimrc using F5 (when open and in focus)
-autocmd Filetype vim nnoremap <buffer> <F5> :so %<CR>
+" Refresh the current buffer
+map <F5> :e<CR>
 
-" Compile files using F5 (when open and in focus)
-autocmd Filetype c,cpp  nnoremap <buffer> <F5> :update
+" Refresh vimrc using F6 (when open and in focus)
+autocmd Filetype vim nnoremap <buffer> <F6> :so %<CR>
+
+" Compile files using F6 (when open and in focus)
+autocmd Filetype c,cpp  nnoremap <buffer> <F6> :update
   \<Bar>execute '!make     '.shellescape(expand('%:r'), 1)<CR>
-autocmd Filetype python nnoremap <buffer> <F5> :update
+autocmd Filetype python nnoremap <buffer> <F6> :update
   \<Bar>execute '!python   '.shellescape(@%, 1)<CR>
-autocmd Filetype java   nnoremap <buffer> <F5> :update
+autocmd Filetype java   nnoremap <buffer> <F6> :update
   \<Bar>execute '!javac    '.shellescape(@%, 1)<CR>
-autocmd Filetype tex    nnoremap <buffer> <F5> :update
+autocmd Filetype tex    nnoremap <buffer> <F6> :update
   \<Bar>cd %:p:h
   \<Bar>execute '!while [ "$(pwd)" \!= "/" ]; do if [ -f main.tex ]; then pdflatex main.tex; break; else cd ..; fi; done'<CR>
 
@@ -713,7 +716,7 @@ inoremap [] []
 inoremap [ []<Left>
 inoremap {} {}
 inoremap { {}<Left>
-inoremap {<CR>  {<CR>}<Esc>O<Tab>
+inoremap {<CR>  {<CR>}<Esc>O
 
 " Insert date and time
 iab xdate <C-r>=strftime("%a %b %d %H:%M:%S %Y %Z")<CR>
