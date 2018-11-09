@@ -37,13 +37,17 @@ trizen -S --noedit --noconfirm                                                 \
 \
   fsharp                                                                       \
 \
+  neo4j-community                                                              \
+\
   universal-ctags-git                                                          \
   visual-studio-code-bin                                                       \
   android-studio  android-tools  android-udev                                  \
   rstudio-desktop-bin                                                          \
   studio-3t                                                                    \
 \
-  gitkraken
+  gitkraken                                                                    \
+\
+  postman-bin                                                                  \
 \
   vmware-workstation                                                           \
 \

@@ -139,7 +139,7 @@ sed -i -e "s/#SystemMaxUse=/SystemMaxUse=64M/g" /etc/systemd/journald.conf
 #   https://docs.npmjs.com/getting-started/fixing-npm-permissions
 #  For now, I'll simply use the flag, --unsafe-perm
 npm install -g --unsafe-perm                                                   \
-  vtop  gtop                                                                   \
+  vtop-node10  gtop                                                                   \
 \
   js-beautify                                                                  \
 \
@@ -210,7 +210,8 @@ systemctl mask systemd-rfkill.socket
 ################################################################################
 
 # Switch from root to user
-wget https://raw.githubusercontent.com/djpalumbo/dotfiles/master/.scripts/arch_setup_user.sh
-chmod +x arch_setup_user.sh
-su $username -c ./arch_setup_user.sh
+wget
+https://raw.githubusercontent.com/djpalumbo/dotfiles/master/.scripts/arch-install/arch-setup_user.sh
+chmod +x arch-setup_user.sh
+su $username -c ./arch-setup_user.sh
 

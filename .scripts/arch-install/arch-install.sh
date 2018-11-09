@@ -54,7 +54,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   htop  powertop                                                               \
 \
   cmake  clang  gdb  peda                                                      \
-  jdk8-openjdk                                                                 \
+  jdk8-openjdk  gradle  maven                                                  \
   python  python2  python-pip                                                  \
   nodejs  npm                                                                  \
   ruby
@@ -122,8 +122,9 @@ genfstab -U -p /mnt > /mnt/etc/fstab
 
 
 # Switch from USB to Arch root on your system
-wget https://raw.githubusercontent.com/djpalumbo/dotfiles/master/.scripts/arch_setup.sh
-mv arch_setup.sh /mnt/
-chmod +x /mnt/arch_setup.sh
-arch-chroot /mnt ./arch_setup.sh
+wget
+https://raw.githubusercontent.com/djpalumbo/dotfiles/master/.scripts/arch-install/arch-setup.sh
+mv arch-setup.sh /mnt/
+chmod +x /mnt/arch-setup.sh
+arch-chroot /mnt ./arch-setup.sh
 
