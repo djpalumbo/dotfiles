@@ -57,8 +57,9 @@ pacstrap -i /mnt --noconfirm                                                   \
   jdk8-openjdk  gradle  maven                                                  \
   python  python2  python-pip                                                  \
   nodejs  npm                                                                  \
-  ruby
+  ruby                                                                         \
   ghc                                                                          \
+  mono  dotnet-runtime  dotnet-sdk                                             \
   r  tk  gcc-fortran                                                           \
 \
   mariadb  mysqlworkbench                                                      \

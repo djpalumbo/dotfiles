@@ -427,6 +427,11 @@ if has('nvim') " Allow for escape from terminal mode in neovim
   tnoremap <Esc> <C-\><C-n>
 endif
 
+" Terminal-specific keycodes (in insert mode, Ctrl+V then your key combo)
+"if $TERM=~'xterm-termite'
+"  set <S-F6>=<F18>
+"endif
+
 " Make sure all .tex files default to type 'tex' (rather than 'plaintex')
 let g:tex_flavor = "latex"
 
@@ -526,6 +531,12 @@ autocmd Filetype java   nnoremap <buffer> <F6> :update
 autocmd Filetype tex    nnoremap <buffer> <F6> :update
   \<Bar>cd %:p:h
   \<Bar>execute '!while [ "$(pwd)" \!= "/" ]; do if [ -f main.tex ]; then pdflatex main.tex; break; else cd ..; fi; done'<CR>
+autocmd Filetype tex    nnoremap <buffer> <leader><F6> :update
+  \<Bar>cd %:p:h
+  \<Bar>execute '!while [ "$(pwd)" \!= "/" ]; do if [ -f main.tex ]; then pdflatex -shell-escape main.tex; break; else cd ..; fi; done'<CR>
+autocmd Filetype tex    nnoremap <buffer> <leader>b<F6> :update
+  \<Bar>cd %:p:h
+  \<Bar>execute '!while [ "$(pwd)" \!= "/" ]; do if [ -f main.tex ]; then pwd; biber main; break; else cd ..; fi; done'<CR>
 
 " *---------*
 " | BUFFERS |
@@ -587,20 +598,6 @@ map <C-S-Up> :resize -1<CR>
 map <F7> zM
 " Open all folds
 map <F8> zR
-
-" " Close all folds
-" map <S-F7> zM
-" " Open all folds
-" map <S-F8> zR
-"
-" " Terminal-specific keycodes
-" if $TERM=~'rxvt-unicode-256color'
-"   map <F17> <S-F7>
-"   map <F18> <S-F8>
-" elseif $TERM=~'xterm-termite'
-"   map <F19> <S-F7>
-"   map <F20> <S-F8>
-" endif
 
 " *-----------*
 " | SEARCHING |
