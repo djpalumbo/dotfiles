@@ -20,7 +20,8 @@ if [ -f `which powerline-daemon` ]; then
   powerline-daemon -q
   POWERLINE_BASH_CONTINUATION=1
   POWERLINE_BASH_SELECT=1
-  source /usr/lib/python3.7/site-packages/powerline/bindings/bash/powerline.sh
+  PYTHON_SITE=$(python -c "import site; print(site.getsitepackages())" | sed "s/[][']//g")
+  source $PYTHON_SITE/powerline/bindings/bash/powerline.sh
 fi
 
 # Import/refresh colorscheme from 'wal' (termite)
