@@ -30,7 +30,7 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   wget                                                                         \
 \
-  efibootmgr  intel-ucode  ntfs-3g  gksu                                       \
+  efibootmgr  intel-ucode  ntfs-3g                                             \
 \
   tlp                                                                          \
 \
@@ -97,7 +97,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   speedcrunch  bc                                                              \
   p7zip                                                                        \
 \
-  python-pywal                                                                 \
+  python-pywal  python-setuptools                                              \
   python-xdg  redshift                                                         \
 \
   audacity                                                                     \

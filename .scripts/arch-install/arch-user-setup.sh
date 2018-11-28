@@ -25,6 +25,8 @@ rm -r /tmp/trizen
 
 # Install packages from the AUR
 trizen -S --noedit --noconfirm                                                 \
+  gksu                                                                         \
+\
   light-git                                                                    \
   openbox-patched                                                              \
 \
@@ -63,6 +65,10 @@ trizen -S --noedit --noconfirm                                                 \
 \
   bash-pipes  cli-visualizer  cava                                             \
 \
+
+
+# Set gksu to use sudo by default:
+sudo gconftool-2 --set --type boolean /apps/gksu/sudo-mode true
 
 
 ################################################################################

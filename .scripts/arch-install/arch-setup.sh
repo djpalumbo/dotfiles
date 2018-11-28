@@ -109,10 +109,6 @@ echo "arch" > /etc/hostname
 echo "127.0.1.1	arch.localdomain	arch" >> /etc/hosts
 
 
-# Set gksu to use sudo by default:
-gconftool-2 --set --type boolean /apps/gksu/sudo-mode true
-
-
 # Load the generic bluetooth driver, if not already loaded
 modprobe btusb
 
