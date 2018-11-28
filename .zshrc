@@ -16,6 +16,12 @@ setopt autocd extendedglob
 bindkey -v
 # End of lines configured by zsh-newuser-install
 
+# Import/refresh colorscheme from 'wal' (termite)
+if [ $TERM = 'xterm-termite' ]
+then
+  (cat ~/.cache/wal/sequences &)
+fi
+
 # Use Powerline
 if [ -f `which powerline-daemon` ]; then
   powerline-daemon -q
@@ -23,12 +29,6 @@ if [ -f `which powerline-daemon` ]; then
   POWERLINE_BASH_SELECT=1
   PYTHON_SITE=$(python -c "import site; print(site.getsitepackages())" | sed "s/[][']//g")
   source $PYTHON_SITE/powerline/bindings/zsh/powerline.zsh
-fi
-
-# Import/refresh colorscheme from 'wal' (termite)
-if [ $TERM = 'xterm-termite' ]
-then
-  (cat ~/.cache/wal/sequences &)
 fi
 
 # Short delay to change mode after hitting Esc key

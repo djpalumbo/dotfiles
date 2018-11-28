@@ -15,6 +15,12 @@ complete -cf sudo
 # Line wrap on window resize
 shopt -s checkwinsize
 
+# Import/refresh colorscheme from 'wal' (termite)
+if [ $TERM = 'xterm-termite' ]
+then
+  (cat ~/.cache/wal/sequences &)
+fi
+
 # Run Powerline
 if [ -f `which powerline-daemon` ]; then
   powerline-daemon -q
@@ -22,12 +28,6 @@ if [ -f `which powerline-daemon` ]; then
   POWERLINE_BASH_SELECT=1
   PYTHON_SITE=$(python -c "import site; print(site.getsitepackages())" | sed "s/[][']//g")
   source $PYTHON_SITE/powerline/bindings/bash/powerline.sh
-fi
-
-# Import/refresh colorscheme from 'wal' (termite)
-if [ $TERM = 'xterm-termite' ]
-then
-  (cat ~/.cache/wal/sequences &)
 fi
 
 # Use vi mode
