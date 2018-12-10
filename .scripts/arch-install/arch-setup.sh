@@ -123,6 +123,8 @@ pacman -Syu
 multilib=$(awk "/\#\[multilib\]/{ print NR; exit }" /etc/pacman.conf)
 sed -i -e "$multilib s/\#//g" /etc/pacman.conf
 sed -i -e "$((multilib+1)) s/\#//g" /etc/pacman.conf
+# Enable color option for pacman
+sed -i -e "s/#Color/Color/g" /etc/pacman.conf
 
 
 # Limit the amount of logs retained by systemd/journalctl to 64M

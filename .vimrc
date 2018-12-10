@@ -524,6 +524,8 @@ autocmd Filetype vim nnoremap <buffer> <F6> :so %<CR>
 " Compile files using F6 (when open and in focus)
 autocmd Filetype c,cpp  nnoremap <buffer> <F6> :update
   \<Bar>execute '!make     '.shellescape(expand('%:r'), 1)<CR>
+autocmd Filetype cs  nnoremap <buffer> <F6> :update
+  \<Bar>execute '!csc      '.shellescape(expand('%:p'), 1)<CR>
 autocmd Filetype python nnoremap <buffer> <F6> :update
   \<Bar>execute '!python   '.shellescape(@%, 1)<CR>
 autocmd Filetype java   nnoremap <buffer> <F6> :update

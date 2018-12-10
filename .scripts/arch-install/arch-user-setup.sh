@@ -15,16 +15,16 @@ timedatectl set-timezone America/New_York
 timedatectl set-ntp true
 
 
-# Install trizen, an AUR package manager and pacman companion
-git clone https://aur.archlinux.org/trizen.git /tmp/trizen
-cd /tmp/trizen
+# Install yay, an AUR package manager and pacman companion
+git clone https://aur.archlinux.org/yay.git /tmp/yay
+cd /tmp/yay
 makepkg -si
 cd ~
-rm -r /tmp/trizen
+rm -rf /tmp/yay
 
 
 # Install packages from the AUR
-trizen -S --noedit --noconfirm                                                 \
+yay -S --noconfirm                                                             \
   gksu                                                                         \
 \
   light-git                                                                    \
@@ -37,7 +37,7 @@ trizen -S --noedit --noconfirm                                                 \
   ultra-flat-icons-blue                                                        \
   urxvt-resize-font-git                                                        \
 \
-  fsharp                                                                       \
+  fsharp  msbuild-stable                                                       \
 \
   neo4j-community                                                              \
 \
@@ -116,6 +116,7 @@ ln -s /mnt/windows/Users/Dave/Google\ Drive/vimwiki ~/vimwiki
 ln -s /mnt/windows/Users/Dave/Google\ Drive/Wallpapers ~/Pictures/Wallpapers
 ln -s /mnt/windows/Users/Dave/Google\ Drive/3D\ Models ~/Documents/3D\ Models
 ln -s /mnt/windows/Users/Dave/Google\ Drive/VLC\ Playlists ~/Music/VLC\ Playlists
+ln -s /mnt/windows/Users/Dave/Google\ Drive/Teenage\ Engineering\ OP-1 ~/Music/Teenage\ Engineering\ OP-1
 ln -s /mnt/windows/Users/Dave/repos ~/repos
 
 

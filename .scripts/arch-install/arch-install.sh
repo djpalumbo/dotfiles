@@ -61,6 +61,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   ghc                                                                          \
   mono  dotnet-runtime  dotnet-sdk                                             \
   r  tk  gcc-fortran                                                           \
+  go                                                                           \
 \
   mariadb  mysqlworkbench                                                      \
   mongodb  mongodb-tools                                                       \
