@@ -137,14 +137,14 @@ sed -i -e "s/#SystemMaxUse=/SystemMaxUse=64M/g" /etc/systemd/journald.conf
 #   https://docs.npmjs.com/getting-started/fixing-npm-permissions
 #  For now, I'll simply use the flag, --unsafe-perm
 npm install -g --unsafe-perm                                                   \
-  vtop-node10  gtop                                                                   \
+  vtop-node10  gtop                                                            \
 \
   js-beautify                                                                  \
 \
   @angular/cli                                                                 \
   react-native-cli                                                             \
 \
-  gulp                                                                         \
+  http-server                                                                  \
 \
 
 
