@@ -65,13 +65,15 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   mariadb  mysqlworkbench                                                      \
   mongodb  mongodb-tools                                                       \
+  redis                                                                        \
 \
   uncrustify  yapf                                                             \
 \
   git  termite  rxvt-unicode  zsh  powerline                                   \
   neovim  python-neovim  python2-neovim                                        \
-  ranger  atool  w3m  rofi  compton  feh  scrot                                \
+  ranger  highlight  atool  w3m  rofi  compton  feh  scrot                     \
   fzf  the_silver_searcher  ack                                                \
+  perf                                                                         \
 \
   virtualbox  virtualbox-host-modules-arch                                     \
   vagrant                                                                      \
