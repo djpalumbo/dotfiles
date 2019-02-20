@@ -39,6 +39,7 @@ yay -S --noconfirm                                                             \
 \
   fsharp  msbuild-stable                                                       \
 \
+  mongodb-bin  mongodb-tools-bin                                               \
   neo4j-community                                                              \
 \
   universal-ctags-git                                                          \

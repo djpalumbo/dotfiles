@@ -64,7 +64,6 @@ pacstrap -i /mnt --noconfirm                                                   \
   go                                                                           \
 \
   mariadb  mysqlworkbench                                                      \
-  mongodb  mongodb-tools                                                       \
   redis                                                                        \
 \
   uncrustify  yapf                                                             \
