@@ -44,6 +44,7 @@ yay -S --noconfirm                                                             \
 \
   universal-ctags-git                                                          \
   visual-studio-code-bin                                                       \
+  intellij-idea-ultimate-edition                                               \
   android-studio  android-tools  android-udev                                  \
 \
   gitkraken                                                                    \
