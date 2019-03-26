@@ -49,7 +49,7 @@ yay -S --noconfirm                                                             \
 \
   gitkraken                                                                    \
 \
-  postman-bin                                                                  \
+  insomnia
 \
   vmware-workstation                                                           \
 \
