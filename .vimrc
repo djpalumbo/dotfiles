@@ -518,6 +518,9 @@ map <leader><F12> :e $MYVIMRC<CR>
 " Refresh the current buffer
 map <F5> :e<CR>
 
+" Execute the contents of the current buffer in zsh
+map <leader>zsh :%!zsh<CR>
+
 " Refresh vimrc using F6 (when open and in focus)
 autocmd Filetype vim nnoremap <buffer> <F6> :so %<CR>
 
@@ -708,6 +711,8 @@ map <leader>pp :setlocal paste!<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Abbreviations/auto-complete
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TODO: Make these togglable
+
 " Auto-brackets
 inoremap () ()
 inoremap ( ()<Left>
@@ -716,6 +721,62 @@ inoremap [ []<Left>
 inoremap {} {}
 inoremap { {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
+
+" Math symbols
+inoremap \deg °
+inoremap \dot ·
+inoremap \int ∫
+inoremap \int0 ∮
+inoremap \sqrt √
+inoremap ^- ⁻
+inoremap ^i ⁱ
+inoremap ^0 ⁰
+inoremap ^1 ¹
+inoremap ^2 ²
+inoremap ^3 ³
+inoremap ^4 ⁴
+inoremap ^5 ⁵
+inoremap ^6 ⁶
+inoremap ^7 ⁷
+inoremap ^8 ⁸
+inoremap ^9 ⁹
+inoremap _- ₋
+inoremap _0 ₀
+inoremap _1 ₁
+inoremap _2 ₂
+inoremap _3 ₃
+inoremap _4 ₄
+inoremap _5 ₅
+inoremap _6 ₆
+inoremap _7 ₇
+inoremap _8 ₈
+inoremap _9 ₉
+inoremap \inf ∞
+inoremap \delta Δ
+inoremap \emf ℰ
+inoremap \epsilon ε
+inoremap \lambda λ
+inoremap \mu μ
+inoremap \ohm Ω
+inoremap \omega ω
+inoremap \phi φ
+inoremap \PHI ϕ
+inoremap \pi π
+inoremap \rho ρ
+inoremap \sigma σ
+inoremap \SIGMA Σ
+inoremap \theta θ
+inoremap \tau τ
+
+inoremap \neq ≠
+inoremap \equiv ≡
+inoremap \leq ≤
+inoremap \geq ≥
+inoremap \larrow ←
+inoremap \rarrow →
+
+inoremap \in ∈
+inoremap \nin ∉
 
 " Insert date and time
 iab xdate <C-r>=strftime("%a %b %d %H:%M:%S %Y %Z")<CR>
