@@ -30,7 +30,7 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   wget                                                                         \
 \
-  efibootmgr  intel-ucode  ntfs-3g                                             \
+  efibootmgr  intel-ucode  ntfs-3g  exfat-utils                                \
 \
   tlp                                                                          \
 \
@@ -44,7 +44,8 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   i3-gaps  sddm                                                                \
 \
-  xorg-xinput  xorg-xev  xf86-input-synaptics                                  \
+  libinput  xf86-input-libinput  xf86-input-synaptics                          \
+  xorg-xinput  xorg-xev                                                        \
   xclip  numlockx  gucharmap                                                   \
 \
   pulseaudio  pulseaudio-alsa  pavucontrol  alsa-utils                         \
@@ -63,16 +64,19 @@ pacstrap -i /mnt --noconfirm                                                   \
   r  tk  gcc-fortran                                                           \
   go                                                                           \
 \
+  docker  docker-compose                                                       \
+\
   mariadb  mysqlworkbench                                                      \
   redis                                                                        \
 \
   uncrustify  yapf                                                             \
 \
   git  termite  rxvt-unicode  zsh  powerline                                   \
-  neovim  python-neovim  python2-neovim                                        \
+  neovim  python-pynvim  python2-neovim                                        \
   ranger  highlight  atool  w3m  rofi  compton  feh  scrot                     \
   fzf  the_silver_searcher  ack                                                \
   perf                                                                         \
+  fdupes                                                                       \
 \
   virtualbox  virtualbox-host-modules-arch                                     \
   vagrant                                                                      \
@@ -93,7 +97,8 @@ pacstrap -i /mnt --noconfirm                                                   \
   i3lock  imagemagick                                                          \
 \
   mpd  mpc  ncmpcpp                                                            \
-  vlc  qt4                                                                     \
+  vlc  libmicrodns  protobuf                                                   \
+  qt4                                                                          \
   playerctl                                                                    \
 \
   speedcrunch  bc                                                              \
@@ -104,6 +109,7 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   audacity                                                                     \
   gimp  inkscape                                                               \
+  viewnior  darktable                                                          \
   blender  cura                                                                \
 \
   transmission-cli                                                             \

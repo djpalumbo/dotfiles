@@ -3,8 +3,10 @@ inode/directory=nemo.desktop
 application/pdf=org.pwmt.zathura-pdf-mupdf.desktop
 image/png=feh.desktop
 text/plain=nvim.desktop
+image/jpeg=viewnior.desktop
 
 [Added Associations]
 application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;
 image/png=feh.desktop;
 text/plain=nvim.desktop;
+image/jpeg=viewnior.desktop;

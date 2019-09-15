@@ -4,10 +4,13 @@
 tmpbg='/tmp/screen.png'
 
 # take screenshot
-scrot "$tmpbg"
+scrot -o "$tmpbg"
 
 # blur it
 convert "$tmpbg" -blur 0x5 "$tmpbg"
 
 # lock the screen
 i3lock -i "$tmpbg"
+
+# clean up after yourself
+rm $tmpbg

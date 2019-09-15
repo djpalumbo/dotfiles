@@ -1,13 +1,3 @@
-###################
-# LAPTOP TOUCHPAD #
-###################
-# Mouse sensitivity
-xinput set-prop "Asus TouchPad" "Device Accel Constant Deceleration" 1.30
-# Tap to click
-xinput set-prop "Asus TouchPad" "Synaptics Tap Action" 1 1 1 1 1 1 1
-# Natural scrolling
-xinput set-prop "Asus TouchPad" "Synaptics Scrolling Distance" -66 -66
-
 ##############
 # APPEARANCE #
 ##############

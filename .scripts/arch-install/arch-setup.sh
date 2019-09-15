@@ -200,6 +200,7 @@ systemctl enable bluetooth.service
 #systemctl enable insync@$username.service
 #systemctl enable mariadb.service
 #systemctl enable mongodb.service
+#systemctl enable docker.service
 
 
 # Mask certain systemd services so that TLP power management works correctly

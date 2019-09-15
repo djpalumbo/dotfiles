@@ -10,7 +10,7 @@ done
 
 
 # Set the timezone
-timedatectl set-timezone America/New_York
+timedatectl set-timezone America/Los_Angeles
 # Make time/date auto-sync
 timedatectl set-ntp true
 
@@ -32,7 +32,7 @@ yay -S --noconfirm                                                             \
 \
   zscroll-git                                                                  \
   ttf-iosevka  ttf-font-awesome-4  ttf-material-design-icons  ttf-ms-fonts     \
-  polybar-git                                                                  \
+  polybar                                                                      \
 \
   ultra-flat-icons-blue                                                        \
   urxvt-resize-font-git                                                        \
@@ -63,7 +63,7 @@ yay -S --noconfirm                                                             \
 \
   masterpdfeditor                                                              \
 \
-  bash-pipes  cli-visualizer  cava                                             \
+  bash-pipes  cli-visualizer  cava  bonsai.sh-git                              \
 \
 
 
@@ -104,6 +104,9 @@ git init
 git remote add origin https://github.com/djpalumbo/dotfiles.git
 git fetch --all
 git reset --hard origin/master
+
+
+# TODO: Link input peripheral settings
 
 
 # Create user directories
