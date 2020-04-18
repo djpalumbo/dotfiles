@@ -25,8 +25,6 @@ rm -rf /tmp/yay
 
 # Install packages from the AUR
 yay -S --noconfirm                                                             \
-  gksu                                                                         \
-\
   light-git                                                                    \
   openbox-patched                                                              \
 \
@@ -37,21 +35,14 @@ yay -S --noconfirm                                                             \
   ultra-flat-icons-blue                                                        \
   urxvt-resize-font-git                                                        \
 \
-  fsharp  msbuild-stable                                                       \
-\
   mongodb-bin  mongodb-tools-bin                                               \
   neo4j-community                                                              \
 \
   universal-ctags-git                                                          \
   visual-studio-code-bin                                                       \
-  intellij-idea-ultimate-edition                                               \
   android-studio  android-tools  android-udev                                  \
 \
-  gitkraken                                                                    \
-\
   insomnia
-\
-  vmware-workstation                                                           \
 \
   insync                                                                       \
 \
@@ -65,10 +56,6 @@ yay -S --noconfirm                                                             \
 \
   bash-pipes  cli-visualizer  cava  bonsai.sh-git                              \
 \
-
-
-# Set gksu to use sudo by default:
-sudo gconftool-2 --set --type boolean /apps/gksu/sudo-mode true
 
 
 ################################################################################

@@ -51,6 +51,8 @@ pacstrap -i /mnt --noconfirm                                                   \
   pulseaudio  pulseaudio-alsa  pavucontrol  alsa-utils                         \
   blueman  pulseaudio-bluetooth  bluez  bluez-libs  bluez-utils                \
 \
+  polkit                                                                       \
+\
   tree                                                                         \
   htop  powertop                                                               \
 \
@@ -71,7 +73,8 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   uncrustify  yapf                                                             \
 \
-  git  termite  rxvt-unicode  zsh  powerline                                   \
+  git  hub                                                                     \
+  termite  rxvt-unicode  zsh  powerline                                        \
   neovim  python-pynvim  python2-neovim                                        \
   ranger  highlight  atool  w3m  rofi  compton  feh  scrot                     \
   fzf  the_silver_searcher  ack                                                \
