@@ -2,7 +2,6 @@
     "workbench.colorTheme": "Monokai Dimmed",
     "editor.tabSize": 2,
     "editor.wordWrap": "on",
-    "editor.lineNumbers": "relative",
 
     "vim.leader": ",",
     "vim.foldfix": true,
@@ -52,5 +51,13 @@
     "telemetry.enableTelemetry": false,
     "workbench.iconTheme": "vscode-icons",
     "window.zoomLevel": 1,
-    "vsicons.dontShowNewVersionMessage": true
+    "vsicons.dontShowNewVersionMessage": true,
+    "files.exclude": {
+        "**/*.pyc": {"when": "$(basename).py"},
+        "**/__pycache__": true,
+        "**/.pytest_cache": true
+    },
+    "aws.samcli.location": "/home/dave/.local/bin/sam",
+    "aws.telemetry": false,
+    "aws.profile": "profile:default"
 }

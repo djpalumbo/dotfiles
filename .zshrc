@@ -56,3 +56,5 @@ alias android-monitor='/opt/android-sdk/tools/monitor'
 alias cookie='fortune -s | cowsay -f tux | lolcat'
 alias syu='curl -s https://www.archlinux.org/feeds/news/ | xmllint --xpath //item/title\ \|\ //item/pubDate /dev/stdin | sed -r -e "s:<title>([^<]*?)</title><pubDate>([^<]*?)</pubDate>:\2\t\1\n:g" && yay -Syu'
 
+# Add pip to PATH
+export PATH=/home/dave/.local/bin:$PATH

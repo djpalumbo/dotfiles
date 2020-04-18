@@ -304,6 +304,11 @@ if !has('nvim')
   let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 endif
 
+" *----------*
+" | Vim JSON |
+" *----------*
+let g:vim_json_syntax_conceal = 0
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -313,7 +318,6 @@ if has('gui_running')
 endif
 
 set number " Show line numbers
-set relativenumber " Make line numbers relative
 set laststatus=2  " Always show the status line
 set ruler " Always show current position
 set mouse=a " Enable mouse
