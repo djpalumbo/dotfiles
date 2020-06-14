@@ -30,7 +30,7 @@ sed -i -e "/vmlinuz-linux/a initrd  \/intel-ucode.img" /boot/loader/entries/arch
 swappart=$(lsblk | grep "SWAP" | cut -d " " -f 1 | sed "s/.*s/s/g")
 echo "options resume=UUID=$(blkid /dev/$swappart | cut -d "\"" -f 2)" >> /boot/loader/entries/arch.conf
 # Configure the initramfs
-sed -i -e "s/^HOOKS.*/HOOKS=\"base udev resume autodetect modconf block filesystems keyboard fsck\"/g" /etc/mkinitcpio.conf
+sed -i -e "s/^HOOKS.*/HOOKS=\"base udev resume keyboard autodetect modconf block fsck filesystems\"/g" /etc/mkinitcpio.conf
 # Rebuild the initramfs
 mkinitcpio -c /etc/mkinitcpio.conf -g /boot/initramfs-linux.img
 
@@ -120,9 +120,9 @@ pacman -Syu
 ################################################################################
 
 # Enable the multilib repository for pacman
-multilib=$(awk "/\#\[multilib\]/{ print NR; exit }" /etc/pacman.conf)
-sed -i -e "$multilib s/\#//g" /etc/pacman.conf
-sed -i -e "$((multilib+1)) s/\#//g" /etc/pacman.conf
+multilib=$(awk "/#\[multilib\]/{ print NR; exit }" /etc/pacman.conf)
+sed -i -e "$multilib s/#//g" /etc/pacman.conf
+sed -i -e "$((multilib+1)) s/#//g" /etc/pacman.conf
 # Enable color option for pacman
 sed -i -e "s/#Color/Color/g" /etc/pacman.conf
 
@@ -212,7 +212,7 @@ systemctl mask systemd-rfkill.socket
 
 # Switch from root to user
 wget
-https://raw.githubusercontent.com/djpalumbo/dotfiles/master/.scripts/arch-install/arch-setup_user.sh
-chmod +x arch-setup_user.sh
-su $username -c ./arch-setup_user.sh
+https://raw.githubusercontent.com/djpalumbo/dotfiles/master/.scripts/arch-install/arch-user-setup.sh
+chmod +x arch-user-setup.sh
+su $username -c ./arch-user-setup.sh
 

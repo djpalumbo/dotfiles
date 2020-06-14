@@ -16,13 +16,13 @@ done
 
 # Sync database, update keyring, and update pacman mirrorlist
 pacman -Sy
-pacman -S --noconfirm archlinux-keyring reflector
+pacman -S --noconfirm archlinux-keyring  reflector
 reflector --verbose --country 'United States' --sort rate --save /etc/pacman.d/mirrorlist
 
 
 # Install packages
 pacstrap -i /mnt --noconfirm                                                   \
-  base  base-devel                                                             \
+  base  linux  linux-firmware                                                  \
 \
   linux-headers                                                                \
 \
