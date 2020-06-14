@@ -6,7 +6,6 @@ set $alt Mod1
 set $super Mod4
 
 set $term termite
-set $term2 urxvt
 set $locker ~/.scripts/pixlock
 
 ########################
@@ -89,7 +88,6 @@ mode "$tray"
 ###########
 # Start a terminal
 bindsym $alt+t exec $term
-bindsym $alt+Shift+t exec $term2
 # Open a file explorer
 bindsym $alt+f exec --no-startup-id $term -e "zsh -c 'source ~/.zshrc & ranger'"
 bindsym $super+f exec nemo
@@ -105,8 +103,6 @@ bindsym Ctrl+$alt+Delete exec --no-startup-id $term -e "zsh -c 'source ~/.zshrc 
 bindsym Ctrl+$alt+Shift+Delete exec --no-startup-id $term -e "zsh -c 'source ~/.zshrc & htop'"
 # Open a music player
 bindsym $super+m exec spotify
-# Open a git client
-bindsym $super+g exec gitkraken
 # Cycle wallpapers and apply new colorscheme
 bindsym $super+w exec wal -i ~/Pictures/Wallpapers -o ~/.scripts/wal-set
 # Take a screenshot

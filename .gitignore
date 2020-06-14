@@ -1,17 +1,13 @@
 *
 !.gitignore
 
-!.Xresources
-!.android/adb_usb.ini
 !.bash_profile
 !.bashrc
 !.config/Code/User/settings.json
 !.config/i3/config
 !.config/mimeapps.list
 !.config/mpd/mpd.conf
-!.config/openbox/
 !.config/picom.conf
-!.config/plank/
 !.config/polybar/config
 !.config/polybar/launch.sh
 !.config/polybar/mpd-scroll
@@ -19,15 +15,9 @@
 !.config/ranger/rifle.conf
 !.config/ranger/scope.sh
 !.config/termite/config
-!.ncmpcpp/bindings
-!.ncmpcpp/config
-!.profile
 !.scripts/
-!.tmux.conf
-!.uncrustify.cfg
 !.vimrc
 !.xinitrc
 !.xlock/
 !.xserverrc
-!.zprofile
 !.zshrc

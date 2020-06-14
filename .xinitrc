@@ -25,5 +25,4 @@ fi
 ###############
 exec i3
 #exec startplasma-x11
-#exec openbox-session
 

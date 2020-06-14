@@ -1,2 +1,0 @@
-emulate sh -c '. ~/.profile'
-

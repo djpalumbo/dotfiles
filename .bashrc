@@ -42,11 +42,7 @@ export EDITOR=/bin/nvim
 export BROWSER=/bin/chromium
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g "" -u'
 export FZF_DEFAULT_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200' --bind=tab:up,btab:down"
-export ANDROID_HOME=/opt/android-sdk
-export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 alias vim='nvim'
-alias android-emulator='/opt/android-sdk/emulator/emulator'
-alias android-monitor='/opt/android-sdk/tools/monitor'
 alias cookie='fortune -s | cowsay -f tux | lolcat'
 alias syu='curl -s https://www.archlinux.org/feeds/news/ | xmllint --xpath //item/title\ \|\ //item/pubDate /dev/stdin | sed -r -e "s:<title>([^<]*?)</title><pubDate>([^<]*?)</pubDate>:\2\t\1\n:g" && yay -Syu'
 

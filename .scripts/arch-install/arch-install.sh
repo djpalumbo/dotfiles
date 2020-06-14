@@ -62,7 +62,9 @@ pacstrap -i /mnt --noconfirm                                                   \
   efibootmgr  intel-ucode  ntfs-3g  exfat-utils                                \
 \
   dhcpcd  dhclient                                                             \
-  networkmanager  network-manager-applet  networkmanager-openconnect           \
+  networkmanager                                                               \
+  network-manager-applet  gnome-keyring                                        \
+  networkmanager-openconnect                                                   \
 \
   reflector                                                                    \
 \
@@ -112,7 +114,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   openssh                                                                      \
   scrot                                                                        \
 \
-  mpd  mpc  ncmpcpp                                                            \
+  mpd  mpc                                                                     \
   playerctl                                                                    \
 \
   texlive-most                                                                 \

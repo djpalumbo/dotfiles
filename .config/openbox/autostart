@@ -1,9 +1,0 @@
-# These things are run when an Openbox X Session is started.
-
-# Use my personal settings
-~/.scripts/wm-settings.sh
-
-# Status bar
-~/.config/polybar/launch.sh
-# Run a dock
-plank -n main
