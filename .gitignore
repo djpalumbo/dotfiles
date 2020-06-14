@@ -6,12 +6,11 @@
 !.bash_profile
 !.bashrc
 !.config/Code/User/settings.json
-!.config/compton.conf
-!.config/gtk-3.0/settings.ini
 !.config/i3/config
 !.config/mimeapps.list
 !.config/mpd/mpd.conf
 !.config/openbox/
+!.config/picom.conf
 !.config/plank/
 !.config/polybar/config
 !.config/polybar/launch.sh
@@ -20,7 +19,6 @@
 !.config/ranger/rifle.conf
 !.config/ranger/scope.sh
 !.config/termite/config
-!.gtkrc-2.0
 !.ncmpcpp/bindings
 !.ncmpcpp/config
 !.profile
