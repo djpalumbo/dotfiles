@@ -1,6 +1,38 @@
 #!/bin/bash
 
 
+# (Optional) Format the entire disk
+#dd if=/dev/zero of=/dev/sda bs=1M status=progress
+
+
+# Identify existing disk partitions if needed
+#lsblk
+
+
+# Partition the disk if not already done
+# sda1 is boot while sda2-sda4 are Windows
+#   /dev/sda5  |  +24G   |  8200  |  Linux swap
+#   /dev/sda6  |  +48G   |  8304  |  Linux x86-64 root (/)
+#   /dev/sda7  |  (end)  |  8302  |  Linux /home
+#gdisk /dev/sda
+
+
+# Create and enable swap
+#mkswap /dev/sda5
+#swapon /dev/sda5
+# Format root and home partitions
+#mkfs.ext4 /dev/sda6
+#mkfs.ext4 /dev/sda7
+
+
+# Mount the partitions, creating directories where necessary
+#mount /dev/sda6 /mnt
+#mkdir /mnt/home
+#mount /dev/sda7 /mnt/home
+#mkdir /mnt/boot
+#mount /dev/sda1 /mnt/boot
+
+
 # Remove boot files if previous install
 rm /mnt/boot/vmlinuz-linux
 rm /mnt/boot/intel-ucode.img
@@ -18,111 +50,82 @@ done
 pacman -Sy
 pacman -S --noconfirm archlinux-keyring  reflector
 reflector --verbose --country 'United States' --sort rate --save /etc/pacman.d/mirrorlist
+# Double-check that everything went OK; if not, manually put US mirrors up top
+vim /etc/pacman.d/mirrorlist
 
 
 # Install packages
 pacstrap -i /mnt --noconfirm                                                   \
   base  linux  linux-firmware                                                  \
-\
-  linux-headers                                                                \
-\
-  reflector                                                                    \
-\
-  wget                                                                         \
+  base-devel  linux-headers                                                    \
 \
   efibootmgr  intel-ucode  ntfs-3g  exfat-utils                                \
 \
+  dhcpcd  dhclient                                                             \
+  networkmanager  network-manager-applet  networkmanager-openconnect           \
+\
+  reflector                                                                    \
+\
   tlp                                                                          \
 \
-  wpa_supplicant  dialog  wireless_tools                                       \
-  networkmanager  network-manager-applet                                       \
-  dhclient  gnome-keyring                                                      \
-  networkmanager-openconnect                                                   \
-\
-  xorg-server  xorg-xinit  xorg-xprop  mesa                                    \
-  xf86-video-nouveau                                                           \
-\
-  i3-gaps  sddm                                                                \
-\
-  libinput  xf86-input-libinput  xf86-input-synaptics                          \
-  xorg-xinput  xorg-xev                                                        \
-  xclip  numlockx  gucharmap                                                   \
+  xorg  xorg-xinit                                                             \
+  xf86-video-nouveau  mesa                                                     \
+  xf86-input-synaptics  numlockx                                               \
 \
   pulseaudio  pulseaudio-alsa  pavucontrol  alsa-utils                         \
-  blueman  pulseaudio-bluetooth  bluez  bluez-libs  bluez-utils                \
+  blueman  pulseaudio-bluetooth                                                \
 \
-  polkit                                                                       \
+  sddm                                                                         \
 \
-  tree                                                                         \
-  htop  powertop                                                               \
+  i3-gaps                                                                      \
 \
-  cmake  clang  gdb  peda                                                      \
-  jdk8-openjdk  gradle  maven                                                  \
-  python  python2  python-pip                                                  \
-  nodejs  npm                                                                  \
-  ruby                                                                         \
-  ghc                                                                          \
-  mono  dotnet-runtime  dotnet-sdk                                             \
-  r  tk  gcc-fortran                                                           \
-  go                                                                           \
+  picom                                                                        \
+  python-pywal  feh                                                            \
+  redshift  python-xdg                                                         \
 \
-  docker  docker-compose                                                       \
-\
-  mariadb  mysqlworkbench                                                      \
-  redis                                                                        \
-\
-  uncrustify  yapf                                                             \
-\
-  git  hub                                                                     \
-  termite  rxvt-unicode  zsh  powerline                                        \
-  neovim  python-pynvim  python2-neovim                                        \
-  ranger  highlight  atool  w3m  rofi  compton  feh  scrot                     \
-  fzf  the_silver_searcher  ack                                                \
-  perf                                                                         \
-  fdupes                                                                       \
-\
-  virtualbox  virtualbox-host-modules-arch                                     \
-  vagrant                                                                      \
-\
-  xdg-user-dirs                                                                \
+  rofi                                                                         \
+  i3lock  xss-lock                                                             \
+  termite  powerline                                                           \
   nemo  nemo-fileroller  nemo-preview                                          \
   lxappearance                                                                 \
 \
   chromium  firefox                                                            \
-  pepper-flash                                                                 \
-\
-  zathura  zathura-pdf-mupdf  zathura-djvu                                     \
-  pdfsam                                                                       \
-  texlive-most                                                                 \
-  libreoffice                                                                  \
-\
-  xss-lock                                                                     \
-  i3lock  imagemagick                                                          \
-\
-  mpd  mpc  ncmpcpp                                                            \
   vlc  libmicrodns  protobuf                                                   \
-  qt4                                                                          \
-  playerctl                                                                    \
+  code                                                                         \
+  gimp  inkscape                                                               \
+  audacity                                                                     \
+  libreoffice                                                                  \
+  zathura  zathura-pdf-mupdf  zathura-djvu                                     \
+  gucharmap                                                                    \
 \
+  wget                                                                         \
+  ack                                                                          \
+  htop  powertop                                                               \
+  zsh                                                                          \
+  git  hub                                                                     \
+  neovim  xclip  python-pynvim                                                 \
+  ranger  highlight  atool  w3m                                                \
+  fzf  the_silver_searcher                                                     \
   speedcrunch  bc                                                              \
   p7zip                                                                        \
+  tree                                                                         \
+  openssh                                                                      \
+  scrot                                                                        \
 \
-  python-pywal  python-setuptools                                              \
-  python-xdg  redshift                                                         \
+  mpd  mpc  ncmpcpp                                                            \
+  playerctl                                                                    \
 \
-  audacity                                                                     \
-  gimp  inkscape                                                               \
-  viewnior  darktable                                                          \
-  blender  cura                                                                \
+  texlive-most                                                                 \
 \
   transmission-cli                                                             \
 \
-  openssh  aws-cli                                                             \
+  aws-cli                                                                      \
+\
+  xdg-user-dirs                                                                \
 \
   ttf-dejavu  ttf-inconsolata  ttf-roboto  ttf-hack                            \
-  adobe-source-han-sans-kr-fonts                                               \
 \
-  parted  gparted                                                              \
+  arc-gtk-theme                                                                \
 \
   neofetch                                                                     \
   fortune-mod  cowsay  lolcat  cmatrix                                         \
@@ -130,12 +133,11 @@ pacstrap -i /mnt --noconfirm                                                   \
 
 
 # Generate mount configuration file
-genfstab -U -p /mnt > /mnt/etc/fstab
+genfstab -U /mnt > /mnt/etc/fstab
 
 
 # Switch from USB to Arch root on your system
-wget
-https://raw.githubusercontent.com/djpalumbo/dotfiles/master/.scripts/arch-install/arch-setup.sh
+wget https://raw.githubusercontent.com/djpalumbo/dotfiles/master/.scripts/arch-install/arch-setup.sh
 mv arch-setup.sh /mnt/
 chmod +x /mnt/arch-setup.sh
 arch-chroot /mnt ./arch-setup.sh

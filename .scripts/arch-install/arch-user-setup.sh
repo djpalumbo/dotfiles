@@ -1,14 +1,6 @@
 #!/bin/bash
 
 
-# Make sure WiFi network is accessible
-while [[ "0%" != $(ping -c 3 8.8.8.8 | grep "packet loss" | cut -d " " -f 6) ]]
-do
-  echo -e "Connect to a WiFi network\n"
-  wifi-menu
-done
-
-
 # Set the timezone
 timedatectl set-timezone America/Los_Angeles
 # Make time/date auto-sync
@@ -26,25 +18,16 @@ rm -rf /tmp/yay
 # Install packages from the AUR
 yay -S --noconfirm                                                             \
   light-git                                                                    \
-  openbox-patched                                                              \
 \
   zscroll-git                                                                  \
   ttf-iosevka  ttf-font-awesome-4  ttf-material-design-icons  ttf-ms-fonts     \
   polybar                                                                      \
 \
-  ultra-flat-icons-blue                                                        \
-  urxvt-resize-font-git                                                        \
+  insync                                                                       \
 \
-  mongodb-bin  mongodb-tools-bin                                               \
-  neo4j-community                                                              \
+  vtop                                                                         \
 \
   universal-ctags-git                                                          \
-  visual-studio-code-bin                                                       \
-  android-studio  android-tools  android-udev                                  \
-\
-  insomnia
-\
-  insync                                                                       \
 \
   chromium-widevine                                                            \
 \
@@ -52,13 +35,11 @@ yay -S --noconfirm                                                             \
 \
   rambox-bin                                                                   \
 \
-  masterpdfeditor                                                              \
+  sddm-theme-aerial-git                                                        \
 \
   bash-pipes  cli-visualizer  cava  bonsai.sh-git                              \
 \
 
-
-################################################################################
 
 # Configure git
 echo -e "\nLet's configure git."
@@ -100,19 +81,14 @@ git reset --hard origin/master
 xdg-user-dirs-update
 mkdir ~/Pictures/Screenshots
 # Make the directory structure convenient using symbolic links
-ln -s /mnt/windows/Users/Dave ~/dwin
-ln -s /mnt/windows/Users/Dave/Google\ Drive ~/gdrive
-ln -s /mnt/windows/Users/Dave/Google\ Drive/vimwiki ~/vimwiki
-ln -s /mnt/windows/Users/Dave/Google\ Drive/Wallpapers ~/Pictures/Wallpapers
-ln -s /mnt/windows/Users/Dave/Google\ Drive/3D\ Models ~/Documents/3D\ Models
-ln -s /mnt/windows/Users/Dave/Google\ Drive/VLC\ Playlists ~/Music/VLC\ Playlists
-ln -s /mnt/windows/Users/Dave/Google\ Drive/Teenage\ Engineering\ OP-1 ~/Music/Teenage\ Engineering\ OP-1
-ln -s /mnt/windows/Users/Dave/repos ~/repos
-
-
-# Install scripts for urxvt
-mkdir -p ~/.urxvt/ext/
-git clone https://github.com/pkkolos/urxvt-scripts ~/.urxvt/ext
+ln -s /mnt/win/Users/Dave ~/dwin
+ln -s /mnt/win/Users/Dave/Google\ Drive ~/gdrive
+ln -s /mnt/win/Users/Dave/Google\ Drive/vimwiki ~/vimwiki
+ln -s /mnt/win/Users/Dave/Google\ Drive/Wallpapers ~/Pictures/Wallpapers
+ln -s /mnt/win/Users/Dave/Google\ Drive/3D\ Models ~/Documents/3D\ Models
+ln -s /mnt/win/Users/Dave/Google\ Drive/VLC\ Playlists ~/Music/VLC\ Playlists
+ln -s /mnt/win/Users/Dave/Google\ Drive/Teenage\ Engineering\ OP-1 ~/Music/Teenage\ Engineering\ OP-1
+ln -s /mnt/win/Users/Dave/repos ~/repos
 
 
 # Set up neovim
@@ -125,42 +101,6 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 # Update and initialize plugins
 nvim +PlugInstall +UpdateRemotePlugins +xall
 
-
-# Download themes
-# GTK
-git clone https://github.com/addy-dclxvi/gtk-theme-collections /tmp/gtk-theme-collections
-mv /tmp/gtk-theme-collections/Fantome ~/.themes/Fantome
-rm -rf /tmp/gtk-theme-collections/
-# Openbox
-git clone https://github.com/addy-dclxvi/openbox-theme-collections /tmp/openbox-theme-collections
-mv /tmp/openbox-theme-collections/Triste-Froly ~/.themes/Triste-Froly
-mv /tmp/openbox-theme-collections/Vent ~/.themes/Vent
-rm -rf /tmp/openbox-theme-collections/
-
-
-# Use zsh instead of bash
-chsh -s $(which zsh)
-
-
-################################################################################
-
-
-# Enable gdb-peda
-echo "source ~/peda/peda.py" >> ~/.gdbinit
-
-
-# Set up VMWare
-# Enable these services as desired:
-#sudo systemctl enable vmware-networks.service       # network access
-#sudo systemctl enable vmware-usbarbitrator.service  # connecting USB devices
-#sudo systemctl enable vmware-hostd.service          # sharing virtual machines
-# Lastly, load the VMware modules:
-#sudo modprobe vmw_vmci
-#sudo modprobe vmmon
-# Run 'vmplayer' unless you have a Workstation license key
-
-
-################################################################################
 
 # Done!
 reboot
