@@ -82,6 +82,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   i3-gaps                                                                      \
 \
   picom                                                                        \
+  dunst                                                                        \
   python-pywal  feh                                                            \
   redshift  python-xdg                                                         \
 \

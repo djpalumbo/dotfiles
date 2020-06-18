@@ -4,6 +4,7 @@
 !.bash_profile
 !.bashrc
 !.config/Code/User/settings.json
+!.config/dunst/dunstrc
 !.config/i3/config
 !.config/mimeapps.list
 !.config/mpd/mpd.conf
