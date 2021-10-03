@@ -109,6 +109,32 @@ sed -i -e "$((multilib+1)) s/#//g" /etc/pacman.conf
 sed -i -e "s/#Color/Color/g" /etc/pacman.conf
 
 
+# Set touchpad options (frequently used options @ "Touchpad Synaptics" Arch wiki)
+echo -e "Section \"InputClass\"
+    Identifier \"touchpad\"
+    Driver \"synaptics\"
+    MatchIsTouchpad \"on\"
+        Option \"TapButton1\" \"1\"
+        Option \"TapButton2\" \"3\"
+        Option \"TapButton3\" \"2\"
+        Option \"VertEdgeScroll\" \"on\"
+        Option \"VertTwoFingerScroll\" \"on\"
+        Option \"HorizEdgeScroll\" \"on\"
+        Option \"HorizTwoFingerScroll\" \"on\"
+        Option \"CircularScrolling\" \"on\"
+        Option \"CircScrollTrigger\" \"2\"
+        Option \"EmulateTwoFingerMinZ\" \"40\"
+        Option \"EmulateTwoFingerMinW\" \"8\"
+        Option \"CoastingSpeed\" \"20\"
+        Option \"FingerLow\" \"30\"
+        Option \"FingerHigh\" \"50\"
+        Option \"MaxTapTime\" \"125\"
+        Option \"CircularScrolling\" \"on\"
+        Option \"CircScrollTrigger\" \"0\"
+EndSection" \
+  > /etc/X11/xorg.conf.d/70-synaptics.conf
+
+
 # Make sure everything is up to date
 pacman -Syu
 

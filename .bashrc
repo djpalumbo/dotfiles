@@ -39,7 +39,7 @@ source /usr/share/fzf/completion.bash
 
 # User settings
 export EDITOR=/bin/nvim
-export BROWSER=/bin/chromium
+export BROWSER=/bin/firefox
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g "" -u'
 export FZF_DEFAULT_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200' --bind=tab:up,btab:down"
 alias vim='nvim'

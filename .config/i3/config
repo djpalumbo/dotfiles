@@ -96,8 +96,8 @@ bindsym $super+f exec nemo
 # Open a text editor
 bindsym $alt+v exec --no-startup-id $term -e "zsh -c 'source ~/.zshrc & nvim'"
 # Open a web browser
-bindsym $super+i exec chromium
-bindsym $super+Shift+i exec firefox
+bindsym $super+i exec firefox
+bindsym $super+Shift+i exec chromium
 # Start a program launcher
 bindsym $super+r exec --no-startup-id rofi -show run
 # Start a task manager
