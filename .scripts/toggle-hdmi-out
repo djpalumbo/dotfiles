@@ -1,24 +1,31 @@
 #!/bin/sh
+# Toggle video & audio outputs via the HDMI port, then reload polybar
 
 # Video
-HDMI_OUT=HDMI-1
-DIMENSIONS=1920x1080
+SCREEN_LAPTOP=eDP-1
+SCREEN_HDMI=HDMI-1
 # Audio
 CARD=alsa_card.pci-0000_00_1f.3
 PROFILE_LAPTOP=output:analog-stereo+input:analog-stereo
 PROFILE_HDMI=output:hdmi-stereo-extra1+input:analog-stereo
 
-# Toggle video & audio outputs via the HDMI port, then reload polybar
-if xrandr | grep "$HDMI_OUT connected $DIMENSIONS"; then
-  xrandr --output $HDMI_OUT --off
+if xrandr | grep -E "$SCREEN_HDMI connected [[:digit:]]+x[[:digit:]]+" && pacmd list-cards | grep "active profile: <$PROFILE_HDMI>"; then
+  notify-send "A/V" "HDMI disabled\nVideo and audio via laptop only"
+  xrandr --output $SCREEN_HDMI --off
   pactl set-card-profile $CARD $PROFILE_LAPTOP
-  ~/.config/polybar/launch.sh
-elif xrandr | grep "$HDMI_OUT connected"; then
-  xrandr --output $HDMI_OUT --mode $DIMENSIONS
+elif xrandr | grep -E "$SCREEN_HDMI connected [[:digit:]]+x[[:digit:]]+" && pacmd list-cards | grep "active profile: <$PROFILE_LAPTOP>"; then
+  notify-send "A/V" "Displaying HDMI above laptop screen\nSending audio out to HDMI"
+  xrandr --output $SCREEN_HDMI --auto --above $SCREEN_LAPTOP
   pactl set-card-profile $CARD $PROFILE_HDMI
-  ~/.config/polybar/launch.sh
-else
-  xrandr --output $HDMI_OUT --off
+elif xrandr | grep "$SCREEN_HDMI connected"; then
+  notify-send "A/V" "Displaying HDMI above laptop screen\nSending audio out to laptop"
+  xrandr --output $SCREEN_HDMI --auto --above $SCREEN_LAPTOP
   pactl set-card-profile $CARD $PROFILE_LAPTOP
-  ~/.config/polybar/launch.sh
+else
+  notify-send "A/V" "No HDMI is connected"
+  xrandr --output $SCREEN_HDMI --off
+  pactl set-card-profile $CARD $PROFILE_LAPTOP
 fi
+
+~/.config/polybar/launch.sh
+
