@@ -431,11 +431,6 @@ if has('nvim') " Allow for escape from terminal mode in neovim
   tnoremap <Esc> <C-\><C-n>
 endif
 
-" Terminal-specific keycodes (in insert mode, Ctrl+V then your key combo)
-"if $TERM=~'xterm-termite'
-"  set <S-F6>=<F18>
-"endif
-
 " Make sure all .tex files default to type 'tex' (rather than 'plaintex')
 let g:tex_flavor = "latex"
 

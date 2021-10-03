@@ -16,11 +16,8 @@ setopt autocd extendedglob
 bindkey -v
 # End of lines configured by zsh-newuser-install
 
-# Import/refresh colorscheme from 'wal' (termite)
-if [ $TERM = 'xterm-termite' ]
-then
-  (cat ~/.cache/wal/sequences &)
-fi
+# Import/refresh colorscheme from 'wal'
+(cat ~/.cache/wal/sequences &)
 
 # Use Powerline
 if [ -f `which powerline-daemon` ]; then
@@ -54,3 +51,4 @@ alias syu='curl -s https://www.archlinux.org/feeds/news/ | xmllint --xpath //ite
 
 # Add pip to PATH
 export PATH=/home/dave/.local/bin:$PATH
+

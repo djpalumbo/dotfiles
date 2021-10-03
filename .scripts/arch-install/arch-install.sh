@@ -88,7 +88,7 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   rofi                                                                         \
   i3lock  xss-lock                                                             \
-  termite  powerline                                                           \
+  alacritty  powerline                                                         \
   nemo  nemo-fileroller  nemo-preview                                          \
   lxappearance                                                                 \
 \

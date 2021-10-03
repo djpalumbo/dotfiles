@@ -4,6 +4,7 @@
 !.bash_profile
 !.bashrc
 !.config/Code/User/settings.json
+!.config/alacritty/alacritty.yml
 !.config/dunst/dunstrc
 !.config/i3/config
 !.config/mimeapps.list
@@ -15,7 +16,6 @@
 !.config/ranger/rc.conf
 !.config/ranger/rifle.conf
 !.config/ranger/scope.sh
-!.config/termite/config
 !.scripts/
 !.vimrc
 !.xinitrc

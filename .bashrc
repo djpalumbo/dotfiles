@@ -1,7 +1,3 @@
-#
-# ~/.bashrc
-#
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -15,11 +11,8 @@ complete -cf sudo
 # Line wrap on window resize
 shopt -s checkwinsize
 
-# Import/refresh colorscheme from 'wal' (termite)
-if [ $TERM = 'xterm-termite' ]
-then
-  (cat ~/.cache/wal/sequences &)
-fi
+# Import/refresh colorscheme from 'wal'
+(cat ~/.cache/wal/sequences &)
 
 # Run Powerline
 if [ -f `which powerline-daemon` ]; then
@@ -45,4 +38,7 @@ export FZF_DEFAULT_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat
 alias vim='nvim'
 alias cookie='fortune -s | cowsay -f tux | lolcat'
 alias syu='curl -s https://www.archlinux.org/feeds/news/ | xmllint --xpath //item/title\ \|\ //item/pubDate /dev/stdin | sed -r -e "s:<title>([^<]*?)</title><pubDate>([^<]*?)</pubDate>:\2\t\1\n:g" && yay -Syu'
+
+# Add pip to PATH
+export PATH=/home/dave/.local/bin:$PATH
 

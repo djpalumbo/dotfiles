@@ -135,6 +135,10 @@ EndSection" \
   > /etc/X11/xorg.conf.d/70-synaptics.conf
 
 
+# Force constant device pixel ratio across all screens for Alacritty
+echo "WINIT_X11_SCALE_FACTOR=1.0" >> /etc/environment
+
+
 # Make sure everything is up to date
 pacman -Syu
 
