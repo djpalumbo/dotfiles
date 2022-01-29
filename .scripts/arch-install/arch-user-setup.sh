@@ -21,6 +21,7 @@ yay -S --noconfirm                                                             \
 \
   zscroll-git                                                                  \
   ttf-iosevka  ttf-font-awesome-4  ttf-material-design-icons  ttf-ms-fonts     \
+  fonts-tlwg                                                                   \
   polybar                                                                      \
 \
   insync                                                                       \
