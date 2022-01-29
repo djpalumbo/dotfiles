@@ -74,8 +74,10 @@ pacstrap -i /mnt --noconfirm                                                   \
   xf86-video-nouveau  mesa                                                     \
   xf86-input-synaptics  numlockx                                               \
 \
-  pulseaudio  pulseaudio-alsa  pavucontrol  alsa-utils                         \
-  blueman  pulseaudio-bluetooth                                                \
+  pipewire  wireplumber                                                        \
+  pipewire-alsa  pipewire-pulse  pipewire-jack                                 \
+  pavucontrol  alsa-utils                                                      \
+  blueman                                                                      \
 \
   sddm                                                                         \
 \

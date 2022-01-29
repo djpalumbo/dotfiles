@@ -58,7 +58,7 @@ mode "$tray"
 {
   # These bindings trigger as soon as you enter the tray mode
   # Bluetooth tray icon (using Blueman)
-  bindsym b exec --no-startup-id blueman-applet start, mode "default"
+  bindsym b exec --no-startup-id blueman-applet, mode "default"
   # Sync gdrive folder with cloud
   bindsym i exec --no-startup-id insync start, mode "default"
   # WiFi tray icon (using Network Manager)
