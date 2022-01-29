@@ -115,7 +115,6 @@ pacstrap -i /mnt --noconfirm                                                   \
   openssh                                                                      \
   scrot                                                                        \
 \
-  mpd  mpc                                                                     \
   playerctl                                                                    \
 \
   texlive-most                                                                 \
