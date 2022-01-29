@@ -100,9 +100,9 @@ echo "127.0.1.1	arch.localdomain	arch" >> /etc/hosts
 
 
 # Enable the multilib repository for pacman
-multilib=$(awk "/#\[multilib\]/{ print NR; exit }" /etc/pacman.conf)
-sed -i -e "$multilib s/#//g" /etc/pacman.conf
-sed -i -e "$((multilib+1)) s/#//g" /etc/pacman.conf
+#multilib=$(awk "/#\[multilib\]/{ print NR; exit }" /etc/pacman.conf)
+#sed -i -e "$multilib s/#//g" /etc/pacman.conf
+#sed -i -e "$((multilib+1)) s/#//g" /etc/pacman.conf
 
 
 # Enable color option for pacman
