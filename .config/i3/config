@@ -125,6 +125,11 @@ bindsym $super+Shift+h move left
 bindsym $super+Shift+j move down
 bindsym $super+Shift+k move up
 bindsym $super+Shift+l move right
+# Move focused workspace between monitors
+bindsym $super+Ctrl+Shift+h move workspace to output left
+bindsym $super+Ctrl+Shift+j move workspace to output down
+bindsym $super+Ctrl+Shift+k move workspace to output up
+bindsym $super+Ctrl+Shift+l move workspace to output right
 
 # Border on (see where focus is)
 bindsym $mod+period exec i3-msg border pixel 2
