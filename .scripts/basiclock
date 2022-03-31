@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
 
-tmpbg='/tmp/screen.png'
-
 i3lock -i "$(< "${HOME}/.cache/wal/wal")"

@@ -38,7 +38,7 @@ yay -S --noconfirm                                                             \
 \
   sddm-theme-aerial-git                                                        \
 \
-  bash-pipes  cli-visualizer  cava  bonsai.sh-git                              \
+  bash-pipes  cli-visualizer  cava  cbonsai                                    \
 \
 
 
@@ -81,6 +81,7 @@ git reset --hard origin/master
 # Create user directories
 xdg-user-dirs-update
 mkdir ~/Pictures/Screenshots
+mkdir ~/repos
 # Make the directory structure convenient using symbolic links
 ln -s /mnt/win/Users/Dave ~/dwin
 ln -s /mnt/win/Users/Dave/Google\ Drive ~/gdrive
@@ -89,7 +90,6 @@ ln -s /mnt/win/Users/Dave/Google\ Drive/Wallpapers ~/Pictures/Wallpapers
 ln -s /mnt/win/Users/Dave/Google\ Drive/3D\ Models ~/Documents/3D\ Models
 ln -s /mnt/win/Users/Dave/Google\ Drive/VLC\ Playlists ~/Music/VLC\ Playlists
 ln -s /mnt/win/Users/Dave/Google\ Drive/Teenage\ Engineering\ OP-1 ~/Music/Teenage\ Engineering\ OP-1
-ln -s /mnt/win/Users/Dave/repos ~/repos
 
 
 # Set up neovim

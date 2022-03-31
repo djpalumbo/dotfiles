@@ -134,9 +134,9 @@ cd %:p:h
 " Ignore files of certain types
 let NERDTreeIgnore=['\.bin$', '\.exe$', '\.pdf$', '\.doc$', '\.docx$', '\.odt$',
   \ '\.class$', '\.pptx$', '\.pptm$', '\.xls$', '\.xlsx$', '\.xlsm$', '\.gdoc$',
-  \ '\.gsheet$', '\.gslides$', '\.psd$', '\.png$', '\.svg$', '\.raw$', '\.mp3$',
-  \ '\.jpg$', '\.jpeg$', '\.mp4$', '\.avi$', '\.url$', '\.cap$', 'desktop.ini$',
-  \ '\.blf$', 'Thumbs.db$', 'ntuser.ini$', '\.regtrans-ms$', '\.ogg$', '\.mkv$',
+  \ '\.gsheet$', '\.gslides$', '\.psd$', '\.png$', '\.raw$', '\.mp3$', '\.jpg$',
+  \ '\.jpeg$', '\.mp4$', '\.avi$', '\.url$', '\.cap$', 'desktop.ini$', '\.blf$',
+  \ 'Thumbs.db$', 'ntuser.ini$', '\.regtrans-ms$', '\.ogg$', '\.mkv$',
   \ '\.flac$', '\.webm$', '\.zip$', '\.tar.gz$', '\.rar$', '\.log1$', '\.log2$',
   \ '\.dat$', '\.gif$', '\.dll$']
 
@@ -675,7 +675,7 @@ else
 endif
 
 " Fugitive
-map <leader>gs :Gstatus<CR>
+map <leader>gs :Git<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>gc :Gcommit -m
 map <leader>gp :Gpush<CR>
