@@ -163,6 +163,7 @@ systemctl enable tlp.service
 systemctl enable bluetooth.service
 systemctl enable sddm.service
 #systemctl enable insync@$username.service
+systemctl enable cups
 
 
 # Mask certain systemd services so that TLP power management works correctly

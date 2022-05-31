@@ -103,6 +103,13 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 nvim +PlugInstall +UpdateRemotePlugins +xall
 
 
+# Set up printing (with my old HP Deskjet F4400, hence the hplip package)
+f4400cxn="hp:/usb/Deskjet_F4400_series?serial=CN04OCM1SQ05C5"
+f4400driver=$(lpinfo -m | grep '^drv.*f4400.*ppd' | awk '{print $1}')
+lpadmin -p "HP_Deskjet_F4400_series" -E -v $f4400cxn -m $f4400driver
+lpoptions -d "HP_Deskjet_F4400_series"
+
+
 # Done!
 reboot
 

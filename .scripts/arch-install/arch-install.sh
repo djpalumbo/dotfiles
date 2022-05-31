@@ -102,6 +102,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   libreoffice                                                                  \
   zathura  zathura-pdf-mupdf  zathura-djvu                                     \
   gucharmap                                                                    \
+  cups  hplip                                                                  \
 \
   wget                                                                         \
   ack                                                                          \
