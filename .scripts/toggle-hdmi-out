@@ -2,25 +2,34 @@
 # Toggle video & audio outputs via the HDMI port, then reload polybar
 
 # Video
-SCREEN_LAPTOP=eDP-1
+SCREEN_LAPTOP=eDP-1 # 1920x1080 "preferred" resolution
 SCREEN_HDMI=HDMI-1
 # Audio
 CARD=alsa_card.pci-0000_00_1f.3
 PROFILE_LAPTOP=output:analog-stereo+input:analog-stereo
 PROFILE_HDMI=output:hdmi-stereo-extra1+input:analog-stereo
 
-if xrandr | grep -E "$SCREEN_HDMI connected [[:digit:]]+x[[:digit:]]+" && pactl list cards | grep "Active Profile: $PROFILE_HDMI"; then
-  notify-send "A/V" "HDMI disabled\nVideo and audio via laptop only"
-  xrandr --output $SCREEN_HDMI --off
-  pactl set-card-profile $CARD $PROFILE_LAPTOP
-elif xrandr | grep -E "$SCREEN_HDMI connected [[:digit:]]+x[[:digit:]]+" && pactl list cards | grep "Active Profile: $PROFILE_LAPTOP"; then
-  notify-send "A/V" "Displaying HDMI above laptop screen\nSending audio out to HDMI"
-  xrandr --output $SCREEN_HDMI --auto --above $SCREEN_LAPTOP
-  pactl set-card-profile $CARD $PROFILE_HDMI
-elif xrandr | grep "$SCREEN_HDMI connected"; then
-  notify-send "A/V" "Displaying HDMI above laptop screen\nSending audio out to laptop"
-  xrandr --output $SCREEN_HDMI --auto --above $SCREEN_LAPTOP
-  pactl set-card-profile $CARD $PROFILE_LAPTOP
+if xrandr | grep "$SCREEN_HDMI connected"; then
+  # Use these to vertically center the displays when enabling HDMI output
+  SCREEN_HDMI_WIDTH=`xrandr | grep -A1 $SCREEN_HDMI | tail -1 | grep -Eo '[[:digit:]]+x[[:digit:]]+' | sed -e 's/x[0-9]\+//g'`
+  SCREEN_LAPTOP_X_OFFSET=`echo "(${SCREEN_HDMI_WIDTH} - 1920) / 2" | bc`
+  SCREEN_HDMI_HEIGHT=`xrandr | grep -A1 $SCREEN_HDMI | tail -1 | grep -Eo '[[:digit:]]+x[[:digit:]]+' | sed -e 's/[0-9]\+x//g'`
+
+  if xrandr | grep -E "$SCREEN_HDMI connected [[:digit:]]+x[[:digit:]]+"; then
+    if pactl list cards | grep "Active Profile: $PROFILE_HDMI"; then
+      notify-send "A/V" "HDMI disabled\nVideo and audio via laptop only"
+      xrandr --output $SCREEN_HDMI --off
+      pactl set-card-profile $CARD $PROFILE_LAPTOP
+    elif pactl list cards | grep "Active Profile: $PROFILE_LAPTOP"; then
+      notify-send "A/V" "Displaying HDMI above laptop screen\nSending audio out to HDMI"
+      xrandr --output $SCREEN_HDMI --auto --output $SCREEN_LAPTOP --pos "${SCREEN_LAPTOP_X_OFFSET}x${SCREEN_HDMI_HEIGHT}"
+      pactl set-card-profile $CARD $PROFILE_HDMI
+    fi
+  else
+    notify-send "A/V" "Displaying HDMI above laptop screen\nSending audio out to laptop"
+    xrandr --output $SCREEN_HDMI --auto --output $SCREEN_LAPTOP --pos "${SCREEN_LAPTOP_X_OFFSET}x${SCREEN_HDMI_HEIGHT}"
+    pactl set-card-profile $CARD $PROFILE_LAPTOP
+  fi
 else
   notify-send "A/V" "No HDMI is connected"
   xrandr --output $SCREEN_HDMI --off
