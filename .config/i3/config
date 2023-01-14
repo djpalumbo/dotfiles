@@ -53,7 +53,7 @@ exec_always --no-startup-id dunst
 # Start/stop a tray application
 bindsym $super+Menu mode "$tray"
 
-set $tray (b)lueman,   (i)nsync,   ra(m)box,   (n)etwork manager,   (r)edshift,   (t)ransmission
+set $tray (b)lueman,   (i)nsync,   (n)etwork manager,   (r)edshift,   (t)ransmission
 mode "$tray"
 {
   # These bindings trigger as soon as you enter the tray mode
@@ -63,8 +63,6 @@ mode "$tray"
   bindsym i exec --no-startup-id insync start, mode "default"
   # WiFi tray icon (using Network Manager)
   bindsym n exec --no-startup-id nm-applet, mode "default"
-  # Open messaging application
-  bindsym m exec --no-startup-id rambox, mode "default"
   # Adjust screen brightness/color based on time of day (like f.lux)
   bindsym r exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent, exec --no-startup-id redshift-gtk -t 5500:2625, mode "default"
   # Start torrenting client
@@ -74,7 +72,6 @@ mode "$tray"
   bindsym Shift+b exec --no-startup-id killall blueman-applet, mode "default"
   bindsym Shift+i exec --no-startup-id killall insync, mode "default"
   bindsym Shift+n exec --no-startup-id killall nm-applet, mode "default"
-  bindsym Shift+m exec --no-startup-id killall rambox, mode "default"
   bindsym Shift+r exec --no-startup-id killall redshift-gtk, exec --no-startup-id killall /usr/lib/geoclue-2.0/demos/agent, mode "default"
   bindsym Shift+t exec --no-startup-id killall transmission-daemon, mode "default"
 

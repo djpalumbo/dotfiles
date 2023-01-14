@@ -20,21 +20,16 @@ yay -S --noconfirm                                                             \
   light-git                                                                    \
 \
   zscroll-git                                                                  \
-  ttf-iosevka  ttf-font-awesome-4  ttf-material-design-icons  ttf-ms-fonts     \
+\
   fonts-tlwg                                                                   \
-  polybar                                                                      \
 \
   insync                                                                       \
 \
   vtop                                                                         \
 \
-  universal-ctags-git                                                          \
-\
   chromium-widevine                                                            \
 \
   spotify                                                                      \
-\
-  rambox-bin                                                                   \
 \
   sddm-theme-aerial-git                                                        \
 \

@@ -81,7 +81,9 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   sddm                                                                         \
 \
-  i3-gaps                                                                      \
+  i3-wm                                                                        \
+\
+  polybar  ttf-dejavu  ttf-font-awesome                                        \
 \
   picom                                                                        \
   dunst                                                                        \
@@ -90,7 +92,7 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   rofi                                                                         \
   i3lock  xss-lock                                                             \
-  alacritty  powerline                                                         \
+  alacritty  powerline  ttf-hack-nerd                                          \
   nemo  nemo-fileroller  nemo-preview                                          \
   lxappearance                                                                 \
 \
@@ -127,8 +129,6 @@ pacstrap -i /mnt --noconfirm                                                   \
   aws-cli                                                                      \
 \
   xdg-user-dirs                                                                \
-\
-  ttf-dejavu  ttf-inconsolata  ttf-roboto  ttf-hack                            \
 \
   arc-gtk-theme                                                                \
 \
