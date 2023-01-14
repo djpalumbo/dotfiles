@@ -9,6 +9,8 @@
 !.config/i3/config
 !.config/mimeapps.list
 !.config/mpd/mpd.conf
+!.config/nvim/init.lua
+!.config/nvim/lua
 !.config/picom.conf
 !.config/polybar/config
 !.config/polybar/launch.sh
@@ -17,7 +19,6 @@
 !.config/ranger/rifle.conf
 !.config/ranger/scope.sh
 !.scripts/
-!.vimrc
 !.xinitrc
 !.xlock/
 !.xserverrc

@@ -87,17 +87,6 @@ ln -s /mnt/win/Users/Dave/Google\ Drive/VLC\ Playlists ~/Music/VLC\ Playlists
 ln -s /mnt/win/Users/Dave/Google\ Drive/Teenage\ Engineering\ OP-1 ~/Music/Teenage\ Engineering\ OP-1
 
 
-# Set up neovim
-ln -s ~/.vim ~/.config/nvim
-ln -s ~/.vimrc ~/.config/nvim/init.vim
-alias vim="nvim"
-# Install vim-plug:
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-# Update and initialize plugins
-nvim +PlugInstall +UpdateRemotePlugins +xall
-
-
 # Set up printing (with my old HP Deskjet F4400, hence the hplip package)
 f4400cxn="hp:/usb/Deskjet_F4400_series?serial=CN04OCM1SQ05C5"
 f4400driver=$(lpinfo -m | grep '^drv.*f4400.*ppd' | awk '{print $1}')
