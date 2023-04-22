@@ -105,6 +105,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   zathura  zathura-pdf-mupdf  zathura-djvu                                     \
   gucharmap                                                                    \
   cups  hplip                                                                  \
+  sane  python-pillow                                                          \
 \
   wget                                                                         \
   ack                                                                          \
