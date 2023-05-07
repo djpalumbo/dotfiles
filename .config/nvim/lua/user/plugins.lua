@@ -67,7 +67,6 @@ return require("packer").startup(function(use)
   use "mhinz/vim-startify"
   use "windwp/nvim-autopairs"
   use "bronson/vim-trailing-whitespace"
-  use "vimwiki/vimwiki"
 
   -- Need more? https://github.com/rockerBOO/awesome-neovim
 

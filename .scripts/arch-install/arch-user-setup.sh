@@ -80,7 +80,7 @@ mkdir ~/repos
 # Make the directory structure convenient using symbolic links
 ln -s /mnt/win/Users/Dave ~/dwin
 ln -s /mnt/win/Users/Dave/Google\ Drive ~/gdrive
-ln -s /mnt/win/Users/Dave/Google\ Drive/vimwiki ~/vimwiki
+ln -s /mnt/win/Users/Dave/Google\ Drive/Obsidian\ Vault ~/Obsidian\ Vault
 ln -s /mnt/win/Users/Dave/Google\ Drive/Wallpapers ~/Pictures/Wallpapers
 ln -s /mnt/win/Users/Dave/Google\ Drive/3D\ Models ~/Documents/3D\ Models
 ln -s /mnt/win/Users/Dave/Google\ Drive/VLC\ Playlists ~/Music/VLC\ Playlists
