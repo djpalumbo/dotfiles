@@ -1,8 +1,10 @@
-local status_ok, _ = pcall(require, "lspconfig")
-if not status_ok then
+local mason_status_ok, mason = pcall(require, "mason")
+if not mason_status_ok then
   return
 end
 
-require "user.plugin_setup.lsp.configs"
+mason.setup()
+
+require "user.plugin_setup.lsp.lspconfig"
 require("user.plugin_setup.lsp.handlers").setup()
 require "user.plugin_setup.lsp.null-ls"
