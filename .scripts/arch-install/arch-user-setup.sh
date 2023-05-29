@@ -31,6 +31,8 @@ yay -S --noconfirm                                                             \
 \
   spotify                                                                      \
 \
+  polybar-spotify                                                              \
+\
   sddm-theme-aerial-git                                                        \
 \
   bash-pipes  cli-visualizer  cava  cbonsai                                    \

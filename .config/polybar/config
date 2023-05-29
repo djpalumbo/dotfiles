@@ -53,11 +53,14 @@ font-3 = Font Awesome 6 Free:style=Solid:pixelsize=11;2
 font-2 = Font Awesome 6 Brands:style=Regular:pixelsize=11;2
 
 modules-left = i3
-modules-center = mpd-scroll
+modules-center = spotify spotify-prev spotify-play-pause spotify-next
 modules-right = battery volume backlight-acpi wlan eth date time
 
 tray-position = right
 tray-padding = 3
+
+; required by polybar-spotify
+enable-ipc = true
 
 
 [module/xwindow]
@@ -107,11 +110,32 @@ label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
 
-[module/mpd-scroll]
+[module/spotify]
 type = custom/script
-exec = ~/.config/polybar/mpd-scroll
 tail = true
-interval = 0
+interval = 1
+format-prefix = " "
+format = <label>
+exec = ~/.config/polybar/scripts/scroll_spotify_status.sh
+
+[module/spotify-prev]
+type = custom/script
+exec = echo ""
+format = <label>
+click-left = playerctl previous -p spotify
+
+[module/spotify-play-pause]
+type = custom/ipc
+hook-0 = echo ""
+hook-1 = echo ""
+initial = 1
+click-left = playerctl play-pause -p spotify
+
+[module/spotify-next]
+type = custom/script
+exec = echo ""
+format = <label>
+click-left = playerctl next -p spotify
 
 
 [module/xbacklight]
