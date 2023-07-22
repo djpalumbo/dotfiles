@@ -16,6 +16,7 @@ local servers = {
   "jsonls",
   "lua_ls",
   "pyright",
+  "rust-analyzer",
   "texlab",
   "tsserver",
 }

@@ -58,6 +58,8 @@ return require("packer").startup(function(use)
   use "neovim/nvim-lspconfig"
   use "jose-elias-alvarez/null-ls.nvim"
 
+  use 'simrat39/rust-tools.nvim'
+
   -- Comments
   use "terrortylor/nvim-comment"
 
