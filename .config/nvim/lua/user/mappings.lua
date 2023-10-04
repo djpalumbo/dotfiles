@@ -43,13 +43,6 @@ nmap("<C-S-Left>", ":vertical resize -1<CR>")
 nmap("<C-S-Down>", ":resize +1<CR>")
 nmap("<C-S-Up>", ":resize -1<CR>")
 
--- VISUAL MODE
-vmap("p", '"_dP') -- keep your last paste when you overwrite
-
--- Stay in visual mode when tabbing
-vmap('<', "<gv")
-vmap('>', ">gv")
-
 -- Move text up/down
 vmap("<A-j>", ":m '>+1<CR>gv=gv")
 vmap("<A-k>", ":m '<-2<CR>==gv")
