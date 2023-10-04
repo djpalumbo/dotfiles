@@ -35,7 +35,7 @@ yay -S --noconfirm                                                             \
 \
   sddm-theme-aerial-git                                                        \
 \
-  bash-pipes  cli-visualizer  cava  cbonsai                                    \
+  bash-pipes  cli-visualizer  cbonsai                                          \
 \
 
 
