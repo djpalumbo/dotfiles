@@ -7,7 +7,7 @@ SCREEN_HDMI=HDMI-1
 # Audio
 CARD=alsa_card.pci-0000_00_1f.3
 PROFILE_LAPTOP=output:analog-stereo+input:analog-stereo
-PROFILE_HDMI=output:hdmi-stereo-extra1+input:analog-stereo
+PROFILE_HDMI=output:hdmi-stereo
 
 if xrandr | grep "$SCREEN_HDMI connected"; then
   # Use these to vertically center the displays when enabling HDMI output
