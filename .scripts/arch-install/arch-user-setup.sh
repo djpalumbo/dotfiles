@@ -80,13 +80,13 @@ xdg-user-dirs-update
 mkdir ~/Pictures/Screenshots
 mkdir ~/repos
 # Make the directory structure convenient using symbolic links
-ln -s /mnt/win/Users/Dave ~/dwin
-ln -s /mnt/win/Users/Dave/Google\ Drive ~/gdrive
-ln -s /mnt/win/Users/Dave/Google\ Drive/Obsidian\ Vault ~/Obsidian\ Vault
-ln -s /mnt/win/Users/Dave/Google\ Drive/Wallpapers ~/Pictures/Wallpapers
-ln -s /mnt/win/Users/Dave/Google\ Drive/3D\ Models ~/Documents/3D\ Models
-ln -s /mnt/win/Users/Dave/Google\ Drive/VLC\ Playlists ~/Music/VLC\ Playlists
-ln -s /mnt/win/Users/Dave/Google\ Drive/Teenage\ Engineering\ OP-1 ~/Music/Teenage\ Engineering\ OP-1
+ln -s /mnt/win/Users/dobmu ~/dwin
+ln -s /mnt/win/Users/dobmu/Google\ Drive ~/gdrive
+ln -s /mnt/win/Users/dobmu/Google\ Drive/Readings ~/Documents/Readings
+ln -s /mnt/win/Users/dobmu/Google\ Drive/Music\ Production ~/Music/Music\ Production
+ln -s /mnt/win/Users/dobmu/Google\ Drive/Readings/Manuals/Music ~/Music/Manuals
+ln -s /mnt/win/Users/dobmu/Google\ Drive/Obsidian\ Vault ~/Obsidian\ Vault
+ln -s /mnt/win/Users/dobmu/Google\ Drive/Wallpapers ~/Pictures/Wallpapers
 
 
 # Set up printing (with my old HP Deskjet F4400, hence the hplip package)
