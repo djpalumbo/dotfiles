@@ -10,25 +10,25 @@
 
 
 # Partition the disk if not already done
-# sda1 is boot while sda2-sda4 are Windows
-#   /dev/sda5  |  +24G   |  8200  |  Linux swap
-#   /dev/sda6  |  +48G   |  8304  |  Linux x86-64 root (/)
-#   /dev/sda7  |  (end)  |  8302  |  Linux /home
+# sda1 is boot
+#   /dev/sda2  |  +24G   |  8200  |  Linux swap
+#   /dev/sda3  |  +96G   |  8304  |  Linux x86-64 root (/)
+#   /dev/sda4  |  (end)  |  8302  |  Linux /home
 #gdisk /dev/sda
 
 
 # Create and enable swap
-#mkswap /dev/sda5
-#swapon /dev/sda5
+#mkswap /dev/sda2
+#swapon /dev/sda2
 # Format root and home partitions
-#mkfs.ext4 /dev/sda6
-#mkfs.ext4 /dev/sda7
+#mkfs.ext4 /dev/sda3
+#mkfs.ext4 /dev/sda4
 
 
 # Mount the partitions, creating directories where necessary
-#mount /dev/sda6 /mnt
+#mount /dev/sda3 /mnt
 #mkdir /mnt/home
-#mount /dev/sda7 /mnt/home
+#mount /dev/sda4 /mnt/home
 #mkdir /mnt/boot
 #mount /dev/sda1 /mnt/boot
 
@@ -41,8 +41,11 @@ rm /mnt/boot/intel-ucode.img
 # Make sure WiFi network is accessible
 while [[ "0%" != $(ping -c 3 8.8.8.8 | grep "packet loss" | cut -d " " -f 6) ]]
 do
-  echo -e "Connect to a WiFi network\n"
-  wifi-menu
+  echo -e "Connect to a WiFi network:\n"
+  echo -e "\t[iwd]# device list"
+  echo -e "\t[iwd]# station DEVICE scan"
+  echo -e "\t[iwd]# station DEVICE get-networks"
+  echo -e "\t[iwd]# station DEVICE connect SSID\n"
 done
 
 
@@ -59,14 +62,11 @@ pacstrap -i /mnt --noconfirm                                                   \
   base  linux  linux-firmware                                                  \
   base-devel  linux-headers                                                    \
 \
-  efibootmgr  intel-ucode  ntfs-3g  exfat-utils                                \
-\
-  dhcpcd  dhclient                                                             \
-  networkmanager                                                               \
-  network-manager-applet  gnome-keyring                                        \
-  networkmanager-openconnect                                                   \
+  intel-ucode                                                                  \
 \
   reflector                                                                    \
+\
+  iwd                                                                          \
 \
   tlp                                                                          \
 \
@@ -74,7 +74,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   xf86-video-nouveau  mesa                                                     \
   xf86-input-synaptics  numlockx                                               \
 \
-  pipewire  wireplumber                                                        \
+  pipewire  wireplumber  qpwgraph                                              \
   pipewire-alsa  pipewire-pulse  pipewire-jack                                 \
   pavucontrol  alsa-utils                                                      \
   blueman                                                                      \
@@ -104,8 +104,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   libreoffice                                                                  \
   zathura  zathura-pdf-mupdf  zathura-djvu                                     \
   gucharmap                                                                    \
-  cups  hplip                                                                  \
-  sane  python-pillow                                                          \
+  cups  sane  python-pillow  hplip                                             \
 \
   wget                                                                         \
   ack                                                                          \
@@ -121,6 +120,8 @@ pacstrap -i /mnt --noconfirm                                                   \
   openssh                                                                      \
   scrot                                                                        \
 \
+  ntfs-3g                                                                      \
+\
   playerctl                                                                    \
 \
   texlive-most                                                                 \
@@ -132,6 +133,10 @@ pacstrap -i /mnt --noconfirm                                                   \
   xdg-user-dirs                                                                \
 \
   arc-gtk-theme                                                                \
+\
+  obsidian                                                                     \
+\
+  reaper                                                                       \
 \
   neofetch                                                                     \
   fortune-mod  cowsay  lolcat  cmatrix                                         \

@@ -17,20 +17,15 @@ rm -rf /tmp/yay
 
 # Install packages from the AUR
 yay -S --noconfirm                                                             \
-  light-git                                                                    \
-\
   zscroll-git                                                                  \
+\
+  iwgtk  snixembed                                                             \
 \
   fonts-tlwg                                                                   \
 \
   insync                                                                       \
 \
-  vtop                                                                         \
-\
-  chromium-widevine                                                            \
-\
   spotify                                                                      \
-\
   polybar-spotify                                                              \
 \
   sddm-theme-aerial-git                                                        \
@@ -77,16 +72,16 @@ git reset --hard origin/master
 
 # Create user directories
 xdg-user-dirs-update
+mkdir ~/gdrive
 mkdir ~/Pictures/Screenshots
 mkdir ~/repos
 # Make the directory structure convenient using symbolic links
-ln -s /mnt/win/Users/dobmu ~/dwin
-ln -s /mnt/win/Users/dobmu/Google\ Drive ~/gdrive
-ln -s /mnt/win/Users/dobmu/Google\ Drive/Readings ~/Documents/Readings
-ln -s /mnt/win/Users/dobmu/Google\ Drive/Music\ Production ~/Music/Music\ Production
-ln -s /mnt/win/Users/dobmu/Google\ Drive/Readings/Manuals/Music ~/Music/Manuals
-ln -s /mnt/win/Users/dobmu/Google\ Drive/Obsidian\ Vault ~/Obsidian\ Vault
-ln -s /mnt/win/Users/dobmu/Google\ Drive/Wallpapers ~/Pictures/Wallpapers
+# TODO: Sync ~/gdrive before running these
+#ln -s ~/gdrive/Readings ~/Documents/Readings
+#ln -s ~/gdrive/Music\ Production ~/Music/Music\ Production
+#ln -s ~/gdrive/Readings/Manuals/Music ~/Music/Manuals
+#ln -s ~/gdrive/Obsidian\ Vault ~/Obsidian\ Vault
+#ln -s ~/gdrive/Wallpapers ~/Pictures/Wallpapers
 
 
 # Set up printing (with my old HP Deskjet F4400, hence the hplip package)

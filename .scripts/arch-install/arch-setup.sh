@@ -2,35 +2,30 @@
 
 
 # Use systemd-boot, since it's EFI
-bootctl --path=/boot install
+bootctl install
 # Configure bootloader defaults
-echo -e "default arch\ntimeout 3\neditor 0" > /boot/loader/loader.conf
+echo -e "default arch.conf\nconsole-mode max\neditor 0" > /boot/loader/loader.conf
 
 
 # Copy default arch entry to boot loader entries
 cp /usr/share/systemd/bootctl/arch.conf /boot/loader/entries/
-# Fix options
-sed -i -e "s/rootfstype=XXXX add_efi_memmap/rootfstype=ext4 add_efi_memmap rw/g" /boot/loader/entries/arch.conf
-# Replace UUID with that of the new root partition
-rootpart=$(lsblk | grep "/$" | cut -d " " -f 1 | sed "s/.*s/s/g")
-sed -i -e "s/PARTUUID=XXXX/PARTUUID=$(blkid /dev/$rootpart | cut -d "\"" -f 6)/g" /boot/loader/entries/arch.conf
+# Provide UUID of the new root partition and update to the correct kernel params
+rootpart="/dev/$(lsblk | grep "/$" | cut -d " " -f 1 | sed "s/.*s/s/g")"
+rootuuid=$(blkid $rootpart -o export | grep "^UUID" | cut -d "=" -f 2)
+sed -i "s/options root=.*/options root=UUID=$rootuuid rw acpi_backlight=video/g" /boot/loader/entries/arch.conf
 # Ensure that intel microcode is used
-sed -i -e "/vmlinuz-linux/a initrd  \/intel-ucode.img" /boot/loader/entries/arch.conf
+sed -i "/vmlinuz-linux/a initrd  \/intel-ucode.img" /boot/loader/entries/arch.conf
 
 
 # Enable hibernation
-swappart=$(lsblk | grep "SWAP" | cut -d " " -f 1 | sed "s/.*s/s/g")
-echo "options resume=UUID=$(blkid /dev/$swappart | cut -d "\"" -f 2)" >> /boot/loader/entries/arch.conf
+swappart="/dev/$(lsblk | grep "SWAP" | cut -d " " -f 1 | sed "s/.*s/s/g")"
+swapuuid=$(blkid $swappart -o export | grep "^UUID" | cut -d "=" -f 2)
+echo "options resume=UUID=$swapuuid" >> /boot/loader/entries/arch.conf
 # Configure the initramfs
-sed -i -e "s/^HOOKS.*/HOOKS=\"base udev resume keyboard autodetect modconf block fsck filesystems\"/g" /etc/mkinitcpio.conf
+sed -i "s/^HOOKS.*/HOOKS=(base udev resume autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)/g" /etc/mkinitcpio.conf
 # Rebuild the initramfs
+# Add `-k $(ls /usr/lib/modules | grep arch)` if it fails to find the kernel version
 mkinitcpio -c /etc/mkinitcpio.conf -g /boot/initramfs-linux.img
-
-
-# Allow Arch to see the Windows partition
-# sda3 is primary Windows partition
-mkdir /mnt/win
-echo "/dev/sda3 /mnt/win ntfs-3g defaults 0 0" >> /etc/fstab
 
 
 # Set the root password
@@ -69,13 +64,13 @@ echo -e "User '$username' has been created.\n"
 
 
 # Allow members of 'wheel' group to use sudo
-sed -i -e "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g" /etc/sudoers
+sed -i "s/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g" /etc/sudoers
 
 
 # Set the locale
-sed -i -e 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
+sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
 locale-gen
-echo -e "LANG=\"en_US.UTF-8\"\nLC_ALL=\"en_US.UTF-8\"" > /etc/environment
+#echo -e "LANG=\"en_US.UTF-8\"\nLC_ALL=\"en_US.UTF-8\"" > /etc/environment
 
 
 # Create a hook for every time pacman-mirrorlist upgrades
@@ -93,20 +88,15 @@ Exec = /bin/sh -c \"reflector --country 'United States' --latest 200 --age 24 --
 
 
 # Change the hostname; configure hosts file
-echo "arch" > /etc/hostname
+hostname=arch
+echo "$hostname" > /etc/hostname
 echo "127.0.0.1	localhost" >> /etc/hosts
 echo "::1	localhost" >> /etc/hosts
-echo "127.0.1.1	arch.localdomain	arch" >> /etc/hosts
-
-
-# Enable the multilib repository for pacman
-#multilib=$(awk "/#\[multilib\]/{ print NR; exit }" /etc/pacman.conf)
-#sed -i -e "$multilib s/#//g" /etc/pacman.conf
-#sed -i -e "$((multilib+1)) s/#//g" /etc/pacman.conf
+echo "127.0.1.1	$hostname.localdomain	$hostname" >> /etc/hosts
 
 
 # Enable color option for pacman
-sed -i -e "s/#Color/Color/g" /etc/pacman.conf
+sed -i "s/#Color/Color/g" /etc/pacman.conf
 
 
 # Set touchpad options (frequently used options @ "Touchpad Synaptics" Arch wiki)
@@ -129,8 +119,8 @@ echo -e "Section \"InputClass\"
         Option \"FingerLow\" \"30\"
         Option \"FingerHigh\" \"50\"
         Option \"MaxTapTime\" \"125\"
-        Option \"CircularScrolling\" \"on\"
-        Option \"CircScrollTrigger\" \"0\"
+        Option \"VertScrollDelta\" \"-111\"
+        Option \"HorizScrollDelta\" \"-111\"
 EndSection" \
   > /etc/X11/xorg.conf.d/70-synaptics.conf
 
@@ -144,21 +134,26 @@ pacman -Syu
 
 
 # Limit the amount of logs retained by systemd/journalctl to 64M
-sed -i -e "s/#SystemMaxUse=/SystemMaxUse=64M/g" /etc/systemd/journald.conf
-
-
-# Remove quirky 'man' directory so that universal-ctags (AUR) can install
-# May not be necessary with universal-ctags-git (AUR)... Requires testing
-#rm /usr/local/share/man
+sed -i "s/#SystemMaxUse=/SystemMaxUse=64M/g" /etc/systemd/journald.conf
 
 
 # Load the generic bluetooth driver, if not already loaded
 modprobe btusb
 
 
+# Enable built-in network configuration & resolve DNS with systemd-resolved
+echo -e "[General]
+EnableNetworkConfiguration=true
+
+[Network]
+NameResolvingService=systemd" \
+  > /etc/iwd/main.conf
+ln -sf ../run/systemd/resolve/stub-resolv.conf /mnt/etc/resolv.conf
+
+
 # Start certain daemons on boot
-systemctl enable NetworkManager.service
-systemctl enable wpa_supplicant.service
+systemctl enable systemd-resolved.service
+systemctl enable iwd.service
 systemctl enable tlp.service
 systemctl enable bluetooth.service
 systemctl enable sddm.service
@@ -173,7 +168,7 @@ systemctl mask systemd-rfkill.socket
 
 # Configure SDDM with defaults and theme (installed later via AUR)
 cp -r /usr/lib/sddm/sddm.conf.d /etc/
-sed -i -e "s/Current=/Current=aerial/g" /etc/sddm.conf.d/sddm.conf
+sed -i "s/Current=/Current=aerial/g" /etc/sddm.conf.d/sddm.conf
 
 
 # Switch from root to user

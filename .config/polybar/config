@@ -136,7 +136,7 @@ ramp-4 = %{T2}🌑%{T-}
 [module/backlight-acpi]
 inherit = module/xbacklight
 type = internal/backlight
-card = intel_backlight
+card = acpi_video0
 
 
 [module/cpu]
@@ -157,7 +157,7 @@ label = %percentage_used%%
 
 [module/wlan]
 type = internal/network
-interface = wlp3s0
+interface = wlan0
 interval = 3.0
 
 format-connected = <label-connected>

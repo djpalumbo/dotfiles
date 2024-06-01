@@ -15,8 +15,8 @@ set $locker ~/.scripts/pixlock
 bindsym XF86KbdBrightnessDown exec light -k -U 1
 bindsym XF86KbdBrightnessUp exec light -k -A 1
 # Screen brightness
-bindsym XF86MonBrightnessDown exec light -U 2
-bindsym XF86MonBrightnessUp exec light -A 2
+#bindsym XF86MonBrightnessDown exec light -U 2
+#bindsym XF86MonBrightnessUp exec light -A 2
 # External monitor - Note: $super+p maps to XF86Display (i.e. Fn+F8)
 bindsym $super+p exec --no-startup-id ~/.scripts/toggle-hdmi-out
 # Audio controls
@@ -46,6 +46,8 @@ font pango:DejaVu Sans Mono 11
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 # Notifications
 exec_always --no-startup-id dunst
+# Proxy StatusNotifierItems API as XEmbed API (workaround for iwgtk+polybar)
+exec_always --no-startup-id snixembed
 
 #####################
 # TRAY APPLICATIONS #
@@ -53,7 +55,7 @@ exec_always --no-startup-id dunst
 # Start/stop a tray application
 bindsym $super+Menu mode "$tray"
 
-set $tray (b)lueman,   (i)nsync,   (n)etwork manager,   (r)edshift,   (t)ransmission
+set $tray (b)lueman,   (i)nsync,   i(w)gtk,   (r)edshift,   (t)ransmission
 mode "$tray"
 {
   # These bindings trigger as soon as you enter the tray mode
@@ -62,7 +64,7 @@ mode "$tray"
   # Sync gdrive folder with cloud
   bindsym i exec --no-startup-id insync start, mode "default"
   # WiFi tray icon (using Network Manager)
-  bindsym n exec --no-startup-id nm-applet, mode "default"
+  bindsym w exec --no-startup-id iwgtk -i, mode "default"
   # Adjust screen brightness/color based on time of day (like f.lux)
   bindsym r exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent, exec --no-startup-id redshift-gtk -t 5500:2625, mode "default"
   # Start torrenting client
@@ -71,7 +73,7 @@ mode "$tray"
   # Stop tray applications
   bindsym Shift+b exec --no-startup-id killall blueman-applet, mode "default"
   bindsym Shift+i exec --no-startup-id killall insync, mode "default"
-  bindsym Shift+n exec --no-startup-id killall nm-applet, mode "default"
+  bindsym Shift+w exec --no-startup-id killall iwgtk, mode "default"
   bindsym Shift+r exec --no-startup-id killall redshift-gtk, exec --no-startup-id killall /usr/lib/geoclue-2.0/demos/agent, mode "default"
   bindsym Shift+t exec --no-startup-id killall transmission-daemon, mode "default"
 
@@ -98,8 +100,7 @@ bindsym $super+Shift+i exec chromium
 # Start a program launcher
 bindsym $super+r exec --no-startup-id rofi -show run
 # Start a task manager
-bindsym Ctrl+$alt+Delete exec --no-startup-id $term -e zsh -c 'source ~/.zshrc & vtop'
-bindsym Ctrl+$alt+Shift+Delete exec --no-startup-id $term -e zsh -c 'source ~/.zshrc & htop'
+bindsym Ctrl+$alt+Delete exec --no-startup-id $term -e zsh -c 'source ~/.zshrc & htop'
 # Open a music player
 bindsym $super+m exec spotify
 # Cycle wallpapers and apply new colorscheme
