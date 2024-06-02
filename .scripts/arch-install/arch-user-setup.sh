@@ -67,6 +67,8 @@ git init
 git remote add origin https://github.com/djpalumbo/dotfiles.git
 git fetch --all
 git reset --hard origin/master
+# You'll want to run the following:
+#gh auth login
 
 
 # TODO: Link input peripheral settings

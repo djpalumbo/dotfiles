@@ -110,7 +110,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   ack                                                                          \
   htop  powertop                                                               \
   zsh                                                                          \
-  git  hub                                                                     \
+  git  github-cli                                                              \
   neovim  xclip  python-pynvim                                                 \
   ranger  highlight  atool  w3m                                                \
   fzf  the_silver_searcher                                                     \
