@@ -21,6 +21,8 @@ yay -S --noconfirm                                                             \
 \
   iwgtk  snixembed                                                             \
 \
+  libinput-gestures                                                            \
+\
   fonts-tlwg                                                                   \
 \
   insync                                                                       \
@@ -82,6 +84,10 @@ mkdir ~/repos
 #ln -s ~/gdrive/Readings/Manuals/Music ~/Music/Manuals
 #ln -s ~/gdrive/Obsidian\ Vault ~/Obsidian\ Vault
 #ln -s ~/gdrive/Wallpapers ~/Pictures/Wallpapers
+
+
+# Enable libinput-gestures
+sudo gpasswd -a $USER input
 
 
 # Set up printing (with my old HP Deskjet F4400, hence the hplip package)

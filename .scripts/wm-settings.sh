@@ -19,4 +19,6 @@ wal -i ~/Pictures/Wallpapers -o ~/.scripts/wal-set
 numlockx
 # Lock on system power change
 xss-lock ~/.scripts/basiclock &
+# libinput-gestures
+libinput-gestures-setup start
 
