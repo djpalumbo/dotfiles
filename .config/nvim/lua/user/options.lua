@@ -10,7 +10,7 @@ local options = {
   shiftwidth = 2,
   expandtab = true,
   smarttab = true,
-  autoindent = true,
+  --autoindent = true, -- overridden by smartindent?
   smartindent = true,
 
   -- Folding
