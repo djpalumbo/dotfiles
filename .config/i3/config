@@ -12,8 +12,8 @@ set $locker ~/.scripts/pixlock
 # LAPTOP FUNCTION KEYS #
 ########################
 # Keyboard backlight
-bindsym XF86KbdBrightnessDown exec light -k -U 1
-bindsym XF86KbdBrightnessUp exec light -k -A 1
+#bindsym XF86KbdBrightnessDown exec light -k -U 1
+#bindsym XF86KbdBrightnessUp exec light -k -A 1
 # Screen brightness
 #bindsym XF86MonBrightnessDown exec light -U 2
 #bindsym XF86MonBrightnessUp exec light -A 2
@@ -130,7 +130,7 @@ bindsym $super+Ctrl+Shift+k move workspace to output up
 bindsym $super+Ctrl+Shift+l move workspace to output right
 
 # Border on (see where focus is)
-bindsym $mod+period exec i3-msg border pixel 2
+bindsym $mod+period exec i3-msg border pixel 1
 bindsym --release $mod+period exec i3-msg border pixel 0
 
 # Split in horizontal orientation
