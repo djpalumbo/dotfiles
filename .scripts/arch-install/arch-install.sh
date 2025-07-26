@@ -83,7 +83,7 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   i3-wm                                                                        \
 \
-  polybar  ttf-dejavu  ttf-font-awesome                                        \
+  polybar  ttf-dejavu  woff2-font-awesome                                      \
 \
   picom                                                                        \
   dunst                                                                        \
