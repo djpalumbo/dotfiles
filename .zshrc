@@ -52,3 +52,8 @@ alias syu='curl -s https://www.archlinux.org/feeds/news/ | xmllint --xpath //ite
 # Add pip to PATH
 export PATH=/home/dave/.local/bin:$PATH
 
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+

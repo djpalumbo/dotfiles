@@ -10,7 +10,7 @@ local function vmap(shortcut, command)
   map('v', shortcut, command)
 end
 
-vim.g.mapleader = ','
+-- mapleader is set in options.lua (must load before lazy.nvim)
 
 -- NORMAL MODE
 nmap("0", "^")
@@ -47,16 +47,4 @@ nmap("<C-S-Up>", ":resize -1<CR>")
 vmap("<A-j>", ":m '>+1<CR>gv=gv")
 vmap("<A-k>", ":m '<-2<CR>==gv")
 
--- PLUGINS
-nmap("<C-n>", ":NvimTreeToggle<CR>")
-
-nmap("<leader>ff", ":lua require('telescope.builtin').find_files()<CR>")
-nmap("<leader>fg", ":lua require('telescope.builtin').live_grep()<CR>")
-nmap("<leader>fb", ":lua require('telescope.builtin').buffers()<CR>")
-nmap("<leader>fh", ":lua require('telescope.builtin').help_tags()<CR>")
-
-nmap("<leader>e", ":Startify<CR>")
-
-nmap("<leader>fw", ":FixWhitespace<CR>")
-
-nmap("<leader>fm", ":Format<CR>")
+-- Plugin mappings are defined in plugins.lua and plugin_setup/

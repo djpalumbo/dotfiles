@@ -1,3 +1,5 @@
+vim.g.mapleader = ","
+
 local options = {
   termguicolors = true,
   number = true,

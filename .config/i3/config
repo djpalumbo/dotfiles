@@ -90,17 +90,17 @@ mode "$tray"
 # Start a terminal
 bindsym $alt+t exec $term
 # Open a file explorer
-bindsym $alt+f exec --no-startup-id $term -e zsh -c 'source ~/.zshrc & ranger'
+bindsym $alt+f exec --no-startup-id $term -e zsh -c 'source ~/.zshrc && ranger'
 bindsym $super+f exec nemo
 # Open a text editor
-bindsym $alt+v exec --no-startup-id $term -e zsh -c 'source ~/.zshrc & nvim'
+bindsym $alt+v exec --no-startup-id $term -e zsh -c 'source ~/.zshrc && nvim'
 # Open a web browser
 bindsym $super+i exec firefox
 bindsym $super+Shift+i exec chromium
 # Start a program launcher
 bindsym $super+r exec --no-startup-id rofi -show run
 # Start a task manager
-bindsym Ctrl+$alt+Delete exec --no-startup-id $term -e zsh -c 'source ~/.zshrc & htop'
+bindsym Ctrl+$alt+Delete exec --no-startup-id $term -e zsh -c 'source ~/.zshrc && htop'
 # Open a music player
 bindsym $super+m exec spotify
 # Cycle wallpapers and apply new colorscheme
