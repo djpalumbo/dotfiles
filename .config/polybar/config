@@ -44,13 +44,12 @@ border-color = #00000000
 padding-left = 0
 padding-right = 0
 
-module-margin-left = 1
-module-margin-right = 1
+module-margin = 1
 
 font-0 = DejaVu Sans:style=Regular:pixelsize=11:antialias=true;3
 font-1 = Font Awesome 7 Free:style=Regular:pixelsize=11;2
-font-3 = Font Awesome 7 Free:style=Solid:pixelsize=11;2
 font-2 = Font Awesome 7 Brands:style=Regular:pixelsize=11;2
+font-3 = Font Awesome 7 Free:style=Solid:pixelsize=11;2
 
 modules-left = i3
 modules-center = spotify
@@ -63,15 +62,6 @@ tray-padding = 3
 enable-ipc = true
 
 
-;[module/pipewire]
-;type = custom/script
-;label = %output%
-;interval = 2
-;exec = exec echo "$(wpctl get-volume @DEFAULT_SINK@ | cut -d " " -f 2) * 100 / 1" | bc
-;click-right = exec pavucontrol &
-;click-left = wpctl set-mute @DEFAULT_SINK@ toggle &
-;scroll-up = wpctl set-volume @DEFAULT_SINK@ 0.02- &
-;scroll-down = wpctl set-volume @DEFAULT_SINK@ 0.02+ &
 
 
 [module/xwindow]
@@ -209,11 +199,11 @@ label =   %time%
 
 
 [module/volume]
-type = internal/alsa
+type = internal/pulseaudio
 
 format-volume = <label-volume>
 label-volume =  %percentage%%
-label-volume-foreground = ${root.foreground}
+label-volume-foreground = ${colors.foreground}
 
 label-muted =  Muted
 
