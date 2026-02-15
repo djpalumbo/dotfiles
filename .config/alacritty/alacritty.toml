@@ -16,3 +16,8 @@ style = "Italic"
 [font.normal]
 family = "Hack Nerd Font"
 style = "Regular"
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001b\r"
