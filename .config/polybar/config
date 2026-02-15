@@ -63,6 +63,17 @@ tray-padding = 3
 enable-ipc = true
 
 
+;[module/pipewire]
+;type = custom/script
+;label = %output%
+;interval = 2
+;exec = exec echo "$(wpctl get-volume @DEFAULT_SINK@ | cut -d " " -f 2) * 100 / 1" | bc
+;click-right = exec pavucontrol &
+;click-left = wpctl set-mute @DEFAULT_SINK@ toggle &
+;scroll-up = wpctl set-volume @DEFAULT_SINK@ 0.02- &
+;scroll-down = wpctl set-volume @DEFAULT_SINK@ 0.02+ &
+
+
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:30:...%

@@ -20,9 +20,9 @@ set $locker ~/.scripts/pixlock
 # External monitor - Note: $super+p maps to XF86Display (i.e. Fn+F8)
 bindsym $super+p exec --no-startup-id ~/.scripts/toggle-hdmi-out
 # Audio controls
-bindsym XF86AudioMute exec amixer sset Master toggle
-bindsym XF86AudioLowerVolume exec amixer sset Master 2%-
-bindsym XF86AudioRaiseVolume exec amixer sset Master 2%+
+bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_SINK@ 0.02-
+bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_SINK@ 0.02+
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86AudioNext exec --no-startup-id playerctl next
