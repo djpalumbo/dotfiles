@@ -97,7 +97,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   lxappearance                                                                 \
 \
   chromium  firefox                                                            \
-  vlc  libmicrodns  protobuf                                                   \
+  vlc  libmicrodns  protobuf  vlc-plugin-ffmpeg                                \
   code                                                                         \
   gimp  inkscape                                                               \
   audacity                                                                     \
