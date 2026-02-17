@@ -31,6 +31,15 @@ fi
 # Short delay to change mode after hitting Esc key
 export KEYTIMEOUT=1
 
+# Up/down arrow keys filter history by typed prefix
+autoload -U up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey -M viins "^[[A" up-line-or-beginning-search
+bindkey -M viins "^[[B" down-line-or-beginning-search
+bindkey -M vicmd "^[[A" up-line-or-beginning-search
+bindkey -M vicmd "^[[B" down-line-or-beginning-search
+
 # Settings via .Xresources
 export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
 bindkey ';5D' backward-word
