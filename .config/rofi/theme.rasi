@@ -1,0 +1,22 @@
+@import "~/.cache/wal/colors-rofi-dark.rasi"
+
+window {
+    width:        25%;
+    border:        2px;
+    border-color:  @foreground;
+    border-radius: 8px;
+    padding:       2ch;
+}
+
+listview {
+    lines: 8;
+}
+
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+element-icon {
+    background-color: inherit;
+}

@@ -6,6 +6,9 @@
 !.config/Code/User/settings.json
 !.config/alacritty/alacritty.yml
 !.config/dunst/dunstrc
+!.config/rofi/config.rasi
+!.config/rofi/theme.rasi
+!.config/wal/templates/dunstrc
 !.config/i3/config
 !.config/mimeapps.list
 !.config/mpd/mpd.conf
