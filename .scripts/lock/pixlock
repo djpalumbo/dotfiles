@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+icon="$HOME/.xlock/icon.png"
+cache="$HOME/.cache/pixlock.png"
+
+if [[ "$1" == "prepare" ]]; then
+    tmp="$(mktemp /tmp/pixlock-XXXXXX.png)"
+    scrot -o "$tmp"
+    convert "$tmp" -scale 10% -scale 1000% "$tmp"
+    convert "$tmp" "$icon" -gravity center -composite -matte "$tmp"
+    mv "$tmp" "$cache"
+    exit 0
+fi
+
+# Use the pre-rendered image if available (from presuspend),
+# otherwise capture a fresh screenshot (e.g. for manual/idle locks)
+if [[ -f "$cache" ]]; then
+    tmpbg="$cache"
+else
+    tmpbg="$(mktemp /tmp/pixlock-XXXXXX.png)"
+    scrot -o "$tmpbg"
+    convert "$tmpbg" -scale 10% -scale 1000% "$tmpbg"
+    convert "$tmpbg" "$icon" -gravity center -composite -matte "$tmpbg"
+fi
+
+i3lock -n -u -i "$tmpbg"
+
+if [[ "$tmpbg" == "$cache" ]]; then
+    rm -f "$cache"
+else
+    rm -f "$tmpbg"
+fi

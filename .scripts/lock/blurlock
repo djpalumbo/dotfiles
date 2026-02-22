@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+cache="$HOME/.cache/blurlock.png"
+
+if [[ "$1" == "prepare" ]]; then
+    tmp="$(mktemp /tmp/blurlock-XXXXXX.png)"
+    scrot -o "$tmp"
+    convert "$tmp" -blur 0x5 "$tmp"
+    mv "$tmp" "$cache"
+    exit 0
+fi
+
+# Use the pre-rendered image if available (from presuspend),
+# otherwise capture a fresh screenshot (e.g. for manual/idle locks)
+if [[ -f "$cache" ]]; then
+    tmpbg="$cache"
+else
+    tmpbg="$(mktemp /tmp/blurlock-XXXXXX.png)"
+    scrot -o "$tmpbg"
+    convert "$tmpbg" -blur 0x5 "$tmpbg"
+fi
+
+i3lock -n -i "$tmpbg"
+
+if [[ "$tmpbg" == "$cache" ]]; then
+    rm -f "$cache"
+else
+    rm -f "$tmpbg"
+fi

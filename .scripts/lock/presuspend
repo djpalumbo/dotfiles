@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+locker="$1"
+action="${2:-suspend}"
+
+"$locker" prepare
+
+systemctl "$action"

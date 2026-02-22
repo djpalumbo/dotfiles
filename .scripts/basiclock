@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-i3lock -i "$(< "${HOME}/.cache/wal/wal")"
