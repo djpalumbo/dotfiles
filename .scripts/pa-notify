@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Notify via dunst when the default PulseAudio/PipeWire sink changes
+
+prev=""
+pactl subscribe | while read -r line; do
+    if [[ "$line" == *"change' on server"* ]]; then
+        current=$(pactl get-default-sink)
+        if [[ "$current" != "$prev" ]]; then
+            prev="$current"
+            desc=$(pactl list sinks | awk "/Name: $current/{found=1} found && /Description:/{sub(/.*Description: /, \"\"); print; exit}")
+            notify-send "Audio" "Default output: $desc"
+        fi
+    fi
+done

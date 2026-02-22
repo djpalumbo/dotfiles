@@ -21,4 +21,6 @@ numlockx
 xss-lock -l -- "${1:-${HOME}/.scripts/lock/basiclock}" &
 # libinput-gestures
 libinput-gestures-setup start
+# Notify when default audio output changes
+~/.scripts/pa-notify &
 
