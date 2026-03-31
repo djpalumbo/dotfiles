@@ -84,6 +84,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   i3-wm                                                                        \
 \
   polybar  ttf-dejavu  woff2-font-awesome                                      \
+  noto-fonts-emoji                                                             \
 \
   picom                                                                        \
   dunst                                                                        \
