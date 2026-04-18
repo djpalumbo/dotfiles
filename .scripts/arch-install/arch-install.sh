@@ -125,7 +125,7 @@ pacstrap -i /mnt --noconfirm                                                   \
 \
   playerctl                                                                    \
 \
-  texlive-most                                                                 \
+  texlive                                                                      \
 \
   transmission-cli                                                             \
 \
