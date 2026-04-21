@@ -35,6 +35,8 @@ exmap surround_curly_brackets surround { }
 vmap S} :surround_curly_brackets<CR>
 exmap surround_pointy_brackets surround < >
 vmap S> :surround_pointy_brackets<CR>
+exmap surround_tildes surround ~ ~
+vmap S~ :surround_tildes<CR>
 
 " Folding
 exmap fm obcommand editor:fold-more
