@@ -61,6 +61,7 @@ vim /etc/pacman.d/mirrorlist
 pacstrap -i /mnt --noconfirm                                                   \
   base  linux  linux-firmware                                                  \
   base-devel  linux-headers                                                    \
+  smartmontools                                                                \
 \
   intel-ucode                                                                  \
 \
