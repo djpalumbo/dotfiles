@@ -7,13 +7,13 @@ local options = {
   mouse = 'a', -- enable mouse in all modes
   history = 1000,
 
-  -- Tabbing & indentation
+  -- Tabbing, indentation & wrapping
   tabstop = 2,
   shiftwidth = 2,
   expandtab = true,
   smarttab = true,
-  --autoindent = true, -- overridden by smartindent?
   smartindent = true,
+  linebreak = true,
 
   -- Folding
   foldmethod = "indent",
