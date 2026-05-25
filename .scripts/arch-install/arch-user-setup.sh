@@ -32,7 +32,7 @@ yay -S --noconfirm                                                             \
 \
   sddm-theme-aerial-git                                                        \
 \
-  bash-pipes  cli-visualizer  cbonsai                                          \
+  bash-pipes  cli-visualizer  cbonsai  unimatrix                               \
 \
 
 

@@ -141,7 +141,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   reaper                                                                       \
 \
   neofetch                                                                     \
-  fortune-mod  cowsay  lolcat  cmatrix                                         \
+  fortune-mod  cowsay  lolcat                                                  \
 \
 
 
