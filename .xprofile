@@ -1,0 +1,7 @@
+# Sourced by SDDM (and most display managers) before the session starts.
+# Use this for session-wide env vars; .xinitrc is only read by `startx`.
+
+# Input method (IBus) - needed for Ctrl+Shift+U Unicode input in non-GTK apps like Alacritty
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus

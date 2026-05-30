@@ -23,4 +23,6 @@ xss-lock -l -- "${1:-${HOME}/.scripts/lock/basiclock}" &
 libinput-gestures-setup start
 # Notify when default audio output changes
 ~/.scripts/pa-notify &
+# IBus daemon for Unicode/IM input (Ctrl+Shift+U in Alacritty)
+ibus-daemon -drx &
 
