@@ -69,6 +69,7 @@ require("lazy").setup({
     end,
   },
   { "nvim-telescope/telescope-media-files.nvim" },
+  { "jghauser/follow-md-links.nvim" },
 
   -- Syntax
   {
@@ -143,7 +144,7 @@ require("lazy").setup({
 
   -- Music
   {
-    "garyburd/norns.nvim",
+    "djpalumbo/norns.nvim",
     config = function()
       require("user.plugin_setup.norns")
     end,
