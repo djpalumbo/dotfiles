@@ -27,9 +27,9 @@ nmap("<A-k>", "<Esc>:m .-2<CR>==", "Move: Line up")
 -- Buffer creation/destruction
 nmap("<leader>bn", ":enew<CR>", "Buffer: New")
 nmap("<leader>bd", ":bdelete!<CR>", "Buffer: Delete")
--- Buffer navigation
-nmap("L", ":bnext<CR>", "Buffer: Next")
-nmap("H", ":bprevious<CR>", "Buffer: Previous")
+-- Buffer navigation (by buffer number, not tabline order)
+nmap("<leader>l", ":bnext<CR>", "Buffer: Next (by buffer number)")
+nmap("<leader>h", ":bprevious<CR>", "Buffer: Previous (by buffer number)")
 
 -- Window management
 nmap("<leader>sh", ":split<CR>", "Window: Split horizontal")

@@ -17,6 +17,23 @@ require("lazy").setup({
   {
     "romgrk/barbar.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = "VeryLazy",
+    keys = {
+      { "<C-S-Tab>", function() vim.cmd(vim.v.count1 .. "BufferPrevious") end, desc = "Buffer: Previous" },
+      { "<C-Tab>", function() vim.cmd(vim.v.count1 .. "BufferNext") end, desc = "Buffer: Next" },
+      { "<C-S-,><C-S-,>", function() require("barbar.api").move_current_buffer(-vim.v.count1) end, desc = "Buffer: Move previous" },
+      { "<C-S-.><C-S-.>", function() require("barbar.api").move_current_buffer(vim.v.count1) end, desc = "Buffer: Move next" },
+      { "<A-1>", "<cmd>BufferGoto 1<CR>", desc = "Buffer: Goto 1" },
+      { "<A-2>", "<cmd>BufferGoto 2<CR>", desc = "Buffer: Goto 2" },
+      { "<A-3>", "<cmd>BufferGoto 3<CR>", desc = "Buffer: Goto 3" },
+      { "<A-4>", "<cmd>BufferGoto 4<CR>", desc = "Buffer: Goto 4" },
+      { "<A-5>", "<cmd>BufferGoto 5<CR>", desc = "Buffer: Goto 5" },
+      { "<A-6>", "<cmd>BufferGoto 6<CR>", desc = "Buffer: Goto 6" },
+      { "<A-7>", "<cmd>BufferGoto 7<CR>", desc = "Buffer: Goto 7" },
+      { "<A-8>", "<cmd>BufferGoto 8<CR>", desc = "Buffer: Goto 8" },
+      { "<A-9>", "<cmd>BufferGoto 9<CR>", desc = "Buffer: Goto 9" },
+      { "<A-0>", "<cmd>BufferLast<CR>", desc = "Buffer: Last" },
+    },
   },
   {
     "nvim-lualine/lualine.nvim",
