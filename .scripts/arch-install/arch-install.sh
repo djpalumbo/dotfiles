@@ -81,6 +81,9 @@ pacstrap -i /mnt --noconfirm                                                   \
   blueman                                                                      \
 \
   sddm                                                                         \
+  qt5-multimedia  qt5-graphicaleffects  qt5-quickcontrols                      \
+  gst-plugins-good  gst-libav  phonon-qt5-gstreamer                            \
+  intel-media-driver  gst-plugin-va  libva-utils                               \
 \
   i3-wm                                                                        \
 \

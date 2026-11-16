@@ -30,8 +30,6 @@ yay -S --noconfirm                                                             \
   spotify                                                                      \
   polybar-spotify                                                              \
 \
-  sddm-theme-aerial-git                                                        \
-\
   bash-pipes  cli-visualizer  cbonsai  unimatrix                               \
 \
 
@@ -86,6 +84,16 @@ mkdir ~/repos
 #ln -s ~/gdrive/Readings/Manuals/Music ~/Music/Manuals
 #ln -s ~/gdrive/Obsidian\ Vault ~/Obsidian\ Vault
 #ln -s ~/gdrive/Wallpapers ~/Pictures/Wallpapers
+
+
+# Install the aerial-fade SDDM login theme from the dotfiles
+sudo ~/.scripts/aerial-fade/install
+read -p "Download aerial login videos now (5 videos, ~0.5-1 GB)? (y/n) " fetch
+if [[ $fetch == y || $fetch == Y ]]; then
+  ~/.scripts/aerial-fetch 5
+else
+  echo "Skipped; the login screen stays black until you run ~/.scripts/aerial-fetch"
+fi
 
 
 # Enable libinput-gestures

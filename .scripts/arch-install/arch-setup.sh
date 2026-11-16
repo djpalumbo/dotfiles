@@ -166,9 +166,9 @@ systemctl mask systemd-rfkill.service
 systemctl mask systemd-rfkill.socket
 
 
-# Configure SDDM with defaults and theme (installed later via AUR)
+# Copy SDDM's default config for local changes. The aerial-fade theme is
+# installed (and selected) from the dotfiles by arch-user-setup.sh.
 cp -r /usr/lib/sddm/sddm.conf.d /etc/
-sed -i "s/Current=/Current=aerial/g" /etc/sddm.conf.d/sddm.conf
 
 
 # Switch from root to user

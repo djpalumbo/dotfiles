@@ -1,0 +1,45 @@
+#!/bin/bash
+# Install the aerial-fade SDDM theme from this directory. Run with sudo.
+# Re-running updates the theme files and keeps downloaded videos.
+set -euo pipefail
+
+[[ $EUID -eq 0 && -n ${SUDO_USER:-} ]] || { echo "Run as: sudo $0" >&2; exit 1; }
+
+src=$(dirname "$(readlink -f "$0")")/theme
+dest=/usr/share/sddm/themes/aerial-fade
+user_home=$(getent passwd "$SUDO_USER" | cut -d: -f6)
+user_group=$(id -gn "$SUDO_USER")
+
+# Rebuild the theme dir from scratch so files removed upstream don't linger,
+# carrying over the downloaded videos and their playlist.
+new=$(mktemp -d /usr/share/sddm/themes/.aerial-fade.XXXXXX)
+cp -r "$src/." "$new/"
+if [[ -d $dest/videos ]]; then mv "$dest/videos" "$new/videos"; else mkdir "$new/videos"; fi
+[[ -f $dest/playlists/local.m3u ]] && mv "$dest/playlists/local.m3u" "$new/playlists/local.m3u"
+touch "$new/playlists/local.m3u"
+chmod -R u=rwX,go=rX "$new"
+chown -R "$SUDO_USER:$user_group" "$new/videos" "$new/playlists/local.m3u"
+if [[ -e $dest ]]; then mv "$dest" "$new.old"; fi
+mv "$new" "$dest"
+rm -rf "$new.old"
+echo "Installed theme to $dest"
+
+# The greeter runs as the sddm user and can't read $HOME, so the videos live
+# in the theme dir; link them into ~/Videos for easy access.
+sudo -u "$SUDO_USER" mkdir -p "$user_home/Videos"
+sudo -u "$SUDO_USER" ln -sfn "$dest/videos" "$user_home/Videos/aerial-sddm-theme"
+sudo -u "$SUDO_USER" python3 -I "$dest/scripts/download-videos.py" --playlist-only
+
+# Select the theme, and make GStreamer prefer the VA-API H.264 decoder over
+# software decoding (on this hybrid-GPU laptop it registers as
+# varenderD129h264dec and otherwise loses to avdec_h264).
+rank='GST_PLUGIN_FEATURE_RANK=avdec_h264:SECONDARY'
+conf=/etc/sddm.conf.d/default.conf
+if [[ -f $conf ]]; then
+  sed -i "s/^Current=.*/Current=aerial-fade/; s/^GreeterEnvironment=.*/GreeterEnvironment=$rank/" "$conf"
+else
+  mkdir -p /etc/sddm.conf.d
+  conf=/etc/sddm.conf.d/aerial-fade.conf
+  printf '[General]\nGreeterEnvironment=%s\n\n[Theme]\nCurrent=aerial-fade\n' "$rank" > "$conf"
+fi
+grep -E '^(Current|GreeterEnvironment)=' "$conf" | sed "s|^|$conf: |"

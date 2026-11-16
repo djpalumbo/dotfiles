@@ -1,0 +1,20 @@
+[General]
+dayTimeStart=7
+dayTimeEnd=19
+; Local videos (fetched with ~/.scripts/aerial-fetch); no image, fade in from black
+bgImgDay=none
+bgImgNight=none
+bgVidDay=playlists/local.m3u
+bgVidNight=playlists/local.m3u
+fadeInDuration=2500
+displayFont="Misc Fixed"
+boldFont=false
+dateFormat="dddd, MMMM d, yyyy"
+actionBarFontColor="#505050"
+passwordLeftMargin=15
+usernameLeftMargin=15
+relativePositionX=0.5
+relativePositionY=0.75
+showLoginButton=false
+showTopBar=true
+autofocusInput=true
