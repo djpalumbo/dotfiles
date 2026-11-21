@@ -69,6 +69,28 @@ git reset --hard origin/master
 #gh auth login
 
 
+# Save an approximate location for sunrise/sunset times (redshift, darkman). It
+# stays out of the dotfiles repo; two decimal places is plenty.
+echo
+read -p "Latitude (e.g. 47.61)? " lat
+read -p "Longitude (e.g. -122.34, negative = west)? " lng
+confirm=n
+while [[ $confirm != y && $confirm != Y ]]; do
+  read -p "'$lat, $lng'? Is that right? (y/n) " confirm
+  if [[ $confirm != y && $confirm != Y ]]; then
+    echo; read -p "Latitude? " lat; read -p "Longitude? " lng
+  fi
+done
+mkdir -p ~/.config
+cat > ~/.config/location <<EOF
+# Approximate location, for sunrise/sunset times. Untracked; written by
+# ~/.scripts/arch-install/arch-user-setup.sh.
+LAT=$lat
+LNG=$lng
+EOF
+echo -e "Location saved to ~/.config/location.\n"
+
+
 # TODO: Link input peripheral settings
 
 
