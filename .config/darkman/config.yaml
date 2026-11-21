@@ -1,0 +1,4 @@
+# Location comes from ~/.config/location via ~/.scripts/theme/darkman-run, and only in
+# auto mode (see ~/.scripts/theme/).
+usegeoclue: false
+portal: true

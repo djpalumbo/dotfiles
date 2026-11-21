@@ -94,6 +94,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   dunst                                                                        \
   python-pywal  feh                                                            \
   redshift  python-xdg                                                         \
+  darkman  xsettingsd  jq                                                      \
 \
   rofi                                                                         \
   i3lock  xss-lock                                                             \

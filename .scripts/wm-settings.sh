@@ -8,9 +8,14 @@ picom -b
 if xrandr | grep -E "HDMI-1 connected [[:digit:]]+x[[:digit:]]+"; then
   xrandr --output HDMI-1 --auto --above eDP-1
 fi
-# Set desktop wallpaper and terminal colorscheme (set via ~/.wallpaper).
+# XSETTINGS daemon, so running GTK3 apps follow light/dark theme changes
+command -v xsettingsd >/dev/null && xsettingsd &
+# Light/dark theme: darkman runs ~/.scripts/theme/apply, which sets a matching
+# wallpaper + wal colorscheme (see ~/.scripts/theme/). Restarting re-runs its
+# hook; clearing the marker makes it apply for this new session.
 # Also, note the (cat ~/.cache/wal/sequences &) in .bashrc & .zshrc
-wal -i ~/Pictures/Wallpapers -o ~/.scripts/wal-set
+rm -f "${XDG_RUNTIME_DIR}/theme-applied"
+systemctl --user restart darkman || wal -i ~/Pictures/Wallpapers -o ~/.scripts/theme/wal-set
 
 ####################
 # STARTUP SETTINGS #

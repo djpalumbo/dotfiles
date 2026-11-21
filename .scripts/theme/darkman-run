@@ -1,0 +1,11 @@
+#!/bin/sh
+# ExecStart for darkman.service (see ~/.config/systemd/user/darkman.service.d/).
+# Passes the location from ~/.config/location only in auto mode; without one,
+# darkman keeps its last mode and schedules no transitions.
+
+mode=$(cat "${XDG_STATE_HOME:-$HOME/.local/state}/theme-mode" 2>/dev/null)
+if [ "${mode:-auto}" = auto ] && [ -r "$HOME/.config/location" ]; then
+  . "$HOME/.config/location"
+  export DARKMAN_LAT="$LAT" DARKMAN_LNG="$LNG"
+fi
+exec /usr/bin/darkman run "$@"

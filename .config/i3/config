@@ -84,6 +84,23 @@ mode "$tray"
   bindsym q mode "default"
 }
 
+# Choose light/dark theme (see ~/.scripts/theme/)
+bindsym $super+t mode "$theme"
+
+set $theme (a)uto,   (l)ight,   (d)ark
+mode "$theme"
+{
+  bindsym a exec --no-startup-id ~/.scripts/theme/mode set auto, mode "default"
+  bindsym l exec --no-startup-id ~/.scripts/theme/mode set light, mode "default"
+  bindsym d exec --no-startup-id ~/.scripts/theme/mode set dark, mode "default"
+
+  # Back to normal
+  bindsym $super+t mode "default"
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym q mode "default"
+}
+
 ###########
 # GENERAL #
 ###########
@@ -103,8 +120,8 @@ bindsym $super+r exec --no-startup-id rofi -show run
 bindsym Ctrl+$alt+Delete exec --no-startup-id $term -e zsh -c 'source ~/.zshrc && htop'
 # Open a music player
 bindsym $super+m exec spotify
-# Cycle wallpapers and apply new colorscheme
-bindsym $super+w exec wal -i ~/Pictures/Wallpapers -o ~/.scripts/wal-set
+# New wallpaper + colorscheme for the current light/dark mode
+bindsym $super+w exec --no-startup-id ~/.scripts/theme/mode wallpaper
 # Take a screenshot
 bindsym $super+Print exec --no-startup-id scrot -e 'mv $f ~/Pictures/Screenshots/'
 

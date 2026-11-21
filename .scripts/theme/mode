@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# Choose between automatic (sunrise/sunset) and forced light/dark themes.
+#
+#   mode                     print the setting: auto, light, or dark
+#   mode set auto|light|dark
+#   mode wallpaper           new random wallpaper for the current mode
+#
+# darkman does the scheduling. In auto mode ./darkman-run hands it the location
+# from ~/.config/location; in forced modes it runs without one, which disables
+# its automatic transitions, and the forced mode is set explicitly.
+
+set -euo pipefail
+
+HERE=$(dirname "$(readlink -f "$0")")
+STATE="${XDG_STATE_HOME:-${HOME}/.local/state}/theme-mode"
+
+setting() {
+  local s
+  s=$(cat "$STATE" 2>/dev/null || true)
+  case $s in light|dark) echo "$s" ;; *) echo auto ;; esac
+}
+
+# The mode ./apply last applied; avoids querying darkman mid-transition
+current() {
+  cat "${XDG_RUNTIME_DIR:-/tmp}/theme-applied" 2>/dev/null || darkman get 2>/dev/null || echo dark
+}
+
+set_mode() {
+  local m=$1
+  [[ $m == auto || $m == light || $m == dark ]] || { echo "unknown mode: $m" >&2; exit 2; }
+  mkdir -p "$(dirname "$STATE")"
+  echo "$m" > "$STATE"
+  # Restart so darkman-run (re)applies or drops the location
+  systemctl --user restart darkman
+  [[ $m == auto ]] || darkman set "$m"
+}
+
+case ${1:-get} in
+  get) setting ;;
+  set) set_mode "${2:-}" ;;
+  wallpaper) "$HERE/apply" --force "$(current)" ;;
+  *) sed -n '2,7s/^# \?//p' "$0" >&2; exit 2 ;;
+esac

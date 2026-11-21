@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+# Apply a light or dark theme: a matching wallpaper + pywal palette, and GTK.
+#
+#   apply [--force] light|dark
+#
+# Called by darkman on every transition (~/.local/share/darkman/theme), and by
+# ./mode. Without --force it's a no-op if that mode is already
+# applied this session, since darkman re-runs its hooks whenever it restarts.
+#
+# Wallpapers are picked from ~/Pictures/Wallpapers/wallpapers.json, which maps
+# each filename to "light", "dark", or "both".
+
+set -euo pipefail
+
+WALLDIR="${HOME}/Pictures/Wallpapers"
+WALLLIST="${WALLDIR}/wallpapers.json"
+RUNDIR="${XDG_RUNTIME_DIR:-/tmp}"
+MARKER="${RUNDIR}/theme-applied"
+
+force=0
+[[ ${1:-} == --force ]] && { force=1; shift; }
+mode=${1:-}
+[[ $mode == light || $mode == dark ]] || { echo "usage: apply [--force] light|dark" >&2; exit 2; }
+
+# Serialize overlapping calls (e.g. rapid polybar clicks)
+exec 9>"${RUNDIR}/theme-apply.lock"
+flock 9
+
+if (( ! force )) && [[ $(cat "$MARKER" 2>/dev/null) == "$mode" ]]; then
+  exit 0
+fi
+
+# --- Wallpaper + pywal ---------------------------------------------------------
+current=$(basename "$(cat "${HOME}/.cache/wal/wal" 2>/dev/null)" 2>/dev/null || true)
+candidates() {
+  if [[ -r $WALLLIST ]]; then
+    jq -r --arg m "$mode" 'to_entries[] | select(.value == $m or .value == "both") | .key' "$WALLLIST"
+  else
+    find "$WALLDIR" -maxdepth 1 -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' \) -printf '%f\n'
+  fi
+}
+# Prefer something other than the current wallpaper
+wallpaper=$(candidates | grep -vxF -- "$current" | shuf -n1 || true)
+[[ -n $wallpaper ]] || wallpaper=$(candidates | shuf -n1)
+
+# Record the mode first: wal-set relaunches polybar, whose label reads this.
+# (No `wal -l`: light palettes make the terminal and bar glaring white; a
+# light wallpaper with wal's normal dark palette is the intent.)
+echo "$mode" > "$MARKER"
+wal -q -i "${WALLDIR}/${wallpaper}" -o "${HOME}/.scripts/theme/wal-set"
+
+# --- GTK -----------------------------------------------------------------------
+if [[ $mode == dark ]]; then
+  gtk_theme=Arc-Dark; scheme=prefer-dark; prefer_dark=1
+else
+  gtk_theme=Arc;      scheme=prefer-light; prefer_dark=0
+fi
+
+# GTK4/libadwaita read this (darkman's portal covers apps using the portal)
+gsettings set org.gnome.desktop.interface color-scheme "$scheme" 2>/dev/null || true
+gsettings set org.gnome.desktop.interface gtk-theme "$gtk_theme" 2>/dev/null || true
+
+# GTK3 apps launched from now on
+gtk3_ini="${HOME}/.config/gtk-3.0/settings.ini"
+if [[ -f $gtk3_ini ]]; then
+  sed -i -e "s/^gtk-theme-name=.*/gtk-theme-name=${gtk_theme}/" \
+         -e '/^gtk-application-prefer-dark-theme=/d' "$gtk3_ini"
+  sed -i "/^\[Settings\]/a gtk-application-prefer-dark-theme=${prefer_dark}" "$gtk3_ini"
+fi
+
+# Already-running GTK3 apps, via XSETTINGS (started in ~/.scripts/wm-settings.sh)
+mkdir -p "${HOME}/.config/xsettingsd"
+cat > "${HOME}/.config/xsettingsd/xsettingsd.conf" <<EOF
+Net/ThemeName "${gtk_theme}"
+EOF
+pkill -HUP -x xsettingsd || true
+

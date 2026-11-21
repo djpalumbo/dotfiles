@@ -1,0 +1,6 @@
+#!/bin/sh
+# darkman hook: $1 is "light" or "dark".
+# Run in its own scope: theme/apply relaunches polybar and dunst, which would
+# otherwise live in darkman.service and be killed whenever darkman restarts.
+exec systemd-run --user --scope --quiet --collect \
+  "$HOME/.scripts/theme/apply" "$1"
