@@ -100,11 +100,13 @@ fi
 sudo gpasswd -a $USER input
 
 
-# Set up printing (with my old HP Deskjet F4400, hence the hplip package)
-f4400cxn="hp:/usb/Deskjet_F4400_series?serial=CN04OCM1SQ05C5"
-f4400driver=$(lpinfo -m | grep '^drv.*f4400.*ppd' | awk '{print $1}')
-lpadmin -p "HP_Deskjet_F4400_series" -E -v $f4400cxn -m $f4400driver
-lpoptions -d "HP_Deskjet_F4400_series"
+# Set up printing: Brother MFC-L2700DW on the LAN, driverless (IPP Everywhere).
+# Addressed by mDNS name (resolved by systemd-resolved), so a DHCP change doesn't
+# break it. Scanning needs no setup: sane-airscan finds it over WSD.
+# NOTE: Never run its "Firmware Update" -- it's on 2016 firmware (L1604111143),
+# predating Brother's alleged third-party-toner lockouts.
+lpadmin -p "Brother_MFC-L2700DW" -E -v "ipp://BRN30055C738CBD.local/ipp/print" -m everywhere -D "Brother MFC-L2700DW"
+lpoptions -d "Brother_MFC-L2700DW"
 
 
 # Done!

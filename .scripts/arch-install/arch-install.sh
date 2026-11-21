@@ -109,7 +109,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   libreoffice                                                                  \
   zathura  zathura-pdf-mupdf  zathura-djvu                                     \
   gucharmap                                                                    \
-  cups  sane  python-pillow  hplip                                             \
+  cups  sane  sane-airscan  python-pillow                                      \
 \
   wget                                                                         \
   ack                                                                          \
