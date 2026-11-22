@@ -125,6 +125,7 @@ bindsym $super+m exec spotify
 bindsym $super+w exec --no-startup-id ~/.scripts/theme/mode wallpaper
 # Take a screenshot
 bindsym $super+Print exec --no-startup-id scrot -e 'mv $f ~/Pictures/Screenshots/'
+bindsym $super+Shift+Print exec --no-startup-id ~/.scripts/capture
 
 # Kill focused window
 bindsym $super+q kill

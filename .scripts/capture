@@ -1,0 +1,130 @@
+#!/usr/bin/env bash
+# macOS-style capture menu: image or video of a selection or the whole screen.
+# A selection is either a dragged box or, with a single click, a whole window.
+# Run it again while a recording is in progress to stop the recording.
+#
+# Images: ~/Pictures/Screenshots (also copied to the clipboard)
+# Videos: ~/Videos/Screencasts
+#
+# Needs: rofi maim slop xdotool ffmpeg xclip dunstify
+
+set -u
+
+IMG_DIR="${HOME}/Pictures/Screenshots"
+VID_DIR="${HOME}/Videos/Screencasts"
+RUN_DIR="${XDG_RUNTIME_DIR:-/tmp}"
+PIDFILE="${RUN_DIR}/capture-rec.pid"
+OUTFILE="${RUN_DIR}/capture-rec.out"
+LOGFILE="${RUN_DIR}/capture-rec.log"
+NOTIFY_ID=48213   # fixed id so recording notifications replace each other
+
+# picom fades windows out over 0.2s when they unmap, so wait for the menu and
+# the selection rectangle to be fully gone before grabbing the screen.
+SETTLE=0.3
+
+notify() { dunstify -a capture -r "$NOTIFY_ID" "$@"; }
+
+# Notification that opens the file when clicked. Runs in the background so the
+# script can exit while it waits for the click.
+notify_saved() {
+    local file="$1" title="$2" icon="$3"
+    (
+        action=$(dunstify -a capture -r "$NOTIFY_ID" -i "$icon" \
+            -A default,Open "$title" "${file/#$HOME/\~}")
+        [ "$action" = default ] && xdg-open "$file"
+    ) >/dev/null 2>&1 &
+}
+
+recording_pid() {
+    local pid
+    [ -f "$PIDFILE" ] || return 1
+    pid=$(<"$PIDFILE")
+    if kill -0 "$pid" 2>/dev/null && [ "$(ps -o comm= -p "$pid")" = ffmpeg ]; then
+        echo "$pid"
+    else
+        rm -f "$PIDFILE"
+        return 1
+    fi
+}
+
+stop_recording() {
+    local pid="$1" file
+    file=$(<"$OUTFILE")
+    kill -INT "$pid"                 # SIGINT lets ffmpeg finalise the mp4
+    while kill -0 "$pid" 2>/dev/null; do sleep 0.1; done
+    rm -f "$PIDFILE" "$OUTFILE"
+    notify_saved "$file" "Recording saved" video-x-generic
+}
+
+# Print "W H X Y" for the chosen target, or fail if the user cancelled.
+geometry() {
+    case "$1" in
+        "Window/Area")
+            # drag for a box, or click to take the window under the pointer
+            slop -f '%w %h %x %y' 2>/dev/null
+            ;;
+        "Full screen")
+            echo "$(xdotool getdisplaygeometry) 0 0"
+            ;;
+    esac
+}
+
+capture_image() {
+    local w="$1" h="$2" x="$3" y="$4" file
+    mkdir -p "$IMG_DIR"
+    file="${IMG_DIR}/$(date +%Y-%m-%d-%H%M%S)_${w}x${h}.png"
+    maim -g "${w}x${h}+${x}+${y}" "$file" || { notify "Screenshot failed"; exit 1; }
+    xclip -selection clipboard -t image/png -i "$file"
+    notify_saved "$file" "Screenshot copied to clipboard" "$file"
+}
+
+capture_video() {
+    local w="$1" h="$2" x="$3" y="$4" file
+    # x264 with yuv420p needs even dimensions
+    w=$(( w / 2 * 2 )); h=$(( h / 2 * 2 ))
+    mkdir -p "$VID_DIR"
+    file="${VID_DIR}/$(date +%Y-%m-%d-%H%M%S).mp4"
+
+    # Show the hint before recording starts so it doesn't end up in the video.
+    notify -t 1200 "Recording…" "Press Super+Shift+Print again to stop"
+    sleep 1.5
+
+    ffmpeg -nostdin -loglevel error -y \
+        -f x11grab -framerate 30 -video_size "${w}x${h}" -i "${DISPLAY}+${x},${y}" \
+        -c:v libx264 -preset veryfast -crf 23 -pix_fmt yuv420p \
+        -movflags +faststart "$file" >"$LOGFILE" 2>&1 &
+    echo $! >"$PIDFILE"
+    echo "$file" >"$OUTFILE"
+
+    sleep 0.5
+    if ! recording_pid >/dev/null; then
+        notify "Recording failed" "See ${LOGFILE}"
+        exit 1
+    fi
+}
+
+# A second press while recording stops it, without showing the menu.
+if pid=$(recording_pid); then
+    stop_recording "$pid"
+    exit 0
+fi
+
+choice=$(printf '%s\n' \
+    "Image · Window/Area" "Image · Full screen" \
+    "Video · Window/Area" "Video · Full screen" |
+    rofi -dmenu -i -matching fuzzy -no-custom -p Capture \
+        -kb-cancel 'Escape,Control+g,Control+bracketleft,Super+Shift+Print' \
+        -theme-str 'window { width: 25ch; location: center; anchor: center; } listview { lines: 4; fixed-height: true; }') || exit 0
+
+kind=${choice%% · *}
+target=${choice#* · }
+
+geom=$(geometry "$target") || exit 0
+[ -n "$geom" ] || exit 0
+sleep "$SETTLE"
+
+# shellcheck disable=SC2086
+case "$kind" in
+    Image) capture_image $geom ;;
+    Video) capture_video $geom ;;
+esac
