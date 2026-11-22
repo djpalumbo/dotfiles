@@ -1,0 +1,20 @@
+[Unit]
+Description=Stop Fn+F3 pushing the ASUS keyboard backlight below off
+# No [Install]: 90-kbd-backlight-sync.rules starts this when the LED appears
+
+[Service]
+ExecStart=/usr/local/bin/kbd-backlight-sync
+Restart=on-failure
+
+# It only reads two world-readable sysfs files
+DynamicUser=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+PrivateNetwork=yes
+PrivateDevices=yes
+RestrictAddressFamilies=none
+CapabilityBoundingSet=
+SystemCallArchitectures=native

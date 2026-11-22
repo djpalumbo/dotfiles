@@ -1,0 +1,24 @@
+#!/bin/bash
+# Install kbd-backlight-sync as a system service, so it works from boot
+# (including the login screen). Run with sudo; re-run to update.
+set -euo pipefail
+
+[[ $EUID -eq 0 ]] || { echo "Run as: sudo $0" >&2; exit 1; }
+
+src=$(dirname "$(readlink -f "$0")")
+install -Dm755 "$src/kbd-backlight-sync" /usr/local/bin/kbd-backlight-sync
+install -Dm644 "$src/kbd-backlight-sync.service" /etc/systemd/system/kbd-backlight-sync.service
+install -Dm644 "$src/90-kbd-backlight-sync.rules" /etc/udev/rules.d/90-kbd-backlight-sync.rules
+systemctl daemon-reload
+udevadm control --reload
+
+# Boot starts it via the udev rule; for now, apply the rule to the existing
+# device and (re)start the service so an update takes effect.
+led=/sys/class/leds/asus::kbd_backlight
+if [[ -e $led ]]; then
+  udevadm trigger --settle --action=add "$led"
+  systemctl restart kbd-backlight-sync.service
+  systemctl --no-pager --lines=0 status kbd-backlight-sync.service
+else
+  echo "No $led on this machine; installed but not started"
+fi

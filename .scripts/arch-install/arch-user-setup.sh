@@ -108,6 +108,9 @@ mkdir ~/repos
 #ln -s ~/gdrive/Wallpapers ~/Pictures/Wallpapers
 
 
+# Keep Fn+F3 from pushing the keyboard backlight "below off" (asus-wmi bug)
+sudo ~/.scripts/kbd-backlight-sync/install
+
 # Install the aerial-fade SDDM login theme from the dotfiles
 sudo ~/.scripts/aerial-fade/install
 read -p "Download aerial login videos now (5 videos, ~0.5-1 GB)? (y/n) " fetch

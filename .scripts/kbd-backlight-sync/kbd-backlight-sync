@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+"""Work around asus-wmi letting Fn+F3 push the keyboard backlight "below off".
+
+The driver keeps its own level counter, which Fn+F3 keeps decrementing past 0,
+so each extra press then costs an extra Fn+F4 to get the light back on.
+Reading the sysfs brightness re-syncs that counter from the firmware, so wait
+for each hardware-initiated change (brightness_hw_changed) and read it once.
+Event-driven: idle between key presses. Exits quietly if the device is absent.
+
+Runs from boot as kbd-backlight-sync.service, started by the udev rule when
+the LED device appears (see ./install).
+"""
+import os
+import select
+import sys
+
+dev = "/sys/class/leds/asus::kbd_backlight/"
+
+
+def resync():
+    with open(dev + "brightness") as f:
+        f.read()
+
+
+try:
+    fd = os.open(dev + "brightness_hw_changed", os.O_RDONLY)
+except FileNotFoundError:
+    sys.exit(0)
+
+poller = select.poll()
+poller.register(fd, select.POLLPRI | select.POLLERR)
+resync()
+while True:
+    # Reading arms the next notification; it fails with ENODATA while the
+    # driver's counter is below 0, which still arms it.
+    try:
+        os.pread(fd, 16, 0)
+    except OSError:
+        pass
+    poller.poll()
+    resync()
