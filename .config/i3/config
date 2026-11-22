@@ -14,9 +14,10 @@ set $locker ~/.scripts/lock/pixlock
 # Keyboard backlight
 #bindsym XF86KbdBrightnessDown exec light -k -U 1
 #bindsym XF86KbdBrightnessUp exec light -k -A 1
-# Screen brightness
-#bindsym XF86MonBrightnessDown exec light -U 2
-#bindsym XF86MonBrightnessUp exec light -A 2
+# Screen brightness (brightnessctl goes through logind, so no root/video group;
+# kernel key handling is off via video.brightness_switch_enabled=0)
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.scripts/brightness down
+bindsym XF86MonBrightnessUp   exec --no-startup-id ~/.scripts/brightness up
 # External monitor - Note: $super+p maps to XF86Display (i.e. Fn+F8)
 bindsym $super+p exec --no-startup-id ~/.scripts/toggle-hdmi-out
 # Audio controls

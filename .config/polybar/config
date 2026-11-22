@@ -53,15 +53,13 @@ font-3 = Font Awesome 7 Free:style=Solid:pixelsize=11;2
 
 modules-left = i3
 modules-center = spotify
-modules-right = theme backlight-acpi volume battery wlan eth date time
+modules-right = theme backlight volume battery wlan eth date time
 
 tray-position = right
 tray-padding = 3
 
 ; required by polybar-spotify
 enable-ipc = true
-
-
 
 
 [module/xwindow]
@@ -121,23 +119,14 @@ format = <label>
 exec = ~/.config/polybar/scripts/scroll_spotify_status.sh
 
 
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <ramp> <label>
-label = %percentage%%
-
-ramp-0 = %{T2}🌕%{T-}
-ramp-1 = %{T2}🌔%{T-}
-ramp-2 = %{T2}🌓%{T-}
-ramp-3 = %{T2}🌒%{T-}
-ramp-4 = %{T2}🌑%{T-}
-
-
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = acpi_video0
+[module/backlight]
+; Screen brightness; i3's brightness keys run ~/.scripts/brightness, which
+; signals the script to redraw immediately
+type = custom/script
+exec = ~/.config/polybar/scripts/backlight.sh
+tail = true
+scroll-up = ~/.scripts/brightness up 5
+scroll-down = ~/.scripts/brightness down 5
 
 
 [module/cpu]

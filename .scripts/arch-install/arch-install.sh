@@ -91,6 +91,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   noto-fonts-emoji                                                             \
 \
   picom                                                                        \
+  brightnessctl                                                                \
   dunst                                                                        \
   python-pywal  feh                                                            \
   redshift  python-xdg                                                         \

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# brightness up|down [percent]: step the screen backlight (default 2%) and have
+# the polybar backlight module redraw now
+# (see ~/.config/polybar/scripts/backlight.sh).
+
+step=${2:-2}
+case $1 in
+  up)   brightnessctl -q set "$step%+" ;;
+  down) brightnessctl -q set "$step%-" ;;
+  *)    echo "usage: brightness up|down [percent]" >&2; exit 2 ;;
+esac
+
+for f in "${XDG_RUNTIME_DIR:-/tmp}"/polybar-backlight/*; do
+  [[ -e $f ]] || continue
+  kill -USR1 "${f##*/}" 2>/dev/null || rm -f "$f"   # drop stale entries
+done

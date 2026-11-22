@@ -12,7 +12,7 @@ cp /usr/share/systemd/bootctl/arch.conf /boot/loader/entries/
 # Provide UUID of the new root partition and update to the correct kernel params
 rootpart="/dev/$(lsblk | grep "/$" | cut -d " " -f 1 | sed "s/.*s/s/g")"
 rootuuid=$(blkid $rootpart -o export | grep "^UUID" | cut -d "=" -f 2)
-sed -i "s/options root=.*/options root=UUID=$rootuuid rw acpi_backlight=video/g" /boot/loader/entries/arch.conf
+sed -i "s/options root=.*/options root=UUID=$rootuuid rw acpi_backlight=video video.brightness_switch_enabled=0/g" /boot/loader/entries/arch.conf
 # Ensure that intel microcode is used
 sed -i "/vmlinuz-linux/a initrd  \/intel-ucode.img" /boot/loader/entries/arch.conf
 
