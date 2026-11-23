@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+. "$(dirname "$0")/run-i3lock.sh"
+
 [[ "$1" == "prepare" ]] && exit 0
 
-i3lock -n -i "$(< "${HOME}/.cache/wal/wal")"
+run_i3lock -i "$(< "${HOME}/.cache/wal/wal")"

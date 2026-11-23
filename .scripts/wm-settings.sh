@@ -23,7 +23,7 @@ systemctl --user restart darkman || wal -i ~/Pictures/Wallpapers -o ~/.scripts/t
 # Start session with numlock enabled
 numlockx
 # Lock on system power change
-xss-lock -l -- "${1:-${HOME}/.scripts/lock/basiclock}" &
+xss-lock --transfer-sleep-lock -l -- "${1:-${HOME}/.scripts/lock/basiclock}" &
 # libinput-gestures
 libinput-gestures-setup start
 # Notify when default audio output changes
