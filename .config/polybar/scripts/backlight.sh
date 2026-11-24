@@ -8,6 +8,10 @@
 # changes that arrive meanwhile, so held keys lag. Not custom/ipc: its initial
 # hook output often fails to appear in polybar 3.7. Builtins only in the loop.
 
+# Polybar shows stderr too: without this, `sleep` crashing (e.g. started while
+# pacman is replacing glibc) puts bash's crash report in the bar
+exec 2>/dev/null
+
 dev=/sys/class/backlight/acpi_video0
 ramp=(🌕 🌔 🌓 🌒 🌑)
 
