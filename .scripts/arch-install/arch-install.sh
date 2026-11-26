@@ -118,7 +118,7 @@ pacstrap -i /mnt --noconfirm                                                   \
   htop  powertop                                                               \
   zsh                                                                          \
   git  github-cli                                                              \
-  neovim  xclip  python-pynvim                                                 \
+  neovim  xclip  python-pynvim  nodejs  npm                                    \
   ranger  highlight  atool  w3m                                                \
   fzf  the_silver_searcher                                                     \
   speedcrunch  bc                                                              \

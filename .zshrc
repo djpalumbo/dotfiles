@@ -68,14 +68,3 @@ alias syu='curl -s https://www.archlinux.org/feeds/news/ | xmllint --xpath //ite
 
 # Add pip to PATH
 export PATH=/home/dave/.local/bin:$PATH
-
-# NVM
-export NVM_DIR="$HOME/.nvm"
-# --no-use skips resolving the default alias (~800ms); put the newest
-# installed node on PATH directly instead. `nvm use` still works.
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use  # This loads nvm
-_nvm_node=($NVM_DIR/versions/node/*(N/nOn[1]))
-(( $#_nvm_node )) && export PATH=$_nvm_node/bin:$PATH
-unset _nvm_node
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
