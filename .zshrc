@@ -20,12 +20,20 @@ bindkey -v
 (cat ~/.cache/wal/sequences &)
 
 # Use Powerline
-if [ -f `which powerline-daemon` ]; then
-  powerline-daemon -q
+if (( $+commands[powerline-daemon] )); then
+  # Starting the daemon costs ~200ms of Python even when it's already up
+  pgrep -u $UID -f powerline-daemon >/dev/null || powerline-daemon -q
   POWERLINE_BASH_CONTINUATION=1
   POWERLINE_BASH_SELECT=1
-  PYTHON_SITE=$(python -c "import site; print(site.getsitepackages())" | sed "s/[][']//g")
-  source $PYTHON_SITE/powerline/bindings/zsh/powerline.zsh
+  # powerline.zsh otherwise runs powerline-config (Python, ~250ms each)
+  # three times per shell to ask questions with fixed answers: which
+  # client to use, and whether zsh uses the prompt and tmux bindings
+  # (yes to both). Rerun those if the powerline config changes.
+  POWERLINE_COMMAND=powerline
+  POWERLINE_CONFIG_COMMAND=true
+  # Glob instead of asking python, which costs a process per shell
+  source /usr/lib/python3*/site-packages/powerline/bindings/zsh/powerline.zsh(N[-1])
+  POWERLINE_CONFIG_COMMAND=powerline-config
 fi
 
 # Short delay to change mode after hitting Esc key
@@ -63,6 +71,11 @@ export PATH=/home/dave/.local/bin:$PATH
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# --no-use skips resolving the default alias (~800ms); put the newest
+# installed node on PATH directly instead. `nvm use` still works.
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use  # This loads nvm
+_nvm_node=($NVM_DIR/versions/node/*(N/nOn[1]))
+(( $#_nvm_node )) && export PATH=$_nvm_node/bin:$PATH
+unset _nvm_node
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
