@@ -1,9 +1,25 @@
 #!/usr/bin/env bash
 # Notify via dunst when the default PulseAudio/PipeWire sink changes
 
-prev=""
-pactl subscribe | while read -r line; do
+# One per user: PipeWire outlives the X session, so an instance from a previous
+# login would otherwise keep running (and notifying) forever
+# (each one's EXIT trap stops its pactl)
+for p in $(pgrep -f "^bash ${BASH_SOURCE[0]}\$"); do
+    [[ $p != "$$" ]] && kill "$p" 2>/dev/null
+done
+
+coproc PACTL { exec pactl subscribe; }
+trap 'kill "$PACTL_PID" 2>/dev/null' EXIT
+trap 'exit' TERM INT HUP
+
+# Start from the current sink so only actual changes notify (the server emits
+# change events at login without the default changing)
+prev=$(pactl get-default-sink)
+
+while read -r line <&"${PACTL[0]}"; do
     if [[ "$line" == *"change' on server"* ]]; then
+        # Session gone: stop rather than D-Bus-activate a dunst with no display
+        xset q >/dev/null 2>&1 || exit
         current=$(pactl get-default-sink)
         if [[ "$current" != "$prev" ]]; then
             prev="$current"
