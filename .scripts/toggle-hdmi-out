@@ -36,5 +36,9 @@ else
   pactl set-card-profile $CARD $PROFILE_LAPTOP
 fi
 
+# The wallpaper was rendered for the old screen size: redraw the same one for
+# the new layout (feh records the current one in ~/.fehbg)
+[ -x ~/.fehbg ] && ~/.fehbg
+
 ~/.config/polybar/launch.sh
 
