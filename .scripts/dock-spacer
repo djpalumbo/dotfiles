@@ -1,0 +1,118 @@
+#!/usr/bin/env python3
+"""Hold space in i3's dock area with an invisible window.
+
+    dock-spacer WxH+X+Y
+
+Maps a fully transparent, click-through dock window of that size, so i3
+reserves the space (like it would for a bar) and lays windows out below it.
+Polybar runs as an override-redirect window drawn over it, so bars can be
+swapped (e.g. crossfaded on a theme change) without i3's layout ever
+changing. Exits when the X server goes away.
+
+Plain ctypes against libX11/libXext, so it needs no Python packages.
+"""
+
+import ctypes as C
+import ctypes.util
+import re
+import sys
+
+X = C.CDLL(ctypes.util.find_library("X11"))
+Xext = C.CDLL(ctypes.util.find_library("Xext"))
+
+ul = C.c_ulong
+X.XOpenDisplay.restype = C.c_void_p
+X.XOpenDisplay.argtypes = [C.c_char_p]
+X.XDefaultScreen.argtypes = [C.c_void_p]
+X.XRootWindow.restype = ul
+X.XRootWindow.argtypes = [C.c_void_p, C.c_int]
+X.XCreateColormap.restype = ul
+X.XCreateColormap.argtypes = [C.c_void_p, ul, C.c_void_p, C.c_int]
+X.XCreateWindow.restype = ul
+X.XCreateWindow.argtypes = [C.c_void_p, ul, C.c_int, C.c_int, C.c_uint, C.c_uint,
+                            C.c_uint, C.c_int, C.c_uint, C.c_void_p, ul, C.c_void_p]
+X.XInternAtom.restype = ul
+X.XInternAtom.argtypes = [C.c_void_p, C.c_char_p, C.c_int]
+X.XChangeProperty.argtypes = [C.c_void_p, ul, ul, ul, C.c_int, C.c_int,
+                              C.c_void_p, C.c_int]
+X.XMapWindow.argtypes = [C.c_void_p, ul]
+X.XNextEvent.argtypes = [C.c_void_p, C.c_void_p]
+Xext.XShapeCombineRectangles.argtypes = [C.c_void_p, ul, C.c_int, C.c_int, C.c_int,
+                                         C.c_void_p, C.c_int, C.c_int, C.c_int]
+
+
+class XVisualInfo(C.Structure):
+    _fields_ = [("visual", C.c_void_p), ("visualid", ul), ("screen", C.c_int),
+                ("depth", C.c_int), ("c_class", C.c_int), ("red_mask", ul),
+                ("green_mask", ul), ("blue_mask", ul), ("colormap_size", C.c_int),
+                ("bits_per_rgb", C.c_int)]
+
+
+class XSetWindowAttributes(C.Structure):
+    _fields_ = [("background_pixmap", ul), ("background_pixel", ul),
+                ("border_pixmap", ul), ("border_pixel", ul),
+                ("bit_gravity", C.c_int), ("win_gravity", C.c_int),
+                ("backing_store", C.c_int), ("backing_planes", ul),
+                ("backing_pixel", ul), ("save_under", C.c_int),
+                ("event_mask", C.c_long), ("do_not_propagate_mask", C.c_long),
+                ("override_redirect", C.c_int), ("colormap", ul), ("cursor", ul)]
+
+
+X.XMatchVisualInfo.argtypes = [C.c_void_p, C.c_int, C.c_int, C.c_int,
+                               C.POINTER(XVisualInfo)]
+
+CWBackPixel, CWBorderPixel, CWColormap = 1 << 1, 1 << 3, 1 << 13
+TrueColor, AllocNone, InputOutput = 4, 0, 1
+ShapeInput, ShapeSet = 2, 0
+XA_ATOM, XA_CARDINAL, XA_STRING, PropModeReplace = 4, 6, 31, 0
+
+
+def main():
+    m = re.fullmatch(r"(\d+)x(\d+)\+(\d+)\+(\d+)", " ".join(sys.argv[1:]))
+    if not m:
+        sys.exit("usage: dock-spacer WxH+X+Y")
+    w, h, x, y = map(int, m.groups())
+
+    dpy = X.XOpenDisplay(None)
+    if not dpy:
+        sys.exit("dock-spacer: cannot open display")
+    scr = X.XDefaultScreen(dpy)
+    root = X.XRootWindow(dpy, scr)
+
+    # 32-bit visual, so the window can be fully transparent (the bar's rounded
+    # corners show the wallpaper through it, as they do over the root)
+    vi = XVisualInfo()
+    if not X.XMatchVisualInfo(dpy, scr, 32, TrueColor, C.byref(vi)):
+        sys.exit("dock-spacer: no 32-bit visual")
+    attrs = XSetWindowAttributes(background_pixel=0, border_pixel=0,
+                                 colormap=X.XCreateColormap(dpy, root, vi.visual,
+                                                            AllocNone))
+    win = X.XCreateWindow(dpy, root, x, y, w, h, 0, 32, InputOutput, vi.visual,
+                          CWBackPixel | CWBorderPixel | CWColormap, C.byref(attrs))
+
+    def prop(name, type_, fmt, values, ctype=ul):
+        arr = (ctype * len(values))(*values)
+        X.XChangeProperty(dpy, win, X.XInternAtom(dpy, name, 0), type_, fmt,
+                          PropModeReplace, arr, len(values))
+
+    prop(b"_NET_WM_WINDOW_TYPE", XA_ATOM, 32,
+         [X.XInternAtom(dpy, b"_NET_WM_WINDOW_TYPE_DOCK", 0)])
+    # A top strut tells i3 to put it in the top dock area (the bar is at the
+    # top of its monitor, which needn't be at y=0 of the screen)
+    strut = [0, 0, y + h, 0, 0, 0, 0, 0, x, x + w - 1, 0, 0]
+    prop(b"_NET_WM_STRUT_PARTIAL", XA_CARDINAL, 32, strut)
+    prop(b"_NET_WM_STRUT", XA_CARDINAL, 32, strut[:4])
+    # WM_CLASS only, no WM_NAME: picom's shadow-exclude skips unnamed windows
+    cls = b"dock-spacer\0dock-spacer\0"
+    prop(b"WM_CLASS", XA_STRING, 8, list(cls), C.c_ubyte)
+    # Empty input shape: clicks go to whatever is over or under it
+    Xext.XShapeCombineRectangles(dpy, win, ShapeInput, 0, 0, None, 0, ShapeSet, 0)
+
+    X.XMapWindow(dpy, win)
+    ev = C.create_string_buffer(192)  # sizeof(XEvent)
+    while True:
+        X.XNextEvent(dpy, ev)  # blocks; Xlib exits when the server goes away
+
+
+if __name__ == "__main__":
+    main()

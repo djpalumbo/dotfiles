@@ -1,0 +1,164 @@
+#!/usr/bin/env python3
+"""Crossfade the wallpaper: hold a copy of the current one, then fade it out.
+
+    wallpaper-fade [--duration SECS] [--timeout SECS]
+
+Copies the wallpaper (the root pixmap; black if none is set yet, as on a fresh
+X server at login) into a click-through window at the very bottom of the
+stack, under every other window, and prints "ready". Set the new wallpaper,
+then send SIGTERM (or let --timeout pass): the copy fades out by stepping
+_NET_WM_WINDOW_OPACITY, which picom composites, revealing the new one.
+Windows stay live throughout. Without a compositor the copy just disappears.
+
+Plain ctypes against libX11/libXext, so it needs no Python packages.
+"""
+
+import argparse
+import ctypes as C
+import ctypes.util
+import re
+import signal
+import subprocess
+import sys
+import time
+
+X = C.CDLL(ctypes.util.find_library("X11"))
+Xext = C.CDLL(ctypes.util.find_library("Xext"))
+
+ul = C.c_ulong
+X.XOpenDisplay.restype = C.c_void_p
+X.XOpenDisplay.argtypes = [C.c_char_p]
+for fn in ("XDefaultScreen", "XDisplayWidth", "XDisplayHeight", "XDefaultDepth"):
+    getattr(X, fn).restype = C.c_int
+X.XDefaultScreen.argtypes = [C.c_void_p]
+for fn in ("XDisplayWidth", "XDisplayHeight", "XDefaultDepth"):
+    getattr(X, fn).argtypes = [C.c_void_p, C.c_int]
+X.XRootWindow.restype = ul
+X.XRootWindow.argtypes = [C.c_void_p, C.c_int]
+X.XCreatePixmap.restype = ul
+X.XCreatePixmap.argtypes = [C.c_void_p, ul, C.c_uint, C.c_uint, C.c_uint]
+X.XCreateGC.restype = C.c_void_p
+X.XCreateGC.argtypes = [C.c_void_p, ul, ul, C.c_void_p]
+X.XCopyArea.argtypes = [C.c_void_p, ul, ul, C.c_void_p,
+                        C.c_int, C.c_int, C.c_uint, C.c_uint, C.c_int, C.c_int]
+X.XFillRectangle.argtypes = [C.c_void_p, ul, C.c_void_p, C.c_int, C.c_int,
+                             C.c_uint, C.c_uint]
+X.XFreeGC.argtypes = [C.c_void_p, C.c_void_p]
+X.XCreateWindow.restype = ul
+X.XCreateWindow.argtypes = [C.c_void_p, ul, C.c_int, C.c_int, C.c_uint, C.c_uint,
+                            C.c_uint, C.c_int, C.c_uint, C.c_void_p, ul, C.c_void_p]
+X.XInternAtom.restype = ul
+X.XInternAtom.argtypes = [C.c_void_p, C.c_char_p, C.c_int]
+X.XChangeProperty.argtypes = [C.c_void_p, ul, ul, ul, C.c_int, C.c_int,
+                              C.c_void_p, C.c_int]
+for fn in ("XMapWindow", "XLowerWindow", "XDestroyWindow", "XFreePixmap"):
+    getattr(X, fn).argtypes = [C.c_void_p, ul]
+X.XSync.argtypes = [C.c_void_p, C.c_int]
+X.XFlush.argtypes = [C.c_void_p]
+X.XCloseDisplay.argtypes = [C.c_void_p]
+X.XSetErrorHandler.argtypes = [C.c_void_p]
+Xext.XShapeCombineRectangles.argtypes = [C.c_void_p, ul, C.c_int, C.c_int, C.c_int,
+                                         C.c_void_p, C.c_int, C.c_int, C.c_int]
+
+
+class XSetWindowAttributes(C.Structure):
+    _fields_ = [("background_pixmap", ul), ("background_pixel", ul),
+                ("border_pixmap", ul), ("border_pixel", ul),
+                ("bit_gravity", C.c_int), ("win_gravity", C.c_int),
+                ("backing_store", C.c_int), ("backing_planes", ul),
+                ("backing_pixel", ul), ("save_under", C.c_int),
+                ("event_mask", C.c_long), ("do_not_propagate_mask", C.c_long),
+                ("override_redirect", C.c_int), ("colormap", ul), ("cursor", ul)]
+
+
+CWBackPixmap, CWOverrideRedirect, InputOutput = 1 << 0, 1 << 9, 1
+ShapeInput, ShapeSet = 2, 0
+XA_CARDINAL, XA_STRING, PropModeReplace = 6, 31, 0
+
+released = False
+
+
+def release(*_):
+    global released
+    released = True
+
+
+def root_pixmap():
+    """The wallpaper pixmap feh (and other setters) publish on the root window."""
+    out = subprocess.run(["xprop", "-root", "_XROOTPMAP_ID"],
+                         capture_output=True, text=True).stdout
+    m = re.search(r"0x[0-9a-fA-F]+", out)
+    return int(m.group(), 16) if m else 0
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--duration", type=float, default=1.0)
+    ap.add_argument("--timeout", type=float, default=10.0)
+    args = ap.parse_args()
+    signal.signal(signal.SIGTERM, release)
+    signal.signal(signal.SIGINT, release)
+    signal.signal(signal.SIGHUP, release)
+
+    dpy = X.XOpenDisplay(None)
+    if not dpy:
+        sys.exit("wallpaper-fade: cannot open display")
+    # A stale pixmap id shouldn't kill us with Xlib's default exit-on-error
+    handler = C.CFUNCTYPE(C.c_int, C.c_void_p, C.c_void_p)(lambda d, e: 0)
+    X.XSetErrorHandler(handler)
+    scr = X.XDefaultScreen(dpy)
+    root = X.XRootWindow(dpy, scr)
+    w, h = X.XDisplayWidth(dpy, scr), X.XDisplayHeight(dpy, scr)
+
+    # Copy it: setting the new wallpaper frees the old pixmap
+    pix = X.XCreatePixmap(dpy, root, w, h, X.XDefaultDepth(dpy, scr))
+    gc = X.XCreateGC(dpy, root, 0, None)
+    if src := root_pixmap():
+        X.XCopyArea(dpy, src, pix, gc, 0, 0, w, h, 0, 0)
+    else:
+        X.XFillRectangle(dpy, pix, gc, 0, 0, w, h)  # GC default: black
+    X.XFreeGC(dpy, gc)
+
+    attrs = XSetWindowAttributes(background_pixmap=pix, override_redirect=1)
+    win = X.XCreateWindow(dpy, root, 0, 0, w, h, 0, 0, InputOutput, None,
+                          CWBackPixmap | CWOverrideRedirect, C.byref(attrs))
+    # WM_CLASS only, no WM_NAME: picom's shadow-exclude skips unnamed windows
+    cls = b"wallpaper-fade\0wallpaper-fade\0"
+    X.XChangeProperty(dpy, win, X.XInternAtom(dpy, b"WM_CLASS", 0), XA_STRING, 8,
+                      PropModeReplace, cls, len(cls))
+    # Empty input shape: clicks on the desktop pass straight through
+    Xext.XShapeCombineRectangles(dpy, win, ShapeInput, 0, 0, None, 0, ShapeSet, 0)
+    opacity = X.XInternAtom(dpy, b"_NET_WM_WINDOW_OPACITY", 0)
+
+    def set_opacity(f):
+        v = ul(int(max(0.0, min(1.0, f)) * 0xFFFFFFFF))
+        X.XChangeProperty(dpy, win, opacity, XA_CARDINAL, 32, PropModeReplace,
+                          C.byref(v), 1)
+        X.XFlush(dpy)
+
+    set_opacity(1.0)
+    X.XMapWindow(dpy, win)
+    X.XLowerWindow(dpy, win)  # under every window, above the root
+    X.XSync(dpy, 0)
+
+    # Let picom's open animation finish so the copy is fully opaque before the
+    # wallpaper changes under it
+    time.sleep(0.25)
+    print("ready", flush=True)
+
+    deadline = time.monotonic() + args.timeout
+    while not released and time.monotonic() < deadline:
+        time.sleep(0.05)
+
+    start = time.monotonic()
+    while (t := (time.monotonic() - start) / args.duration) < 1:
+        set_opacity(1 - t * t * (3 - 2 * t))  # smoothstep
+        time.sleep(1 / 120)
+    set_opacity(0)
+    X.XDestroyWindow(dpy, win)
+    X.XFreePixmap(dpy, pix)
+    X.XCloseDisplay(dpy)
+
+
+if __name__ == "__main__":
+    main()

@@ -43,11 +43,25 @@ candidates() {
 wallpaper=$(candidates | grep -vxF -- "$current" | shuf -n1 || true)
 [[ -n $wallpaper ]] || wallpaper=$(candidates | shuf -n1)
 
+# Crossfade the wallpaper: hold a copy of the old one beneath every window
+# while wal sets the new one, then fade the copy out. Windows stay live. (The
+# bar crossfades itself in polybar/launch.sh.) Released on exit too, so a
+# failure can't leave it behind, and wallpaper-fade gives up by itself after
+# 10 s.
+coproc FADE { exec "${HOME}/.scripts/wallpaper-fade" 2>/dev/null; }
+fade_pid=$FADE_PID
+trap 'kill "$fade_pid" 2>/dev/null || true' EXIT
+[[ -n ${FADE[0]:-} ]] && read -r -t 2 -u "${FADE[0]}" _ || true
+
 # Record the mode first: wal-set relaunches polybar, whose label reads this.
 # (No `wal -l`: light palettes make the terminal and bar glaring white; a
 # light wallpaper with wal's normal dark palette is the intent.)
 echo "$mode" > "$MARKER"
-wal -q -i "${WALLDIR}/${wallpaper}" -o "${HOME}/.scripts/theme/wal-set"
+# -e: skip wal's own reloads; wal-set does what's needed (xrdb, then a clean
+# bar relaunch). wal's would SIGUSR1 polybar into restarting in place, racing
+# that relaunch.
+wal -q -e -i "${WALLDIR}/${wallpaper}" -o "${HOME}/.scripts/theme/wal-set"
+kill "$fade_pid" 2>/dev/null || true
 
 # --- GTK -----------------------------------------------------------------------
 if [[ $mode == dark ]]; then

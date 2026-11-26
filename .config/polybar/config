@@ -25,6 +25,12 @@ margin-bottom = 0
 ; eDP-1
 monitor = ${env:MONITOR:}
 bottom = false
+; Drawn over i3 rather than docked in it: launch.sh runs a ~/.scripts/dock-spacer
+; per monitor to hold this space, so relaunching the bar never shifts windows
+override-redirect = true
+; Stacked just above i3's own background frames, i.e. below every client
+; window: nothing tiled overlaps it, and fullscreen windows still cover it
+wm-restack = i3
 fixed-center = true
 width = 100%
 height = 28

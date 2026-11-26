@@ -6,16 +6,25 @@
 # Source generated colors.
 source "${HOME}/.cache/wal/colors.sh"
 
+# Reload in place rather than restarting, which would drop any notification
+# on screen (e.g. one sent at login). Only if it's running: dunstctl would
+# otherwise D-Bus-activate dunst.service, outside the X session.
 reload_dunst() {
-    pkill dunst
-    dunst &
+    if pgrep -x dunst >/dev/null; then
+        dunstctl reload
+    else
+        dunst &
+    fi
 }
 
 reload_polybar() {
-  source "${HOME}/.config/polybar/launch.sh"
+  "${HOME}/.config/polybar/launch.sh"
 }
 
 main() {
+    # Polybar reads its colors from the X resources (wal runs with -e, so
+    # merging them is up to us), before it's relaunched
+    xrdb -merge -quiet "${HOME}/.cache/wal/colors.Xresources"
     reload_dunst &
     reload_polybar &
 }
